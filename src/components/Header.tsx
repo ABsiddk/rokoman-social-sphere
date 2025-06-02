@@ -1,18 +1,15 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Home, User, BarChart3, Settings, LogIn, UserCircle } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeControls from './ThemeControls';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Header = () => {
-  const [isEnglish, setIsEnglish] = useState(true);
+  const { language, toggleLanguage, t } = useLanguage();
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
-
-  const toggleLanguage = () => {
-    setIsEnglish(!isEnglish);
-  };
 
   return (
     <header className="bg-white dark:bg-[rgb(39,113,150)] shadow-lg sticky top-0 z-50 transition-all duration-300 border-b border-[rgb(129,130,135)]/20">
@@ -23,7 +20,7 @@ const Header = () => {
             <div className="w-10 h-10 bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">O</span>
             </div>
-            <span className="text-xl font-bold text-[rgb(39,113,150)] dark:text-white">OnnoRokom Community</span>
+            <span className="text-xl font-bold text-[rgb(39,113,150)] dark:text-white">{t('brand.name')}</span>
           </div>
 
           {/* Navigation */}
@@ -37,7 +34,7 @@ const Header = () => {
               }`}
             >
               <Home size={18} />
-              <span>Home</span>
+              <span>{t('nav.home')}</span>
             </Link>
 
             <Link
@@ -49,7 +46,7 @@ const Header = () => {
               }`}
             >
               <User size={18} />
-              <span>View and Edit Profile</span>
+              <span>{t('nav.profile')}</span>
             </Link>
 
             <Link
@@ -61,7 +58,7 @@ const Header = () => {
               }`}
             >
               <BarChart3 size={18} />
-              <span>Dashboard</span>
+              <span>{t('nav.dashboard')}</span>
             </Link>
 
             <Link
@@ -73,7 +70,7 @@ const Header = () => {
               }`}
             >
               <Settings size={18} />
-              <span>Administration and Properties</span>
+              <span>{t('nav.admin')}</span>
             </Link>
           </nav>
 
@@ -83,16 +80,11 @@ const Header = () => {
             <div className="relative">
               <button
                 onClick={toggleLanguage}
-                className="flex items-center bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] rounded-full p-1 transition-all duration-300 hover:shadow-lg"
+                className="flex items-center bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] rounded-full p-1 transition-all duration-300 hover:shadow-lg w-16 h-8"
               >
-                <div className={`w-8 h-6 rounded-full transition-all duration-300 ${isEnglish ? 'translate-x-0 bg-white' : 'translate-x-6 bg-white'} shadow-md`}>
-                  <span className="text-xs font-bold text-[rgb(39,113,150)] flex items-center justify-center h-full">
-                    {isEnglish ? 'EN' : 'বাং'}
-                  </span>
-                </div>
-                <div className={`w-8 h-6 rounded-full transition-all duration-300 ${!isEnglish ? 'translate-x-0' : '-translate-x-6'} flex items-center justify-center`}>
-                  <span className="text-xs font-bold text-white">
-                    {!isEnglish ? 'EN' : 'বাং'}
+                <div className={`w-8 h-6 rounded-full transition-all duration-300 ${language === 'en' ? 'translate-x-0 bg-white' : 'translate-x-6 bg-white'} shadow-md flex items-center justify-center`}>
+                  <span className="text-xs font-bold text-[rgb(39,113,150)]">
+                    {language === 'en' ? 'EN' : 'বাং'}
                   </span>
                 </div>
               </button>
@@ -107,7 +99,7 @@ const Header = () => {
               className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] text-white rounded-lg hover:shadow-lg transition-all duration-200"
             >
               <LogIn size={18} />
-              <span>Log in</span>
+              <span>{t('nav.login')}</span>
             </Link>
 
             {/* Profile Icon */}
