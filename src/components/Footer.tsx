@@ -36,8 +36,8 @@ const Footer = () => {
               <li><a href="/" className="text-gray-400 hover:text-white transition-colors">{t('nav.home')}</a></li>
               <li><a href="/profile" className="text-gray-400 hover:text-white transition-colors">{t('nav.profile')}</a></li>
               <li><a href="/dashboard" className="text-gray-400 hover:text-white transition-colors">{t('nav.dashboard')}</a></li>
-              <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">{t('footer.about')}</a></li>
+              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">{t('footer.contact.page')}</a></li>
             </ul>
           </div>
 
@@ -45,11 +45,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">{t('footer.admin')}</h3>
             <ul className="space-y-2">
-              <li><a href="/admin" className="text-gray-400 hover:text-white transition-colors">Admin Panel</a></li>
-              <li><a href="/admin/login" className="text-gray-400 hover:text-white transition-colors">Admin Login</a></li>
-              <li><a href="/admin/properties" className="text-gray-400 hover:text-white transition-colors">Properties</a></li>
-              <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="/admin" className="text-gray-400 hover:text-white transition-colors">{t('footer.admin.panel')}</a></li>
+              <li><a href="/admin/login" className="text-gray-400 hover:text-white transition-colors">{t('footer.admin.login')}</a></li>
+              <li><a href="/admin/properties" className="text-gray-400 hover:text-white transition-colors">{t('footer.admin.properties')}</a></li>
+              <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors">{t('footer.privacy')}</a></li>
+              <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors">{t('footer.terms')}</a></li>
             </ul>
           </div>
 
