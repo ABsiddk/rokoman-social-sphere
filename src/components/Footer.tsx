@@ -1,8 +1,11 @@
 
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
@@ -13,10 +16,10 @@ const Footer = () => {
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-orange-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">O</span>
               </div>
-              <span className="text-xl font-bold">OnnoRokom Community</span>
+              <span className="text-xl font-bold">{t('brand.name')}</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Building connections, fostering growth, and creating opportunities for everyone in our vibrant community.
+              {t('footer.tagline')}
             </p>
             <div className="flex space-x-4">
               <Facebook className="w-6 h-6 text-gray-400 hover:text-blue-500 cursor-pointer transition-colors" />
@@ -28,31 +31,31 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.quicklinks')}</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
-              <li><a href="/profile" className="text-gray-400 hover:text-white transition-colors">Profile</a></li>
-              <li><a href="/dashboard" className="text-gray-400 hover:text-white transition-colors">Dashboard</a></li>
-              <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/" className="text-gray-400 hover:text-white transition-colors">{t('nav.home')}</a></li>
+              <li><a href="/profile" className="text-gray-400 hover:text-white transition-colors">{t('nav.profile')}</a></li>
+              <li><a href="/dashboard" className="text-gray-400 hover:text-white transition-colors">{t('nav.dashboard')}</a></li>
+              <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">{t('footer.about')}</a></li>
+              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">{t('footer.contact.page')}</a></li>
             </ul>
           </div>
 
           {/* Admin Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Administration</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.admin')}</h3>
             <ul className="space-y-2">
-              <li><a href="/admin" className="text-gray-400 hover:text-white transition-colors">Admin Panel</a></li>
-              <li><a href="/admin/login" className="text-gray-400 hover:text-white transition-colors">Admin Login</a></li>
-              <li><a href="/admin/properties" className="text-gray-400 hover:text-white transition-colors">Properties</a></li>
-              <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="/admin" className="text-gray-400 hover:text-white transition-colors">{t('footer.admin.panel')}</a></li>
+              <li><a href="/admin/login" className="text-gray-400 hover:text-white transition-colors">{t('footer.admin.login')}</a></li>
+              <li><a href="/admin/properties" className="text-gray-400 hover:text-white transition-colors">{t('footer.admin.properties')}</a></li>
+              <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors">{t('footer.privacy')}</a></li>
+              <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors">{t('footer.terms')}</a></li>
             </ul>
           </div>
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.contact')}</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-gray-400" />
@@ -76,8 +79,8 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 OnnoRokom Community. All rights reserved. | Developed by{' '}
-            <span className="text-blue-400 font-semibold">OnnoRokom Projukti Limited</span>
+            {t('footer.developed')}{' '}
+            <span className="text-blue-400 font-semibold">{t('footer.company')}</span>
           </p>
         </div>
       </div>
