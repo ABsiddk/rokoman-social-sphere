@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Home, User, BarChart3, Settings, LogIn, UserCircle } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -8,14 +9,13 @@ import { LogOut } from 'lucide-react';
 
 const Header = () => {
   const { language, toggleLanguage, t } = useLanguage();
-  const { currentUser, logout, isAuthenticated } = useUser();
+  const { currentUser, logout, isAuthenticated, hasPermission } = useUser();
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
 
   const handleLogout = () => {
     logout();
-    // Optionally navigate to home page after logout
     window.location.href = '/';
   };
 
@@ -45,41 +45,50 @@ const Header = () => {
               <span>{t('nav.home')}</span>
             </Link>
 
-            <Link
-              to="/profile"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                isActive('/profile') 
-                  ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
-                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5'
-              }`}
-            >
-              <User size={18} />
-              <span>{t('nav.profile')}</span>
-            </Link>
+            {/* Profile link - only show if authenticated */}
+            {isAuthenticated && (
+              <Link
+                to="/profile"
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                  isActive('/profile') 
+                    ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
+                    : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5'
+                }`}
+              >
+                <User size={18} />
+                <span>{t('nav.profile')}</span>
+              </Link>
+            )}
 
-            <Link
-              to="/dashboard"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                isActive('/dashboard') 
-                  ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
-                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5'
-              }`}
-            >
-              <BarChart3 size={18} />
-              <span>{t('nav.dashboard')}</span>
-            </Link>
+            {/* Dashboard link - only show for moderators and admins */}
+            {hasPermission('moderator') && (
+              <Link
+                to="/dashboard"
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                  isActive('/dashboard') 
+                    ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
+                    : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5'
+                }`}
+              >
+                <BarChart3 size={18} />
+                <span>{t('nav.dashboard')}</span>
+              </Link>
+            )}
 
-            <Link
-              to="/admin"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                isActive('/admin') 
-                  ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
-                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5'
-              }`}
-            >
-              <Settings size={18} />
-              <span>{t('nav.admin')}</span>
-            </Link>
+            {/* Admin link - only show for moderators and admins */}
+            {hasPermission('moderator') && (
+              <Link
+                to="/admin"
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                  isActive('/admin') 
+                    ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
+                    : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5'
+                }`}
+                >
+                <Settings size={18} />
+                <span>{t('nav.admin')}</span>
+              </Link>
+            )}
           </nav>
 
           {/* Right Side Controls */}
