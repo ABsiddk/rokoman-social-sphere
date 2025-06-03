@@ -1,11 +1,8 @@
 
 import React from 'react';
 import { Star, MapPin } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
 
 const MembersSection = () => {
-  const { t } = useLanguage();
-
   const members = [
     {
       name: "Sarah Johnson",
@@ -46,10 +43,11 @@ const MembersSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
-            {t('members.title')}
+            Some of Our Members
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            {t('members.subtitle')}
+            Meet the incredible individuals who make our community vibrant and dynamic. 
+            Each member brings unique skills, perspectives, and experiences to our network.
           </p>
         </div>
 
@@ -86,11 +84,11 @@ const MembersSection = () => {
                 </div>
                 <div className="bg-gradient-to-r from-blue-100 to-orange-100 dark:from-blue-900 dark:to-orange-900 rounded-lg p-3">
                   <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('members.specialty')}: {member.specialty}
+                    Specialty: {member.specialty}
                   </p>
                 </div>
                 <button className="w-full mt-4 bg-gradient-to-r from-blue-500 to-orange-500 text-white py-2 rounded-lg hover:shadow-lg transition-all duration-200 hover:scale-105">
-                  {t('members.connect')}
+                  Connect
                 </button>
               </div>
             </div>
@@ -99,7 +97,7 @@ const MembersSection = () => {
 
         <div className="text-center mt-12">
           <button className="bg-gray-800 dark:bg-white text-white dark:text-gray-800 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-200">
-            {t('members.viewall')}
+            View All Members
           </button>
         </div>
       </div>

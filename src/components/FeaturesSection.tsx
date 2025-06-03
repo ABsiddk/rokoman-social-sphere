@@ -1,41 +1,38 @@
 
 import React from 'react';
 import { Shield, Users, MessageCircle, Settings, Globe, Lock } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
 
 const FeaturesSection = () => {
-  const { t } = useLanguage();
-
   const features = [
     {
       icon: Shield,
-      titleKey: 'features.privacy.title',
-      descKey: 'features.privacy.desc'
+      title: "Privacy & Security",
+      description: "Your data is protected with end-to-end encryption and advanced security protocols."
     },
     {
       icon: Users,
-      titleKey: 'features.network.title',
-      descKey: 'features.network.desc'
+      title: "Exclusive Network",
+      description: "Connect with like-minded individuals in a curated, private community environment."
     },
     {
       icon: MessageCircle,
-      titleKey: 'features.communication.title',
-      descKey: 'features.communication.desc'
+      title: "Real-time Communication",
+      description: "Instant messaging, video calls, and group discussions to stay connected 24/7."
     },
     {
       icon: Settings,
-      titleKey: 'features.customizable.title',
-      descKey: 'features.customizable.desc'
+      title: "Customizable Experience",
+      description: "Personalize your profile, preferences, and notifications to suit your needs."
     },
     {
       icon: Globe,
-      titleKey: 'features.global.title',
-      descKey: 'features.global.desc'
+      title: "Global Reach",
+      description: "Connect with members from around the world while maintaining local community feel."
     },
     {
       icon: Lock,
-      titleKey: 'features.invite.title',
-      descKey: 'features.invite.desc'
+      title: "Invite-Only Access",
+      description: "Carefully moderated community ensuring quality interactions and meaningful connections."
     }
   ];
 
@@ -44,10 +41,11 @@ const FeaturesSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
-            {t('features.title')}
+            Facilities of Our Private Network
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            {t('features.subtitle')}
+            Experience premium networking features designed to foster meaningful connections 
+            and collaborative opportunities in a secure environment.
           </p>
         </div>
 
@@ -61,10 +59,10 @@ const FeaturesSection = () => {
                 <feature.icon className="text-white" size={32} />
               </div>
               <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                {t(feature.titleKey)}
+                {feature.title}
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                {t(feature.descKey)}
+                {feature.description}
               </p>
             </div>
           ))}
