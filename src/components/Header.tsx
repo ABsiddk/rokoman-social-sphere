@@ -1,15 +1,23 @@
-
 import React from 'react';
 import { Home, User, BarChart3, Settings, LogIn, UserCircle } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeControls from './ThemeControls';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useUser } from '../contexts/UserContext';
+import { LogOut } from 'lucide-react';
 
 const Header = () => {
   const { language, toggleLanguage, t } = useLanguage();
+  const { currentUser, logout, isAuthenticated } = useUser();
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleLogout = () => {
+    logout();
+    // Optionally navigate to home page after logout
+    window.location.href = '/';
+  };
 
   return (
     <header className="bg-white dark:bg-[rgb(39,113,150)] shadow-lg sticky top-0 z-50 transition-all duration-300 border-b border-[rgb(129,130,135)]/20">
@@ -93,19 +101,38 @@ const Header = () => {
             {/* Theme Controls */}
             <ThemeControls />
 
-            {/* Login */}
-            <Link
-              to="/login"
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] text-white rounded-lg hover:shadow-lg transition-all duration-200"
-            >
-              <LogIn size={18} />
-              <span>{t('nav.login')}</span>
-            </Link>
+            {/* Login/Logout */}
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-600 dark:text-gray-300 hidden md:block">
+                  {currentUser?.name}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center space-x-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-200"
+                >
+                  <LogOut size={18} />
+                  <span className="hidden md:block">{t('nav.logout')}</span>
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] text-white rounded-lg hover:shadow-lg transition-all duration-200"
+              >
+                <LogIn size={18} />
+                <span>{t('nav.login')}</span>
+              </Link>
+            )}
 
             {/* Profile Icon */}
-            <button className="p-2 rounded-lg hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5 transition-all duration-200">
-              <UserCircle className="text-[rgb(129,130,135)] dark:text-gray-300" size={24} />
-            </button>
+            {isAuthenticated && (
+              <Link to="/profile">
+                <button className="p-2 rounded-lg hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5 transition-all duration-200">
+                  <UserCircle className="text-[rgb(129,130,135)] dark:text-gray-300" size={24} />
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

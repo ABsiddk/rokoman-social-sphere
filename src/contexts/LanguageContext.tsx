@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export type Language = 'en' | 'bn';
@@ -23,10 +22,12 @@ const translations = {
   en: {
     // Header
     'nav.home': 'Home',
+    'nav.about': 'About',
     'nav.profile': 'View and Edit Profile',
     'nav.dashboard': 'Dashboard',
     'nav.admin': 'Administration and Properties',
     'nav.login': 'Log in',
+    'nav.logout': 'Log out',
     'brand.name': 'OnnoRokom Community',
     
     // Hero Section
@@ -138,10 +139,12 @@ const translations = {
   bn: {
     // Header
     'nav.home': 'হোম',
-    'nav.profile': 'প্রোফাইল দেখুন ও সম্পাদনা করুন',
+    'nav.about': 'সম্পর্কে',
+    'nav.profile': 'প্রোফাইল',
     'nav.dashboard': 'ড্যাশবোর্ড',
-    'nav.admin': 'প্রশাসন ও সম্পত্তি',
-    'nav.login': 'লগ ইন',
+    'nav.admin': 'প্রশাসন',
+    'nav.login': 'লগইন',
+    'nav.logout': 'লগআউট',
     'brand.name': 'অন্নরকম কমিউনিটি',
     
     // Hero Section
