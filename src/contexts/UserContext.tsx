@@ -3,51 +3,14 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 export type UserRole = 'admin' | 'moderator' | 'user';
 
-export interface UserEmail {
-  id: string;
-  email: string;
-  type: 'personal' | 'office';
-}
-
-export interface UserPhone {
-  id: string;
-  phone: string;
-  type: 'personal' | 'office';
-}
-
-export interface UserExperience {
-  id: string;
-  jobTitle: string;
-  company: string;
-  startDate: string;
-  endDate?: string;
-  isCurrent: boolean;
-  location: string;
-  description: string;
-}
-
 export interface User {
   id: string;
   name: string;
-  nickNames: string[];
-  dateOfBirth?: string;
-  gender?: 'male' | 'female' | 'other';
-  religion?: string;
-  maritalStatus?: 'single' | 'married' | 'divorced' | 'widowed';
-  emails: UserEmail[];
-  phones: UserPhone[];
-  presentAddress: {
-    district: string;
-    address: string;
-  };
-  permanentAddress: {
-    district: string;
-    address: string;
-  };
-  experiences: UserExperience[];
-  profileHeadline?: string;
+  email: string;
   role: UserRole;
   avatar?: string;
+  phone?: string;
+  address?: string;
   joinDate: string;
   lastLogin: string;
   isActive: boolean;
@@ -68,28 +31,14 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-const bangladeshDistricts = [
-  'Dhaka', 'Chittagong', 'Rajshahi', 'Sylhet', 'Khulna', 'Barisal', 'Rangpur', 'Mymensingh',
-  'Comilla', 'Gazipur', 'Narayanganj', 'Jessore', 'Bogra', 'Dinajpur', 'Pabna', 'Tangail',
-  'Jamalpur', 'Kishoreganj', 'Munshiganj', 'Manikganj', 'Gopalganj', 'Faridpur', 'Madaripur',
-  'Shariatpur', 'Rajbari', 'Narsingdi', 'Brahmanbaria', 'Chandpur', 'Lakshmipur', 'Feni',
-  'Noakhali', 'Coxs Bazar', 'Rangamati', 'Bandarban', 'Khagrachhari', 'Bagerhat', 'Chuadanga',
-  'Jhenaidah', 'Kushtia', 'Magura', 'Meherpur', 'Narail', 'Satkhira', 'Barguna', 'Bhola',
-  'Jhalokati', 'Patuakhali', 'Pirojpur', 'Panchagarh', 'Thakurgaon', 'Nilphamari', 'Lalmonirhat',
-  'Kurigram', 'Gaibandha', 'Sherpur', 'Netrokona', 'Habiganj', 'Moulvibazar', 'Sunamganj'
-];
-
 const defaultUsers: User[] = [
   {
     id: '1',
     name: 'Super Admin',
-    nickNames: ['Admin'],
-    emails: [{ id: '1', email: 'admin@onnorokom.com', type: 'office' }],
-    phones: [{ id: '1', phone: '+880 1234-567890', type: 'office' }],
-    presentAddress: { district: 'Dhaka', address: 'Dhanmondi, Dhaka' },
-    permanentAddress: { district: 'Dhaka', address: 'Dhanmondi, Dhaka' },
-    experiences: [],
+    email: 'admin@onnorokom.com',
     role: 'admin',
+    phone: '+880 1234-567890',
+    address: 'Dhaka, Bangladesh',
     joinDate: '2023-01-01',
     lastLogin: new Date().toISOString(),
     isActive: true
@@ -97,13 +46,10 @@ const defaultUsers: User[] = [
   {
     id: '2',
     name: 'Content Moderator',
-    nickNames: ['Moderator'],
-    emails: [{ id: '1', email: 'moderator@onnorokom.com', type: 'office' }],
-    phones: [{ id: '1', phone: '+880 1234-567891', type: 'office' }],
-    presentAddress: { district: 'Dhaka', address: 'Uttara, Dhaka' },
-    permanentAddress: { district: 'Dhaka', address: 'Uttara, Dhaka' },
-    experiences: [],
+    email: 'moderator@onnorokom.com',
     role: 'moderator',
+    phone: '+880 1234-567891',
+    address: 'Dhaka, Bangladesh',
     joinDate: '2023-02-01',
     lastLogin: new Date().toISOString(),
     isActive: true
@@ -111,13 +57,10 @@ const defaultUsers: User[] = [
   {
     id: '3',
     name: 'John Doe',
-    nickNames: ['John'],
-    emails: [{ id: '1', email: 'user@onnorokom.com', type: 'personal' }],
-    phones: [{ id: '1', phone: '+880 1234-567892', type: 'personal' }],
-    presentAddress: { district: 'Dhaka', address: 'Mirpur, Dhaka' },
-    permanentAddress: { district: 'Dhaka', address: 'Mirpur, Dhaka' },
-    experiences: [],
+    email: 'user@onnorokom.com',
     role: 'user',
+    phone: '+880 1234-567892',
+    address: 'Dhaka, Bangladesh',
     joinDate: '2023-03-01',
     lastLogin: new Date().toISOString(),
     isActive: true
@@ -147,7 +90,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     // Simple authentication - in real app, this would be API call
-    const user = users.find(u => u.emails.some(e => e.email === email));
+    const user = users.find(u => u.email === email);
     if (user && (password === 'admin123' || password === 'password')) {
       const updatedUser = { ...user, lastLogin: new Date().toISOString() };
       setCurrentUser(updatedUser);
@@ -238,5 +181,3 @@ export const useUser = () => {
   }
   return context;
 };
-
-export { bangladeshDistricts };

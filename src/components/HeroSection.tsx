@@ -2,7 +2,6 @@
 import React from 'react';
 import { Play, Users } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -26,13 +25,10 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                to="/register"
-                className="flex items-center justify-center space-x-3 bg-gradient-to-r from-blue-600 to-orange-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
+              <button className="flex items-center justify-center space-x-3 bg-gradient-to-r from-blue-600 to-orange-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <Users size={24} />
                 <span>{t('hero.join')}</span>
-              </Link>
+              </button>
               <button className="flex items-center justify-center space-x-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300">
                 <span>{t('hero.learn')}</span>
               </button>

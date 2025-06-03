@@ -13,9 +13,9 @@ const ProfileForm = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: currentUser?.name || '',
-    email: currentUser?.emails.length > 0 ? currentUser.emails[0].email : '',
-    phone: currentUser?.phones.length > 0 ? currentUser.phones[0].phone : '',
-    address: currentUser?.presentAddress.address || ''
+    email: currentUser?.email || '',
+    phone: currentUser?.phone || '',
+    address: currentUser?.address || ''
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -23,37 +23,7 @@ const ProfileForm = () => {
   };
 
   const handleSave = () => {
-    const updates: any = {
-      name: formData.name
-    };
-
-    // Update emails array
-    if (formData.email !== (currentUser?.emails.length > 0 ? currentUser.emails[0].email : '')) {
-      updates.emails = [{
-        id: currentUser?.emails.length > 0 ? currentUser.emails[0].id : '1',
-        email: formData.email,
-        type: currentUser?.emails.length > 0 ? currentUser.emails[0].type : 'personal'
-      }];
-    }
-
-    // Update phones array
-    if (formData.phone !== (currentUser?.phones.length > 0 ? currentUser.phones[0].phone : '')) {
-      updates.phones = [{
-        id: currentUser?.phones.length > 0 ? currentUser.phones[0].id : '1',
-        phone: formData.phone,
-        type: currentUser?.phones.length > 0 ? currentUser.phones[0].type : 'personal'
-      }];
-    }
-
-    // Update address
-    if (formData.address !== currentUser?.presentAddress.address) {
-      updates.presentAddress = {
-        ...currentUser?.presentAddress,
-        address: formData.address
-      };
-    }
-
-    updateProfile(updates);
+    updateProfile(formData);
     setIsEditing(false);
     toast({
       title: t('profile.update.success.title'),
@@ -64,9 +34,9 @@ const ProfileForm = () => {
   const handleCancel = () => {
     setFormData({
       name: currentUser?.name || '',
-      email: currentUser?.emails.length > 0 ? currentUser.emails[0].email : '',
-      phone: currentUser?.phones.length > 0 ? currentUser.phones[0].phone : '',
-      address: currentUser?.presentAddress.address || ''
+      email: currentUser?.email || '',
+      phone: currentUser?.phone || '',
+      address: currentUser?.address || ''
     });
     setIsEditing(false);
   };
@@ -156,7 +126,7 @@ const ProfileForm = () => {
               />
             ) : (
               <p className="text-gray-800 dark:text-white bg-gray-50 dark:bg-gray-700 p-2 rounded">
-                {currentUser.emails.length > 0 ? currentUser.emails[0].email : t('profile.not.provided')}
+                {currentUser.email}
               </p>
             )}
           </div>
@@ -175,7 +145,7 @@ const ProfileForm = () => {
               />
             ) : (
               <p className="text-gray-800 dark:text-white bg-gray-50 dark:bg-gray-700 p-2 rounded">
-                {currentUser.phones.length > 0 ? currentUser.phones[0].phone : t('profile.not.provided')}
+                {currentUser.phone || t('profile.not.provided')}
               </p>
             )}
           </div>
@@ -194,7 +164,7 @@ const ProfileForm = () => {
               />
             ) : (
               <p className="text-gray-800 dark:text-white bg-gray-50 dark:bg-gray-700 p-2 rounded">
-                {currentUser.presentAddress.address || t('profile.not.provided')}
+                {currentUser.address || t('profile.not.provided')}
               </p>
             )}
           </div>

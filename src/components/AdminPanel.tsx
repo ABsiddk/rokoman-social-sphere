@@ -24,9 +24,8 @@ const AdminPanel = () => {
   });
 
   const filteredUsers = users.filter(user => {
-    const primaryEmail = user.emails.length > 0 ? user.emails[0].email : '';
     const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         primaryEmail.toLowerCase().includes(searchTerm.toLowerCase());
+                         user.email.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = filterRole === 'all' || user.role === filterRole;
     return matchesSearch && matchesRole;
   });
@@ -41,19 +40,7 @@ const AdminPanel = () => {
       return;
     }
 
-    const userData = {
-      name: newUser.name,
-      nickNames: [],
-      emails: [{ id: '1', email: newUser.email, type: 'personal' as const }],
-      phones: [{ id: '1', phone: newUser.phone || '', type: 'personal' as const }],
-      presentAddress: { district: '', address: newUser.address || '' },
-      permanentAddress: { district: '', address: newUser.address || '' },
-      experiences: [],
-      role: newUser.role,
-      isActive: newUser.isActive
-    };
-
-    createUser(userData);
+    createUser(newUser);
     setNewUser({
       name: '',
       email: '',
@@ -236,7 +223,7 @@ const AdminPanel = () => {
                         {user.name}
                       </div>
                       <div className="text-sm text-gray-500 dark:text-gray-400">
-                        {user.emails.length > 0 ? user.emails[0].email : 'No email'}
+                        {user.email}
                       </div>
                     </div>
                   </td>
