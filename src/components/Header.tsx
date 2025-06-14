@@ -28,7 +28,10 @@ const Header = () => {
             <div className="w-10 h-10 bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">O</span>
             </div>
-            <span className="text-xl font-bold text-[rgb(39,113,150)] dark:text-white">{t('brand.name')}</span>
+            <span className="text-xl font-bold">
+              <span className="text-white">OnnoRokom</span>
+              <span className="text-[rgb(39,113,150)] dark:text-[rgb(129,130,135)]"> Community</span>
+            </span>
           </div>
 
           {/* Navigation */}

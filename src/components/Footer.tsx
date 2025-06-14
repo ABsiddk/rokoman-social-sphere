@@ -13,10 +13,13 @@ const Footer = () => {
           {/* Logo and Tagline */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-orange-500 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">O</span>
               </div>
-              <span className="text-xl font-bold">{t('brand.name')}</span>
+              <span className="text-xl font-bold">
+                <span className="text-white">OnnoRokom</span>
+                <span className="text-[rgb(129,130,135)]"> Community</span>
+              </span>
             </div>
             <p className="text-gray-400 text-sm">
               {t('footer.tagline')}
@@ -80,7 +83,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
             {t('footer.developed')}{' '}
-            <span className="text-blue-400 font-semibold">{t('footer.company')}</span>
+            <span className="text-[rgb(129,130,135)] font-semibold">{t('footer.company')}</span>
           </p>
         </div>
       </div>
