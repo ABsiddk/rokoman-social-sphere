@@ -32,7 +32,18 @@ const HeroSection = () => {
                   <span>{t('hero.join')}</span>
                 </button>
               </Link>
-              <button className="flex items-center justify-center space-x-3 border-2 border-transparent bg-gradient-to-r from-[rgb(39,113,150)] via-[rgb(75,145,185)] to-[rgb(129,130,135)] bg-clip-border px-8 py-4 rounded-xl font-semibold hover:bg-gradient-to-r hover:from-[rgb(39,113,150)]/10 hover:via-[rgb(75,145,185)]/10 hover:to-[rgb(129,130,135)]/10 dark:hover:from-[rgb(129,130,135)]/10 dark:hover:via-[rgb(129,130,135)]/10 dark:hover:to-[rgb(129,130,135)]/10 transition-all duration-300 text-[rgb(39,113,150)] dark:text-[rgb(129,130,135)]">
+              <button
+                className="
+                  flex items-center justify-center space-x-3 
+                  px-8 py-4 rounded-xl font-semibold w-full sm:w-auto 
+                  transition-all duration-300 
+                  border-2 border-transparent
+                  text-white bg-gray-800
+                  hover:bg-gray-900 hover:text-white 
+                  dark:bg-gray-900 dark:text-white dark:hover:bg-gray-950
+                  shadow-md
+                "
+              >
                 <span>{t('hero.learn')}</span>
               </button>
             </div>
