@@ -66,10 +66,6 @@ const HeroSection = () => {
                   className="w-full h-full"
                 />
               </div>
-              <div className="absolute bottom-4 left-4 right-4 bg-black bg-opacity-50 text-white p-4 rounded-lg">
-                <h3 className="text-lg font-semibold mb-1">{t('hero.overview')}</h3>
-                <p className="text-sm">{t('hero.discover')}</p>
-              </div>
             </div>
           </div>
         </div>
