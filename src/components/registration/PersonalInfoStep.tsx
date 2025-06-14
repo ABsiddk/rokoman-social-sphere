@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
@@ -18,10 +18,18 @@ interface PersonalInfoStepProps {
 }
 
 const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { genderOptions, religionOptions, maritalStatusOptions } = useSelectOptions();
   const { validateForm } = usePersonalInfoValidation();
+
+  // Update errors when language or form data changes for live translations
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setErrors(validateForm(data));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language]);
 
   const handleSubmit = () => {
     const validationErrors = validateForm(data);
@@ -30,6 +38,10 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
       onComplete();
     }
   };
+
+  // Theme color for dropdowns (using the "primary" color as example)
+  const selectTriggerTheme = "border-2 border-primary focus:border-primary focus:ring-2 focus:ring-primary shadow hover:shadow-lg bg-background dark:bg-gray-800 transition-all";
+  const selectContentTheme = "bg-background dark:bg-gray-800 text-foreground border-primary z-40";
 
   return (
     <div className="space-y-6">
@@ -45,26 +57,28 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Full Name */}
         <div className="md:col-span-2">
-          <Label htmlFor="fullName">{t('register.step2.fullname')} *</Label>
+          <Label htmlFor="fullName">{t('register.step2.full_name')} *</Label>
           <Input
             id="fullName"
             value={data.fullName}
             onChange={(e) => updateData({ fullName: e.target.value })}
-            placeholder={t('register.step2.fullname.placeholder')}
+            placeholder={t('register.step2.full_name_placeholder')}
             className={errors.fullName ? 'border-red-500' : ''}
+            autoComplete="off"
           />
           {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
         </div>
 
-        {/* Nicknames */}
+        {/* Nicknames Section: pass translation keys */}
         <NicknameSection
           nickNames={data.nickNames}
           onUpdate={(nickNames) => updateData({ nickNames })}
+          t={t}
         />
 
         {/* Date of Birth */}
         <div>
-          <Label htmlFor="dateOfBirth">{t('register.step2.dob')}</Label>
+          <Label htmlFor="dateOfBirth">{t('register.step2.date_of_birth')}</Label>
           <Input
             id="dateOfBirth"
             type="date"
@@ -76,11 +90,14 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
         {/* Gender */}
         <div>
           <Label>{t('register.step2.gender')}</Label>
-          <Select value={data.gender} onValueChange={(value) => updateData({ gender: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder={t('register.step2.gender.placeholder')} />
+          <Select 
+            value={data.gender}
+            onValueChange={(value) => updateData({ gender: value })}
+          >
+            <SelectTrigger className={selectTriggerTheme}>
+              <SelectValue placeholder={t('register.step2.gender')} />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className={selectContentTheme}>
               {genderOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
@@ -93,11 +110,14 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
         {/* Religion */}
         <div>
           <Label>{t('register.step2.religion')}</Label>
-          <Select value={data.religion} onValueChange={(value) => updateData({ religion: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder={t('register.step2.religion.placeholder')} />
+          <Select
+            value={data.religion}
+            onValueChange={(value) => updateData({ religion: value })}
+          >
+            <SelectTrigger className={selectTriggerTheme}>
+              <SelectValue placeholder={t('register.step2.religion')} />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className={selectContentTheme}>
               {religionOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
@@ -109,12 +129,15 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
 
         {/* Marital Status */}
         <div>
-          <Label>{t('register.step2.marital')}</Label>
-          <Select value={data.maritalStatus} onValueChange={(value) => updateData({ maritalStatus: value })}>
-            <SelectTrigger>
-              <SelectValue placeholder={t('register.step2.marital.placeholder')} />
+          <Label>{t('register.step2.marital_status')}</Label>
+          <Select
+            value={data.maritalStatus}
+            onValueChange={(value) => updateData({ maritalStatus: value })}
+          >
+            <SelectTrigger className={selectTriggerTheme}>
+              <SelectValue placeholder={t('register.step2.marital_status')} />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className={selectContentTheme}>
               {maritalStatusOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
@@ -126,28 +149,30 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
 
         {/* Personal Email */}
         <div>
-          <Label htmlFor="personalEmail">{t('register.step2.email.personal')}</Label>
+          <Label htmlFor="personalEmail">{t('register.step2.personal_email')}</Label>
           <Input
             id="personalEmail"
             type="email"
             value={data.personalEmail}
             onChange={(e) => updateData({ personalEmail: e.target.value })}
-            placeholder={t('register.step2.email.personal.placeholder')}
+            placeholder={t('register.step2.personal_email_placeholder')}
             className={errors.personalEmail ? 'border-red-500' : ''}
+            autoComplete="off"
           />
           {errors.personalEmail && <p className="text-red-500 text-sm mt-1">{errors.personalEmail}</p>}
         </div>
 
         {/* Official Email */}
         <div>
-          <Label htmlFor="officialEmail">{t('register.step2.email.official')}</Label>
+          <Label htmlFor="officialEmail">{t('register.step2.official_email')}</Label>
           <Input
             id="officialEmail"
             type="email"
             value={data.officialEmail}
             onChange={(e) => updateData({ officialEmail: e.target.value })}
-            placeholder={t('register.step2.email.official.placeholder')}
+            placeholder={t('register.step2.official_email_placeholder')}
             className={errors.officialEmail ? 'border-red-500' : ''}
+            autoComplete="off"
           />
           {errors.officialEmail && <p className="text-red-500 text-sm mt-1">{errors.officialEmail}</p>}
         </div>
@@ -156,12 +181,13 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
         <AdditionalPhonesSection
           additionalPhones={data.additionalPhones}
           onUpdate={(additionalPhones) => updateData({ additionalPhones })}
+          t={t}
         />
       </div>
 
       <div className="flex justify-end">
         <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
-          {t('register.step2.continue')}
+          {t('register.step2.save_continue')}
         </Button>
       </div>
     </div>
@@ -169,3 +195,4 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
 };
 
 export default PersonalInfoStep;
+
