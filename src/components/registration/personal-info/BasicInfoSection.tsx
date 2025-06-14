@@ -40,9 +40,13 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   return (
     <>
       <div className="md:col-span-2">
-        {/* Force full name label color to strong red regardless of parent styles */}
-        <Label htmlFor="fullName" className={`${fullNameLabelRed} font-semibold`}>
-          {t('register.step2.full_name')} *
+        {/* Force label text and color for full name */}
+        <Label
+          htmlFor="fullName"
+          className="font-semibold"
+          style={{ color: "#ff4545" }}
+        >
+          সনদ অনুযায়ী আপনার পূর্ণ নাম লিখুন *
         </Label>
         <Input
           id="fullName"
