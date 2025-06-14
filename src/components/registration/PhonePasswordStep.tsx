@@ -87,7 +87,7 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
           <Label htmlFor="phone" className="text-gray-700 dark:text-gray-300 font-medium text-sm">
             {t('register.step1.phone')} <span className="text-red-500">*</span>
           </Label>
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex gap-2 w-full">
             <CountryCodeSelect
               value={data.countryCode}
               onChange={(value) => updateData({ countryCode: value })}
@@ -115,7 +115,7 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
 
         <Button
           onClick={handleSendOTP}
-          className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 dark:from-green-600 dark:to-green-700 dark:hover:from-green-700 dark:hover:to-green-800 text-white font-semibold py-3 h-12 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+          className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 dark:from-green-600 dark:to-green-700 dark:hover:from-green-700 dark:hover:to-green-800 text-white font-semibold py-3 h-12 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
           size="lg"
         >
           {t('register.step1.send_otp')}
@@ -126,3 +126,4 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
 };
 
 export default PhonePasswordStep;
+

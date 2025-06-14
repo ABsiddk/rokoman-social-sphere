@@ -3,12 +3,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import { Input } from '../../ui/input';
 import { Search } from 'lucide-react';
+import { CountryOption } from './countryOptions';
 
-interface CountryOption {
-  code: string;
-  name: string;
-  flag: string;
-}
+// Helper: get the ISO short form from country name, e.g. 'Bangladesh' -> 'BD'
+const getShortForm = (country: CountryOption) => {
+  // If name like 'Bangladesh (Alt)' just take first word
+  const base = country.name.split(' ')[0];
+  return base.length > 3 ? base.slice(0, 2).toUpperCase() : base.toUpperCase();
+};
 
 interface CountryCodeSelectProps {
   value: string;
@@ -21,7 +23,6 @@ const CountryCodeSelect = ({ value, onChange, countries }: CountryCodeSelectProp
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Focus search input when dropdown opens
   useEffect(() => {
     if (isSelectOpen && searchInputRef.current) {
       setTimeout(() => {
@@ -30,68 +31,75 @@ const CountryCodeSelect = ({ value, onChange, countries }: CountryCodeSelectProp
     }
   }, [isSelectOpen]);
 
+  const selected = countries.find(c => c.code === value);
+
+  // Default: show "BD +88" etc
+  const triggerDisplay = selected
+    ? `${getShortForm(selected)} ${selected.code}`
+    : value;
+
   const filteredCountries = countries.filter(country => {
     const searchLower = searchTerm.toLowerCase().trim();
     if (!searchLower) return true;
-    
     return (
       country.name.toLowerCase().includes(searchLower) ||
       country.code.toLowerCase().includes(searchLower) ||
-      country.code.replace('+', '').includes(searchLower) ||
-      // Search by country short forms (ISO codes)
-      country.name.toLowerCase().substring(0, 3).includes(searchLower) ||
-      // Search by first letters of country name
-      country.name.toLowerCase().split(' ').some(word => word.startsWith(searchLower))
+      getShortForm(country).toLowerCase().includes(searchLower)
     );
   });
 
   return (
-    <div className="w-full sm:w-80 lg:w-96">
-      <Select 
-        value={value} 
-        onValueChange={onChange}
+    <div
+      className="w-full sm:w-auto"
+      style={{ minWidth: 150, maxWidth: 200 }}
+    >
+      <Select
+        value={value}
+        onValueChange={(v) => {
+          setSearchTerm('');
+          onChange(v);
+        }}
         onOpenChange={setIsSelectOpen}
       >
-        <SelectTrigger className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white font-medium hover:border-blue-300 dark:hover:border-blue-500 focus:border-blue-500 dark:focus:border-blue-400 transition-all duration-200 h-12 shadow-sm">
-          <SelectValue className="text-sm font-medium" />
+        <SelectTrigger className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white font-medium hover:border-blue-300 dark:hover:border-blue-500 focus:border-blue-500 dark:focus:border-blue-400 transition-all duration-200 h-10 rounded-lg px-2 w-full min-w-[120px] max-w-[200px] text-sm"
+          style={{ minWidth: 150, maxWidth: 200 }}>
+          <SelectValue asChild>
+            <span className="flex items-center gap-2">
+              {selected && <span className="text-xl">{selected.flag}</span>}
+              <span className="font-semibold">{triggerDisplay}</span>
+            </span>
+          </SelectValue>
         </SelectTrigger>
-        <SelectContent className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 max-h-80 w-full min-w-[320px] sm:min-w-[380px] lg:min-w-[420px] z-[9999] shadow-2xl rounded-lg overflow-hidden">
-          <div className="sticky top-0 p-4 border-b-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 z-10">
+        <SelectContent className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 max-h-80 w-full min-w-[220px] z-[9999] shadow-2xl rounded-lg overflow-hidden p-0">
+          <div className="sticky top-0 px-4 py-2 border-b-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 z-10">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={16} />
               <Input
                 ref={searchInputRef}
-                placeholder="Search by country, code, or name..."
+                placeholder="Search country/code..."
                 value={searchTerm}
                 onChange={(e) => {
                   e.stopPropagation();
                   setSearchTerm(e.target.value);
                 }}
-                onKeyDown={(e) => {
-                  e.stopPropagation();
-                }}
-                onFocus={(e) => {
-                  e.stopPropagation();
-                }}
-                className="pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm rounded-md font-medium transition-all duration-200"
+                onKeyDown={e => e.stopPropagation()}
+                onFocus={e => e.stopPropagation()}
+                className="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm rounded-md font-medium transition-all duration-200"
                 autoComplete="off"
               />
             </div>
           </div>
-          <div className="max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800">
+          <div className="max-h-64 overflow-y-auto">
             {filteredCountries.length > 0 ? (
               filteredCountries.map((country) => (
-                <SelectItem 
-                  key={country.code} 
-                  value={country.code} 
-                  className="text-gray-900 dark:text-white font-medium hover:bg-blue-50 dark:hover:bg-gray-700 focus:bg-blue-100 dark:focus:bg-gray-600 cursor-pointer px-4 py-3 transition-all duration-150 border-b border-gray-50 dark:border-gray-700 last:border-b-0"
-                  onSelect={() => setSearchTerm('')}
+                <SelectItem
+                  key={country.code}
+                  value={country.code}
+                  className="text-gray-900 dark:text-white font-medium hover:bg-blue-50 dark:hover:bg-gray-700 focus:bg-blue-100 dark:focus:bg-gray-600 cursor-pointer px-4 py-2 text-sm flex gap-2"
                 >
-                  <div className="flex items-center gap-3 w-full">
-                    <span className="text-xl flex-shrink-0">{country.flag}</span>
-                    <span className="font-bold text-blue-600 dark:text-blue-400 min-w-[65px] flex-shrink-0 text-sm">{country.code}</span>
-                    <span className="text-sm text-gray-700 dark:text-gray-300 truncate flex-1 font-medium">{country.name}</span>
-                  </div>
+                  <span className="text-xl">{country.flag}</span>
+                  <span className="font-bold min-w-[40px]">{getShortForm(country)} {country.code}</span>
+                  <span className="text-gray-500 dark:text-gray-400 flex-1 text-xs">{country.name}</span>
                 </SelectItem>
               ))
             ) : (
@@ -109,3 +117,4 @@ const CountryCodeSelect = ({ value, onChange, countries }: CountryCodeSelectProp
 };
 
 export default CountryCodeSelect;
+
