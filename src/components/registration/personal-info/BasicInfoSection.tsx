@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
@@ -19,6 +18,7 @@ interface BasicInfoSectionProps {
 
 const teamCream = 'text-[#ffe6b2]'; // Cream color for main label
 const redHighlight = 'text-red-500'; // For error/highlight
+const fullNameLabelRed = 'text-[#ff4545]'; // Cartoonish red
 
 const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   fullName,
@@ -40,7 +40,8 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   return (
     <>
       <div className="md:col-span-2">
-        <Label htmlFor="fullName" className={`${labelColor} font-semibold`}>
+        {/* Full name label color changed to cartoon red */}
+        <Label htmlFor="fullName" className={`${fullNameLabelRed} font-semibold`}>
           {t('register.step2.full_name')} *
         </Label>
         <Input
@@ -115,4 +116,3 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
 };
 
 export default BasicInfoSection;
-
