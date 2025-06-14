@@ -32,6 +32,18 @@ const translations = {
     'common.required': 'Required',
     'common.optional': 'Optional',
     
+    // Hero Section
+    'hero.welcome': 'Welcome to',
+    'hero.community': 'Professional Network',
+    'hero.description': 'Connect with professionals, grow your network, and discover new opportunities in our thriving community.',
+    'hero.join': 'Join Community',
+    'hero.learn': 'Learn More',
+    'hero.members': 'Active Members',
+    'hero.connections': 'Daily Connections',
+    'hero.satisfaction': 'Satisfaction Rate',
+    'hero.overview': 'Platform Overview',
+    'hero.discover': 'Discover what makes us different',
+    
     // Registration
     'register.title': 'Create Your OnnoRokom Account',
     'register.subtitle': 'Join our community and get started',
@@ -98,6 +110,9 @@ const translations = {
     'register.step4.currently_working': 'Currently Working',
     'register.step4.job_description': 'Job Description',
     'register.step4.complete_registration': 'Complete Registration',
+    
+    // Step 4 Errors
+    'register.step4.errors.occupation.required': 'Please select an occupation',
     
     // OTP Verification
     'register.otp.title': 'Verify Your Phone Number',
@@ -166,6 +181,18 @@ const translations = {
     'common.required': 'আবশ্যক',
     'common.optional': 'ঐচ্ছিক',
     
+    // Hero Section
+    'hero.welcome': 'স্বাগতম',
+    'hero.community': 'পেশাদার নেটওয়ার্কে',
+    'hero.description': 'পেশাদারদের সাথে সংযোগ করুন, আপনার নেটওয়ার্ক বাড়ান এবং আমাদের সমৃদ্ধ কমিউনিটিতে নতুন সুযোগ আবিষ্কার করুন।',
+    'hero.join': 'কমিউনিটিতে যোগ দিন',
+    'hero.learn': 'আরো জানুন',
+    'hero.members': 'সক্রিয় সদস্য',
+    'hero.connections': 'দৈনিক সংযোগ',
+    'hero.satisfaction': 'সন্তুষ্টির হার',
+    'hero.overview': 'প্ল্যাটফর্ম ওভারভিউ',
+    'hero.discover': 'আমাদের বিশেষত্ব আবিষ্কার করুন',
+    
     // Registration
     'register.title': 'আপনার অন্নরকম অ্যাকাউন্ট তৈরি করুন',
     'register.subtitle': 'আমাদের কমিউনিটিতে যোগ দিন এবং শুরু করুন',
@@ -232,6 +259,9 @@ const translations = {
     'register.step4.currently_working': 'বর্তমানে কাজ করছেন',
     'register.step4.job_description': 'কাজের বিবরণ',
     'register.step4.complete_registration': 'নিবন্ধন সম্পূর্ণ করুন',
+    
+    // Step 4 Errors
+    'register.step4.errors.occupation.required': 'দয়া করে একটি পেশা নির্বাচন করুন',
     
     // OTP Verification
     'register.otp.title': 'আপনার ফোন নম্বর যাচাই করুন',
