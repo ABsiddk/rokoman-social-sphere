@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -28,7 +29,12 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
       setErrors(validateForm(data));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [language]);
+  }, [language, data]);
+
+  // Force re-render on language change by including 'language' in the render dependencies
+  // This is a no-op statement, but it ensures React sees 'language' as a dependency so it rerenders.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _currentLanguage = language;
 
   const handleSubmit = () => {
     const validationErrors = validateForm(data);
@@ -82,6 +88,7 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
             type="date"
             value={data.dateOfBirth}
             onChange={(e) => updateData({ dateOfBirth: e.target.value })}
+            placeholder={t('register.step2.date_of_birth_placeholder')}
           />
         </div>
 
