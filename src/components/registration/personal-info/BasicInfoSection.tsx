@@ -17,6 +17,9 @@ interface BasicInfoSectionProps {
   t: (key: string) => string;
 }
 
+const teamCream = 'text-[#ffe6b2]'; // Cream color for main label
+const redHighlight = 'text-red-500'; // For error/highlight
+
 const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   fullName,
   fullNameError,
@@ -25,7 +28,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   onNickname1Change,
   nickname2 = '',
   onNickname2Change,
-  labelColor = 'text-[rgb(145,153,165)]',
+  labelColor = teamCream,
   inputBgColor = 'bg-[rgb(55,65,81)] text-white border-none focus:ring-2 focus:ring-primary',
   t,
 }) => {
@@ -37,7 +40,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   return (
     <>
       <div className="md:col-span-2">
-        <Label htmlFor="fullName" className={labelColor}>
+        <Label htmlFor="fullName" className={`${labelColor} font-semibold`}>
           {t('register.step2.full_name')} *
         </Label>
         <Input
@@ -48,7 +51,11 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
           className={`${inputBgColor} ${fullNameError ? 'border-red-500' : ''}`}
           autoComplete="off"
         />
-        {fullNameError && <p className="text-red-500 text-sm mt-1">{fullNameError}</p>}
+        {fullNameError && (
+          <p className={`${redHighlight} text-sm mt-1`}>
+            {fullNameError}
+          </p>
+        )}
       </div>
 
       <div>
@@ -62,7 +69,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
           placeholder={t('register.step2.nickname_placeholder')}
           className={inputBgColor}
         />
-        <div className="text-xs mt-1 text-[rgb(145,153,165)]">
+        <div className={`text-xs mt-1 ${teamCream}`}>
           {/* Updated help text */}
           {t('register.step2.nickname1_hint') ?? 'The name you are known by in your family and friends.'}
         </div>
@@ -75,14 +82,14 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
               type="button"
               variant="outline"
               disabled
-              className="border-[rgb(145,153,165)] text-[rgb(145,153,165)] cursor-default"
+              className="border-[#ffe6b2] text-[#ffe6b2] cursor-default"
             >
               {t('register.step2.nickname')} 2
             </Button>
             <Button
               type="button"
               variant="outline"
-              className="border-[rgb(145,153,165)] text-[rgb(145,153,165)]"
+              className="border-[#ffe6b2] text-[#ffe6b2]"
               onClick={handleAddNickname2}
             >
               + {t('register.step2.add_nickname') ?? 'Add Nickname'}
@@ -108,3 +115,4 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
 };
 
 export default BasicInfoSection;
+
