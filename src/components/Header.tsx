@@ -35,50 +35,50 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-1">
             <Link
               to="/"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
                 isActive('/') 
                   ? 'bg-[rgb(39,113,150)] text-white dark:bg-white/10 dark:text-white border border-[rgb(39,113,150)]' 
                   : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
               }`}
             >
               <Home size={18} />
-              <span className="font-medium">{t('nav.home')}</span>
+              <span>{t('nav.home')}</span>
             </Link>
 
             <Link
               to="/profile"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
                 isActive('/profile') 
                   ? 'bg-[rgb(39,113,150)] text-white dark:bg-white/10 dark:text-white border border-[rgb(39,113,150)]' 
                   : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
               }`}
             >
               <User size={18} />
-              <span className="font-medium">{t('nav.profile')}</span>
+              <span>{t('nav.profile')}</span>
             </Link>
 
             <Link
               to="/dashboard"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
                 isActive('/dashboard') 
                   ? 'bg-[rgb(39,113,150)] text-white dark:bg-white/10 dark:text-white border border-[rgb(39,113,150)]' 
                   : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
               }`}
             >
               <BarChart3 size={18} />
-              <span className="font-medium">{t('nav.dashboard')}</span>
+              <span>{t('nav.dashboard')}</span>
             </Link>
 
             <Link
               to="/admin"
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
                 isActive('/admin') 
                   ? 'bg-[rgb(39,113,150)] text-white dark:bg-white/10 dark:text-white border border-[rgb(39,113,150)]' 
                   : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
               }`}
             >
               <Settings size={18} />
-              <span className="font-medium">{t('nav.admin')}</span>
+              <span>{t('nav.admin')}</span>
             </Link>
           </nav>
 
@@ -91,7 +91,9 @@ const Header = () => {
                 className="flex items-center bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] rounded-full p-1 transition-all duration-300 hover:shadow-lg hover:scale-105 w-16 h-8 focus:outline-none focus:ring-2 focus:ring-[rgb(39,113,150)]/50"
                 aria-label="Toggle Language"
               >
-                <div className={`w-8 h-6 rounded-full transition-all duration-300 ${language === 'en' ? 'translate-x-0 bg-white' : 'translate-x-6 bg-white'} shadow-md flex items-center justify-center`}>
+                <div className={`w-6 h-6 bg-white rounded-full transition-all duration-300 shadow-md flex items-center justify-center ${
+                  language === 'en' ? 'translate-x-0' : 'translate-x-8'
+                }`}>
                   <span className="text-xs font-bold text-[rgb(39,113,150)]">
                     {language === 'en' ? 'EN' : 'বাং'}
                   </span>

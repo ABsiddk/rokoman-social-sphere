@@ -19,7 +19,6 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
   const [autoFill, setAutoFill] = useState(false);
   const [error, setError] = useState('');
 
-  // Demo OTPs for testing
   const demoOTPs = ['123456', '654321', '111111'];
 
   useEffect(() => {
@@ -44,15 +43,14 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
 
   const handleVerify = () => {
     if (otp.length !== 6) {
-      setError(t('registration.otp.error.incomplete'));
+      setError(t('register.otp.error.incomplete'));
       return;
     }
 
-    // Check against demo OTPs
     if (demoOTPs.includes(otp)) {
       onVerified();
     } else {
-      setError(t('registration.otp.error.invalid'));
+      setError(t('register.otp.error.invalid'));
     }
   };
 
@@ -75,7 +73,7 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
       <div className="text-center">
         <button
           onClick={onBack}
-          className="inline-flex items-center text-[rgb(39,113,150)] hover:text-[rgb(39,113,150)]/80 dark:text-blue-400 dark:hover:text-blue-300 mb-4 transition-colors duration-200"
+          className="inline-flex items-center text-[rgb(39,113,150)] hover:text-[rgb(39,113,150)]/80 dark:text-blue-400 dark:hover:text-blue-300 mb-4 transition-colors duration-200 font-medium"
         >
           <ArrowLeft size={16} className="mr-1" />
           {t('common.back')}
@@ -84,7 +82,7 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
           {t('register.otp.title')}
         </h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-2">
+        <p className="text-gray-600 dark:text-gray-300 mb-2 font-medium">
           {t('register.otp.subtitle')}
         </p>
         <p className="font-semibold text-gray-800 dark:text-white">{phoneNumber}</p>
@@ -103,18 +101,18 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
             className="justify-center"
           >
             <InputOTPGroup className="gap-2">
-              <InputOTPSlot index={0} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-              <InputOTPSlot index={1} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-              <InputOTPSlot index={2} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-              <InputOTPSlot index={3} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-              <InputOTPSlot index={4} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-              <InputOTPSlot index={5} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
+              <InputOTPSlot index={0} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold" />
+              <InputOTPSlot index={1} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold" />
+              <InputOTPSlot index={2} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold" />
+              <InputOTPSlot index={3} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold" />
+              <InputOTPSlot index={4} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold" />
+              <InputOTPSlot index={5} className="w-12 h-12 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold" />
             </InputOTPGroup>
           </InputOTP>
         </div>
 
         {error && (
-          <p className="text-red-500 dark:text-red-400 text-center">{error}</p>
+          <p className="text-red-500 dark:text-red-400 text-center font-medium">{error}</p>
         )}
 
         <div className="flex items-center justify-center space-x-2">
@@ -125,7 +123,7 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
             onChange={(e) => setAutoFill(e.target.checked)}
             className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700"
           />
-          <label htmlFor="autoFill" className="text-sm text-gray-600 dark:text-gray-300">
+          <label htmlFor="autoFill" className="text-sm text-gray-600 dark:text-gray-300 font-medium">
             {t('register.otp.autofill')}
           </label>
         </div>
@@ -133,7 +131,7 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
         <Button
           onClick={handleVerify}
           disabled={otp.length !== 6}
-          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-medium py-3 transition-colors duration-200"
+          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 dark:disabled:bg-gray-600 text-white font-medium py-3 transition-all duration-200 shadow-md hover:shadow-lg"
           size="lg"
         >
           {t('register.verify')}
@@ -141,14 +139,14 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
 
         {canResend && (
           <div className="text-center">
-            <p className="text-gray-600 dark:text-gray-300 mb-2">
+            <p className="text-gray-600 dark:text-gray-300 mb-2 font-medium">
               {t('register.otp.not_received')}
             </p>
             <Button
               onClick={handleResendOTP}
               variant="outline"
               size="sm"
-              className="bg-white dark:bg-gray-700 border-[rgb(39,113,150)] text-[rgb(39,113,150)] dark:text-white hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-gray-600"
+              className="bg-white dark:bg-gray-700 border-[rgb(39,113,150)] text-[rgb(39,113,150)] dark:text-white hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-gray-600 font-medium"
             >
               {t('register.otp.resend')}
             </Button>
@@ -157,7 +155,7 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
 
         {/* Demo OTPs for testing */}
         <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 text-center">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 text-center font-medium">
             {t('register.otp.demo.title')}
           </p>
           <div className="flex justify-center space-x-2">
@@ -165,7 +163,7 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
               <button
                 key={index}
                 onClick={() => copyDemoOTP(demoOTP)}
-                className="flex items-center space-x-1 px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+                className="flex items-center space-x-1 px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 font-medium"
               >
                 <span>{demoOTP}</span>
                 <Copy size={12} />
