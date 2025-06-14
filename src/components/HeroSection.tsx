@@ -7,10 +7,6 @@ import { Link } from 'react-router-dom';
 const HeroSection = () => {
   const { t } = useLanguage();
 
-  const handleVideoClick = () => {
-    window.open('https://www.youtube.com/watch?v=-ihuECJ29T8', '_blank');
-  };
-
   return (
     <section className="relative bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen flex items-center">
       <div className="container mx-auto px-4">
@@ -36,10 +32,7 @@ const HeroSection = () => {
                   <span>{t('hero.join')}</span>
                 </button>
               </Link>
-              <button 
-                onClick={handleVideoClick}
-                className="flex items-center justify-center space-x-3 border-2 border-[rgb(39,113,150)] dark:border-[rgb(129,130,135)] text-[rgb(39,113,150)] dark:text-[rgb(129,130,135)] px-8 py-4 rounded-xl font-semibold hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-[rgb(129,130,135)]/10 transition-all duration-300"
-              >
+              <button className="flex items-center justify-center space-x-3 border-2 border-[rgb(39,113,150)] dark:border-[rgb(129,130,135)] text-[rgb(39,113,150)] dark:text-[rgb(129,130,135)] px-8 py-4 rounded-xl font-semibold hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-[rgb(129,130,135)]/10 transition-all duration-300">
                 <span>{t('hero.learn')}</span>
               </button>
             </div>
@@ -63,16 +56,19 @@ const HeroSection = () => {
           {/* Video Section */}
           <div className="relative">
             <div className="relative bg-gray-100 dark:bg-gray-700 rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-video bg-gradient-to-br from-[rgb(39,113,150)]/20 to-[rgb(129,130,135)]/20 dark:from-[rgb(39,113,150)]/30 dark:to-[rgb(129,130,135)]/30 flex items-center justify-center cursor-pointer" onClick={handleVideoClick}>
-                <button className="flex items-center justify-center w-20 h-20 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:scale-110 transition-all duration-300 border-4 border-[rgb(39,113,150)] dark:border-[rgb(129,130,135)]">
-                  <Play className="text-[rgb(39,113,150)] dark:text-[rgb(129,130,135)] ml-1" size={32} />
-                </button>
+              <div className="aspect-video">
+                <iframe
+                  src="https://www.youtube.com/embed/-ihuECJ29T8"
+                  title={t('hero.overview')}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
               </div>
-              <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer" onClick={handleVideoClick}>
-                <div className="text-white text-center">
-                  <h3 className="text-xl font-semibold mb-2">{t('hero.overview')}</h3>
-                  <p className="text-sm">{t('hero.discover')}</p>
-                </div>
+              <div className="absolute bottom-4 left-4 right-4 bg-black bg-opacity-50 text-white p-4 rounded-lg">
+                <h3 className="text-lg font-semibold mb-1">{t('hero.overview')}</h3>
+                <p className="text-sm">{t('hero.discover')}</p>
               </div>
             </div>
           </div>
