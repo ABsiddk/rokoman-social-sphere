@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '../ui/input-otp';
 import { Button } from '../ui/button';
 import { ArrowLeft, Copy } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import glassButtonStyles from './phone-password/LiquidGlassButton.module.css';
 
 interface OTPVerificationProps {
   phoneNumber: string;
@@ -142,14 +142,20 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
             </label>
           </div>
 
-          <Button
+          <button
             onClick={handleVerify}
             disabled={otp.length !== 6}
-            className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 dark:disabled:bg-gray-600 text-white font-medium py-3 transition-all duration-200 shadow-md hover:shadow-lg"
-            size="lg"
+            type="button"
+            className={
+              glassButtonStyles.liquidGlassButton +
+              ' w-full mt-2 font-medium text-lg text-[rgb(39,113,150)] dark:text-white ' +
+              'transition-all duration-200'
+            }
           >
-            {t('register.verify')}
-          </Button>
+            <span className={glassButtonStyles.liquidGlassButtonContent}>
+              {t('register.verify')}
+            </span>
+          </button>
 
           {canResend && (
             <div className="text-center">
