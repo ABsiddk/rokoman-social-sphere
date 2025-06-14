@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -216,10 +215,20 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
   const [showOTP, setShowOTP] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredCountries = countryOptions.filter(country => 
-    country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    country.code.includes(searchTerm)
-  );
+  const filteredCountries = countryOptions.filter(country => {
+    const searchLower = searchTerm.toLowerCase().trim();
+    if (!searchLower) return true;
+    
+    return (
+      country.name.toLowerCase().includes(searchLower) ||
+      country.code.toLowerCase().includes(searchLower) ||
+      country.code.replace('+', '').includes(searchLower) ||
+      // Search by country short forms (ISO codes)
+      country.name.toLowerCase().substring(0, 3).includes(searchLower) ||
+      // Search by first letters of country name
+      country.name.toLowerCase().split(' ').some(word => word.startsWith(searchLower))
+    );
+  });
 
   const validatePhone = (phone: string, countryCode: string) => {
     if (countryCode === '+88') {
@@ -334,38 +343,47 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
           <Label htmlFor="phone" className="text-gray-700 dark:text-gray-300 font-medium">
             {t('register.step1.phone')} <span className="text-red-500">*</span>
           </Label>
-          <div className="flex gap-2">
-            <div className="w-60">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <div className="w-full sm:w-72 md:w-80">
               <Select value={data.countryCode} onValueChange={(value) => updateData({ countryCode: value })}>
-                <SelectTrigger className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <SelectTrigger className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors h-11">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 max-h-80 z-50">
-                  <div className="p-2 border-b border-gray-200 dark:border-gray-600">
+                <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 max-h-80 w-full min-w-[300px] sm:min-w-[350px] z-[9999] shadow-2xl">
+                  <div className="sticky top-0 p-3 border-b border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 z-10">
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={16} />
                       <Input
-                        placeholder="Search countries..."
+                        placeholder="Search by country, code, or name..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-10 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white"
+                        className="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        autoComplete="off"
                       />
                     </div>
                   </div>
-                  <div className="max-h-60 overflow-y-auto">
-                    {filteredCountries.map((country) => (
-                      <SelectItem 
-                        key={country.code} 
-                        value={country.code} 
-                        className="text-gray-900 dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 cursor-pointer"
-                      >
-                        <span className="flex items-center gap-2">
-                          <span>{country.flag}</span>
-                          <span>{country.code}</span>
-                          <span className="text-sm text-gray-600 dark:text-gray-400">{country.name}</span>
-                        </span>
-                      </SelectItem>
-                    ))}
+                  <div className="max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
+                    {filteredCountries.length > 0 ? (
+                      filteredCountries.map((country) => (
+                        <SelectItem 
+                          key={country.code} 
+                          value={country.code} 
+                          className="text-gray-900 dark:text-white font-medium hover:bg-blue-50 dark:hover:bg-gray-700 focus:bg-blue-100 dark:focus:bg-gray-600 cursor-pointer px-4 py-3 transition-colors duration-150"
+                        >
+                          <div className="flex items-center gap-3 w-full">
+                            <span className="text-lg">{country.flag}</span>
+                            <span className="font-semibold text-blue-600 dark:text-blue-400 min-w-[60px]">{country.code}</span>
+                            <span className="text-sm text-gray-700 dark:text-gray-300 truncate flex-1">{country.name}</span>
+                          </div>
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <div className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
+                        <Search className="mx-auto mb-2 h-8 w-8 opacity-50" />
+                        <p className="text-sm">No countries found</p>
+                        <p className="text-xs">Try searching by name or code</p>
+                      </div>
+                    )}
                   </div>
                 </SelectContent>
               </Select>
@@ -378,7 +396,7 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
                 value={data.phone}
                 onChange={(e) => handlePhoneChange(e.target.value)}
                 placeholder={t('register.step1.phone_placeholder')}
-                className={`pl-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 font-medium ${errors.phone ? 'border-red-500' : ''}`}
+                className={`pl-10 h-11 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 font-medium ${errors.phone ? 'border-red-500' : ''}`}
               />
             </div>
           </div>
@@ -397,7 +415,7 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
               value={data.password}
               onChange={(e) => updateData({ password: e.target.value })}
               placeholder={t('register.step1.password_placeholder')}
-              className={`pr-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 font-medium ${errors.password ? 'border-red-500' : ''}`}
+              className={`pr-10 h-11 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 font-medium ${errors.password ? 'border-red-500' : ''}`}
             />
             <button
               type="button"
@@ -421,7 +439,7 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
               value={data.confirmPassword}
               onChange={(e) => updateData({ confirmPassword: e.target.value })}
               placeholder={t('register.step1.confirm_placeholder')}
-              className={`pr-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 font-medium ${errors.confirmPassword ? 'border-red-500' : ''}`}
+              className={`pr-10 h-11 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 font-medium ${errors.confirmPassword ? 'border-red-500' : ''}`}
             />
             <button
               type="button"
