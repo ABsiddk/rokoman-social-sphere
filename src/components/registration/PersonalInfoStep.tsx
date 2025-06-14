@@ -1,11 +1,15 @@
+
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
-import { Plus, X } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
+import NicknameSection from './personal-info/NicknameSection';
+import AdditionalPhonesSection from './personal-info/AdditionalPhonesSection';
+import { useSelectOptions } from './personal-info/SelectOptions';
+import { usePersonalInfoValidation } from './personal-info/ValidationUtils';
 
 interface PersonalInfoStepProps {
   data: RegistrationData;
@@ -16,83 +20,13 @@ interface PersonalInfoStepProps {
 const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProps) => {
   const { t } = useLanguage();
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const genderOptions = [
-    { value: 'male', label: t('register.step2.gender.male') },
-    { value: 'female', label: t('register.step2.gender.female') },
-    { value: 'other', label: t('register.step2.gender.other') }
-  ];
-
-  const religionOptions = [
-    { value: 'islam', label: t('register.step2.religion.islam') },
-    { value: 'hinduism', label: t('register.step2.religion.hinduism') },
-    { value: 'christianity', label: t('register.step2.religion.christianity') },
-    { value: 'buddhism', label: t('register.step2.religion.buddhism') },
-    { value: 'other', label: t('register.step2.religion.other') }
-  ];
-
-  const maritalStatusOptions = [
-    { value: 'single', label: t('register.step2.marital.single') },
-    { value: 'married', label: t('register.step2.marital.married') },
-    { value: 'divorced', label: t('register.step2.marital.divorced') },
-    { value: 'widowed', label: t('register.step2.marital.widowed') }
-  ];
-
-  const addNickname = () => {
-    if (data.nickNames.length < 5) {
-      updateData({ nickNames: [...data.nickNames, ''] });
-    }
-  };
-
-  const removeNickname = (index: number) => {
-    const newNicknames = data.nickNames.filter((_, i) => i !== index);
-    updateData({ nickNames: newNicknames });
-  };
-
-  const updateNickname = (index: number, value: string) => {
-    const newNicknames = [...data.nickNames];
-    newNicknames[index] = value;
-    updateData({ nickNames: newNicknames });
-  };
-
-  const addAdditionalPhone = () => {
-    if (data.additionalPhones.length < 3) {
-      updateData({ additionalPhones: [...data.additionalPhones, ''] });
-    }
-  };
-
-  const removeAdditionalPhone = (index: number) => {
-    const newPhones = data.additionalPhones.filter((_, i) => i !== index);
-    updateData({ additionalPhones: newPhones });
-  };
-
-  const updateAdditionalPhone = (index: number, value: string) => {
-    const newPhones = [...data.additionalPhones];
-    newPhones[index] = value;
-    updateData({ additionalPhones: newPhones });
-  };
-
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!data.fullName.trim()) {
-      newErrors.fullName = t('register.step2.errors.fullname.required');
-    }
-
-    if (data.personalEmail && !/\S+@\S+\.\S+/.test(data.personalEmail)) {
-      newErrors.personalEmail = t('register.step2.errors.email.invalid');
-    }
-
-    if (data.officialEmail && !/\S+@\S+\.\S+/.test(data.officialEmail)) {
-      newErrors.officialEmail = t('register.step2.errors.email.invalid');
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const { genderOptions, religionOptions, maritalStatusOptions } = useSelectOptions();
+  const { validateForm } = usePersonalInfoValidation();
 
   const handleSubmit = () => {
-    if (validateForm()) {
+    const validationErrors = validateForm(data);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
       onComplete();
     }
   };
@@ -123,38 +57,10 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
         </div>
 
         {/* Nicknames */}
-        <div className="md:col-span-2">
-          <Label>{t('register.step2.nickname')}</Label>
-          {data.nickNames.map((nickname, index) => (
-            <div key={index} className="flex items-center space-x-2 mt-2">
-              <Input
-                value={nickname}
-                onChange={(e) => updateNickname(index, e.target.value)}
-                placeholder={t('register.step2.nickname.placeholder')}
-                className="flex-1"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => removeNickname(index)}
-              >
-                <X size={16} />
-              </Button>
-            </div>
-          ))}
-          {data.nickNames.length < 5 && (
-            <Button
-              type="button"
-              variant="outline"
-              onClick={addNickname}
-              className="mt-2"
-            >
-              <Plus size={16} className="mr-2" />
-              {t('register.step2.nickname.add')}
-            </Button>
-          )}
-        </div>
+        <NicknameSection
+          nickNames={data.nickNames}
+          onUpdate={(nickNames) => updateData({ nickNames })}
+        />
 
         {/* Date of Birth */}
         <div>
@@ -247,38 +153,10 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
         </div>
 
         {/* Additional Phone Numbers */}
-        <div className="md:col-span-2">
-          <Label>{t('register.step2.phone.additional')}</Label>
-          {data.additionalPhones.map((phone, index) => (
-            <div key={index} className="flex items-center space-x-2 mt-2">
-              <Input
-                value={phone}
-                onChange={(e) => updateAdditionalPhone(index, e.target.value)}
-                placeholder={t('register.step2.phone.additional.placeholder')}
-                className="flex-1"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => removeAdditionalPhone(index)}
-              >
-                <X size={16} />
-              </Button>
-            </div>
-          ))}
-          {data.additionalPhones.length < 3 && (
-            <Button
-              type="button"
-              variant="outline"
-              onClick={addAdditionalPhone}
-              className="mt-2"
-            >
-              <Plus size={16} className="mr-2" />
-              {t('register.step2.phone.additional.add')}
-            </Button>
-          )}
-        </div>
+        <AdditionalPhonesSection
+          additionalPhones={data.additionalPhones}
+          onUpdate={(additionalPhones) => updateData({ additionalPhones })}
+        />
       </div>
 
       <div className="flex justify-end">
