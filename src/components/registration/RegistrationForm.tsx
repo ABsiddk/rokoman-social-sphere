@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import StepIndicator from './StepIndicator';
@@ -170,13 +169,13 @@ const RegistrationForm = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors duration-300">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
-            {t('registration.title')}
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2 transition-colors duration-300">
+            {t('register.title')}
           </h1>
-          <p className="text-gray-600 dark:text-gray-300">
-            {t('registration.subtitle')}
+          <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
+            {t('register.subtitle')}
           </p>
         </div>
 

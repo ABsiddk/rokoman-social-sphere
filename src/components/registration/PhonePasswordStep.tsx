@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
-import { Phone, Lock, Eye, EyeOff, Check, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
+import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Phone, Eye, EyeOff } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
 import OTPVerification from './OTPVerification';
@@ -18,9 +18,9 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
   const { t } = useLanguage();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [showOTPStep, setShowOTPStep] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showOTP, setShowOTP] = useState(false);
 
   const countryCodes = [
     { code: '+88', country: 'Bangladesh', flag: '🇧🇩' },
@@ -97,25 +97,55 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
       return;
     }
 
-    setShowConfirmModal(true);
+    setShowConfirmation(true);
   };
 
   const handleConfirmPhone = () => {
-    setShowConfirmModal(false);
-    setShowOTPStep(true);
+    setShowConfirmation(false);
+    setShowOTP(true);
   };
 
   const handleOTPVerified = () => {
     onComplete();
   };
 
-  if (showOTPStep) {
+  if (showOTP) {
     return (
       <OTPVerification
         phoneNumber={`${data.countryCode} ${data.phone}`}
-        onVerified={handleOTPVerified}
-        onBack={() => setShowOTPStep(false)}
+        onVerified={onComplete}
+        onBack={() => setShowOTP(false)}
       />
+    );
+  }
+
+  if (showConfirmation) {
+    return (
+      <div className="space-y-6 text-center">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+          {t('register.step1.phone_confirmation')}
+        </h2>
+        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+          <p className="text-lg font-semibold text-blue-800 dark:text-blue-200">
+            {data.countryCode} {data.phone}
+          </p>
+        </div>
+        <div className="flex gap-4 justify-center">
+          <Button
+            onClick={() => setShowConfirmation(false)}
+            variant="outline"
+            className="bg-white dark:bg-gray-700 border-[rgb(39,113,150)] text-[rgb(39,113,150)] dark:text-white hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-gray-600"
+          >
+            {t('register.step1.edit_phone')}
+          </Button>
+          <Button
+            onClick={() => setShowOTP(true)}
+            className="bg-green-600 hover:bg-green-700 text-white"
+          >
+            {t('register.step1.confirm_phone')}
+          </Button>
+        </div>
+      </div>
     );
   }
 
@@ -124,154 +154,107 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
 
   return (
     <div className="space-y-6">
-      <div className="text-center mb-6">
+      <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-          {t('registration.step1.title')}
+          {t('register.step1.title')}
         </h2>
-        <p className="text-gray-600 dark:text-gray-300">
-          {t('registration.step1.subtitle')}
-        </p>
       </div>
 
-      {/* Phone Number */}
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          {t('registration.phone.label')}
-        </label>
-        <div className="flex space-x-2">
-          <Select value={data.countryCode} onValueChange={(value) => updateData({ countryCode: value })}>
-            <SelectTrigger className="w-32">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {countryCodes.map((country) => (
-                <SelectItem key={country.code} value={country.code}>
-                  {country.flag} {country.code}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <div className="relative flex-1">
-            <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+      <div className="space-y-4">
+        {/* Country Code and Phone Number */}
+        <div className="space-y-2">
+          <Label htmlFor="phone" className="text-gray-700 dark:text-gray-300">
+            {t('register.step1.phone')}
+          </Label>
+          <div className="flex gap-2">
+            <Select value={data.countryCode} onValueChange={(value) => updateData({ countryCode: value })}>
+              <SelectTrigger className="w-32 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600">
+                <SelectItem value="+88" className="text-gray-900 dark:text-white">+88 Bangladesh</SelectItem>
+                <SelectItem value="+1" className="text-gray-900 dark:text-white">+1 USA</SelectItem>
+                <SelectItem value="+91" className="text-gray-900 dark:text-white">+91 India</SelectItem>
+              </SelectContent>
+            </Select>
+            <div className="relative flex-1">
+              <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={18} />
+              <Input
+                id="phone"
+                type="tel"
+                value={data.phone}
+                onChange={(e) => updateData({ phone: e.target.value })}
+                placeholder={t('register.step1.phone_placeholder')}
+                className={`pl-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${errors.phone ? 'border-red-500' : ''}`}
+              />
+            </div>
+          </div>
+          {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+        </div>
+
+        {/* Password Fields */}
+        <div className="space-y-2">
+          <Label htmlFor="password" className="text-gray-700 dark:text-gray-300">
+            {t('register.step1.password')}
+          </Label>
+          <div className="relative">
             <Input
-              type="tel"
-              value={data.phone}
-              onChange={(e) => handlePhoneChange(e.target.value)}
-              placeholder={data.countryCode === '+88' ? '01XXXXXXXXX' : t('registration.phone.placeholder')}
-              className={`pl-10 ${errors.phone ? 'border-red-500' : ''}`}
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              value={data.password}
+              onChange={(e) => updateData({ password: e.target.value })}
+              placeholder={t('register.step1.password_placeholder')}
+              className={`pr-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${errors.password ? 'border-red-500' : ''}`}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
           </div>
+          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
         </div>
-        {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
-      </div>
 
-      {/* Password */}
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          {t('registration.password.new')}
-        </label>
-        <div className="relative">
-          <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            value={data.password}
-            onChange={(e) => updateData({ password: e.target.value })}
-            placeholder={t('registration.password.placeholder')}
-            className={`pl-10 pr-10 ${errors.password ? 'border-red-500' : ''}`}
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
-          >
-            {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-          </button>
-        </div>
-        
-        {/* Password Strength Indicator */}
-        {data.password && (
-          <div className="space-y-2">
-            <div className="flex space-x-1">
-              <div className={`h-2 flex-1 rounded ${passwordStrength === 'weak' ? 'bg-red-500' : passwordStrength === 'medium' ? 'bg-yellow-500' : 'bg-green-500'}`} />
-              <div className={`h-2 flex-1 rounded ${passwordStrength === 'medium' || passwordStrength === 'strong' ? 'bg-yellow-500' : 'bg-gray-200'}`} />
-              <div className={`h-2 flex-1 rounded ${passwordStrength === 'strong' ? 'bg-green-500' : 'bg-gray-200'}`} />
-            </div>
-            <div className="space-y-1">
-              {passwordErrors.map((error, index) => (
-                <div key={index} className="flex items-center space-x-2 text-sm">
-                  <X size={12} className="text-red-500" />
-                  <span className="text-red-500">{error}</span>
-                </div>
-              ))}
-              {passwordErrors.length === 0 && data.password && (
-                <div className="flex items-center space-x-2 text-sm">
-                  <Check size={12} className="text-green-500" />
-                  <span className="text-green-500">{t('registration.password.strong')}</span>
-                </div>
-              )}
-            </div>
+        <div className="space-y-2">
+          <Label htmlFor="confirmPassword" className="text-gray-700 dark:text-gray-300">
+            {t('register.step1.confirm_password')}
+          </Label>
+          <div className="relative">
+            <Input
+              id="confirmPassword"
+              type={showConfirmPassword ? 'text' : 'password'}
+              value={data.confirmPassword}
+              onChange={(e) => updateData({ confirmPassword: e.target.value })}
+              placeholder={t('register.step1.confirm_placeholder')}
+              className={`pr-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${errors.confirmPassword ? 'border-red-500' : ''}`}
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
           </div>
-        )}
-      </div>
-
-      {/* Confirm Password */}
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          {t('registration.password.confirm')}
-        </label>
-        <div className="relative">
-          <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-          <Input
-            type={showConfirmPassword ? 'text' : 'password'}
-            value={data.confirmPassword}
-            onChange={(e) => updateData({ confirmPassword: e.target.value })}
-            placeholder={t('registration.password.confirm.placeholder')}
-            className={`pl-10 pr-10 ${errors.confirmPassword ? 'border-red-500' : ''}`}
-          />
-          <button
-            type="button"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
-          >
-            {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-          </button>
+          {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
         </div>
-        {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
-      </div>
 
-      <Button 
-        onClick={handleSendOTP}
-        className="w-full bg-green-600 hover:bg-green-700"
-        size="lg"
-      >
-        {t('registration.send.otp')}
-      </Button>
-
-      {/* Confirmation Modal */}
-      {showConfirmModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md mx-4">
-            <h3 className="text-lg font-semibold mb-4">{t('registration.confirm.phone.title')}</h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-2">{t('registration.confirm.phone.message')}</p>
-            <p className="font-semibold text-lg mb-6">{data.countryCode} {data.phone}</p>
-            <div className="flex space-x-3">
-              <Button
-                onClick={() => setShowConfirmModal(false)}
-                variant="outline"
-                className="flex-1"
-              >
-                {t('registration.edit')}
-              </Button>
-              <Button
-                onClick={handleConfirmPhone}
-                className="flex-1 bg-green-600 hover:bg-green-700"
-              >
-                {t('registration.confirm')}
-              </Button>
-            </div>
-          </div>
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border border-blue-200 dark:border-blue-800">
+          <p className="text-sm text-blue-800 dark:text-blue-200">
+            {t('register.step1.password_requirements')}
+          </p>
         </div>
-      )}
+
+        <Button
+          onClick={handleSendOTP}
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-lg transition-colors duration-200"
+          size="lg"
+        >
+          {t('register.step1.send_otp')}
+        </Button>
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import RegistrationForm from '../components/registration/RegistrationForm';
 
 const Register = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <Header />
       <main className="container mx-auto px-4 py-8">
         <RegistrationForm />

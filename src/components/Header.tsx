@@ -16,7 +16,6 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-    // Optionally navigate to home page after logout
     window.location.href = '/';
   };
 
@@ -38,8 +37,8 @@ const Header = () => {
               to="/"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                 isActive('/') 
-                  ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
-                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
+                  ? 'bg-[rgb(39,113,150)] text-white dark:bg-white/10 dark:text-white border border-[rgb(39,113,150)]' 
+                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
               }`}
             >
               <Home size={18} />
@@ -50,8 +49,8 @@ const Header = () => {
               to="/profile"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                 isActive('/profile') 
-                  ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
-                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
+                  ? 'bg-[rgb(39,113,150)] text-white dark:bg-white/10 dark:text-white border border-[rgb(39,113,150)]' 
+                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
               }`}
             >
               <User size={18} />
@@ -62,8 +61,8 @@ const Header = () => {
               to="/dashboard"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                 isActive('/dashboard') 
-                  ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
-                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
+                  ? 'bg-[rgb(39,113,150)] text-white dark:bg-white/10 dark:text-white border border-[rgb(39,113,150)]' 
+                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
               }`}
             >
               <BarChart3 size={18} />
@@ -74,8 +73,8 @@ const Header = () => {
               to="/admin"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                 isActive('/admin') 
-                  ? 'bg-[rgb(39,113,150)]/10 dark:bg-white/10 text-[rgb(39,113,150)] dark:text-white border border-[rgb(39,113,150)]/30' 
-                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/5 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
+                  ? 'bg-[rgb(39,113,150)] text-white dark:bg-white/10 dark:text-white border border-[rgb(39,113,150)]' 
+                  : 'text-[rgb(129,130,135)] dark:text-gray-300 hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-white/5 hover:text-[rgb(39,113,150)] dark:hover:text-white'
               }`}
             >
               <Settings size={18} />
