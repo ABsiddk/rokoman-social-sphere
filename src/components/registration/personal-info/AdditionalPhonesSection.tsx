@@ -1,69 +1,46 @@
 
 import React from 'react';
-import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
-import { Plus, X } from 'lucide-react';
-import { useLanguage } from '../../../contexts/LanguageContext';
 
 interface AdditionalPhonesSectionProps {
   additionalPhones: string[];
   onUpdate: (phones: string[]) => void;
+  labelColor?: string;
+  inputBgColor?: string;
+  t: (key: string) => string;
 }
 
-const AdditionalPhonesSection = ({ additionalPhones, onUpdate }: AdditionalPhonesSectionProps) => {
-  const { t } = useLanguage();
-
-  const addAdditionalPhone = () => {
-    if (additionalPhones.length < 3) {
-      onUpdate([...additionalPhones, '']);
-    }
-  };
-
-  const removeAdditionalPhone = (index: number) => {
-    const newPhones = additionalPhones.filter((_, i) => i !== index);
-    onUpdate(newPhones);
-  };
-
-  const updateAdditionalPhone = (index: number, value: string) => {
-    const newPhones = [...additionalPhones];
-    newPhones[index] = value;
-    onUpdate(newPhones);
+const AdditionalPhonesSection = ({
+  additionalPhones,
+  onUpdate,
+  labelColor = 'text-[rgb(145,153,165)]',
+  inputBgColor = 'bg-[rgb(55,65,81)] text-white border-none focus:ring-2 focus:ring-primary',
+  t,
+}: AdditionalPhonesSectionProps) => {
+  const updateAdditionalPhone = (idx: number, value: string) => {
+    const updated = [...additionalPhones];
+    updated[idx] = value;
+    onUpdate(updated);
   };
 
   return (
-    <div className="md:col-span-2">
-      <Label>{t('register.step2.phone.additional')}</Label>
-      {additionalPhones.map((phone, index) => (
-        <div key={index} className="flex items-center space-x-2 mt-2">
+    <>
+      {[...Array(3)].map((_, i) => (
+        <div key={i}>
+          <Label htmlFor={`addPhone${i + 1}`} className={labelColor}>
+            {t('register.step2.additional_phone')} {i + 1}
+          </Label>
           <Input
-            value={phone}
-            onChange={(e) => updateAdditionalPhone(index, e.target.value)}
-            placeholder={t('register.step2.phone.additional.placeholder')}
-            className="flex-1"
+            id={`addPhone${i + 1}`}
+            value={additionalPhones?.[i] || ''}
+            onChange={(e) => updateAdditionalPhone(i, e.target.value)}
+            placeholder={t('register.step2.additional_phone_placeholder')}
+            className={inputBgColor}
           />
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={() => removeAdditionalPhone(index)}
-          >
-            <X size={16} />
-          </Button>
         </div>
       ))}
-      {additionalPhones.length < 3 && (
-        <Button
-          type="button"
-          variant="outline"
-          onClick={addAdditionalPhone}
-          className="mt-2"
-        >
-          <Plus size={16} className="mr-2" />
-          {t('register.step2.phone.additional.add')}
-        </Button>
-      )}
-    </div>
+    </>
   );
 };
 
