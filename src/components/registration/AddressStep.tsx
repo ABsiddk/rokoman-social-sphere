@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -51,24 +50,24 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
     const newErrors: Record<string, string> = {};
 
     if (!data.presentAddress.division) {
-      newErrors.presentDivision = t('registration.step3.errors.division.required');
+      newErrors.presentDivision = t('register.step3.errors.division.required');
     }
     if (!data.presentAddress.district) {
-      newErrors.presentDistrict = t('registration.step3.errors.district.required');
+      newErrors.presentDistrict = t('register.step3.errors.district.required');
     }
     if (!data.presentAddress.subDistrict) {
-      newErrors.presentSubDistrict = t('registration.step3.errors.subdistrict.required');
+      newErrors.presentSubDistrict = t('register.step3.errors.subdistrict.required');
     }
 
     if (!data.sameAsPresentAddress) {
       if (!data.permanentAddress.division) {
-        newErrors.permanentDivision = t('registration.step3.errors.division.required');
+        newErrors.permanentDivision = t('register.step3.errors.division.required');
       }
       if (!data.permanentAddress.district) {
-        newErrors.permanentDistrict = t('registration.step3.errors.district.required');
+        newErrors.permanentDistrict = t('register.step3.errors.district.required');
       }
       if (!data.permanentAddress.subDistrict) {
-        newErrors.permanentSubDistrict = t('registration.step3.errors.subdistrict.required');
+        newErrors.permanentSubDistrict = t('register.step3.errors.subdistrict.required');
       }
     }
 
@@ -86,22 +85,22 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-          {t('registration.step3.title')}
+          {t('register.step3.title')}
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          {t('registration.step3.subtitle')}
+          {t('register.step3.subtitle')}
         </p>
       </div>
 
       {/* Present Address */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-          {t('registration.step3.present.title')}
+          {t('register.step3.present.title')}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label>{t('registration.step3.nationality')}</Label>
+            <Label>{t('register.step3.nationality')}</Label>
             <Select 
               value={data.presentAddress.nationality} 
               onValueChange={(value) => updateData({ 
@@ -109,17 +108,17 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
               })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={t('registration.step3.nationality.placeholder')} />
+                <SelectValue placeholder={t('register.step3.nationality.placeholder')} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="Bangladesh">Bangladesh</SelectItem>
-                <SelectItem value="Other">{t('registration.step3.nationality.other')}</SelectItem>
+                <SelectItem value="Other">{t('register.step3.nationality.other')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <Label>{t('registration.step3.division')} *</Label>
+            <Label>{t('register.step3.division')} *</Label>
             <Select 
               value={data.presentAddress.division} 
               onValueChange={(value) => updateData({ 
@@ -127,7 +126,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
               })}
             >
               <SelectTrigger className={errors.presentDivision ? 'border-red-500' : ''}>
-                <SelectValue placeholder={t('registration.step3.division.placeholder')} />
+                <SelectValue placeholder={t('register.step3.division.placeholder')} />
               </SelectTrigger>
               <SelectContent>
                 {divisions.map((division) => (
@@ -139,7 +138,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
           </div>
 
           <div>
-            <Label>{t('registration.step3.district')} *</Label>
+            <Label>{t('register.step3.district')} *</Label>
             <Select 
               value={data.presentAddress.district} 
               onValueChange={(value) => updateData({ 
@@ -147,7 +146,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
               })}
             >
               <SelectTrigger className={errors.presentDistrict ? 'border-red-500' : ''}>
-                <SelectValue placeholder={t('registration.step3.district.placeholder')} />
+                <SelectValue placeholder={t('register.step3.district.placeholder')} />
               </SelectTrigger>
               <SelectContent>
                 {districts.map((district) => (
@@ -159,37 +158,37 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
           </div>
 
           <div>
-            <Label>{t('registration.step3.subdistrict')} *</Label>
+            <Label>{t('register.step3.subdistrict')} *</Label>
             <Input
               value={data.presentAddress.subDistrict}
               onChange={(e) => updateData({ 
                 presentAddress: { ...data.presentAddress, subDistrict: e.target.value }
               })}
-              placeholder={t('registration.step3.subdistrict.placeholder')}
+              placeholder={t('register.step3.subdistrict.placeholder')}
               className={errors.presentSubDistrict ? 'border-red-500' : ''}
             />
             {errors.presentSubDistrict && <p className="text-red-500 text-sm mt-1">{errors.presentSubDistrict}</p>}
           </div>
 
           <div>
-            <Label>{t('registration.step3.village')}</Label>
+            <Label>{t('register.step3.village')}</Label>
             <Input
               value={data.presentAddress.villageHouseRoad}
               onChange={(e) => updateData({ 
                 presentAddress: { ...data.presentAddress, villageHouseRoad: e.target.value }
               })}
-              placeholder={t('registration.step3.village.placeholder')}
+              placeholder={t('register.step3.village.placeholder')}
             />
           </div>
 
           <div>
-            <Label>{t('registration.step3.zipcode')}</Label>
+            <Label>{t('register.step3.zipcode')}</Label>
             <Input
               value={data.presentAddress.zipCode}
               onChange={(e) => updateData({ 
                 presentAddress: { ...data.presentAddress, zipCode: e.target.value }
               })}
-              placeholder={t('registration.step3.zipcode.placeholder')}
+              placeholder={t('register.step3.zipcode.placeholder')}
             />
           </div>
         </div>
@@ -198,7 +197,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
       {/* Permanent Address */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-          {t('registration.step3.permanent.title')}
+          {t('register.step3.permanent.title')}
         </h3>
 
         <div className="flex items-center space-x-2">
@@ -208,14 +207,14 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
             onCheckedChange={handleSameAddressChange}
           />
           <Label htmlFor="sameAddress">
-            {t('registration.step3.same.address')}
+            {t('register.step3.same.address')}
           </Label>
         </div>
 
         {!data.sameAsPresentAddress && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label>{t('registration.step3.nationality')}</Label>
+              <Label>{t('register.step3.nationality')}</Label>
               <Select 
                 value={data.permanentAddress.nationality} 
                 onValueChange={(value) => updateData({ 
@@ -223,17 +222,17 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
                 })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('registration.step3.nationality.placeholder')} />
+                  <SelectValue placeholder={t('register.step3.nationality.placeholder')} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Bangladesh">Bangladesh</SelectItem>
-                  <SelectItem value="Other">{t('registration.step3.nationality.other')}</SelectItem>
+                  <SelectItem value="Other">{t('register.step3.nationality.other')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <Label>{t('registration.step3.division')} *</Label>
+              <Label>{t('register.step3.division')} *</Label>
               <Select 
                 value={data.permanentAddress.division} 
                 onValueChange={(value) => updateData({ 
@@ -241,7 +240,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
                 })}
               >
                 <SelectTrigger className={errors.permanentDivision ? 'border-red-500' : ''}>
-                  <SelectValue placeholder={t('registration.step3.division.placeholder')} />
+                  <SelectValue placeholder={t('register.step3.division.placeholder')} />
                 </SelectTrigger>
                 <SelectContent>
                   {divisions.map((division) => (
@@ -253,7 +252,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
             </div>
 
             <div>
-              <Label>{t('registration.step3.district')} *</Label>
+              <Label>{t('register.step3.district')} *</Label>
               <Select 
                 value={data.permanentAddress.district} 
                 onValueChange={(value) => updateData({ 
@@ -261,7 +260,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
                 })}
               >
                 <SelectTrigger className={errors.permanentDistrict ? 'border-red-500' : ''}>
-                  <SelectValue placeholder={t('registration.step3.district.placeholder')} />
+                  <SelectValue placeholder={t('register.step3.district.placeholder')} />
                 </SelectTrigger>
                 <SelectContent>
                   {districts.map((district) => (
@@ -273,37 +272,37 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
             </div>
 
             <div>
-              <Label>{t('registration.step3.subdistrict')} *</Label>
+              <Label>{t('register.step3.subdistrict')} *</Label>
               <Input
                 value={data.permanentAddress.subDistrict}
                 onChange={(e) => updateData({ 
                   permanentAddress: { ...data.permanentAddress, subDistrict: e.target.value }
                 })}
-                placeholder={t('registration.step3.subdistrict.placeholder')}
+                placeholder={t('register.step3.subdistrict.placeholder')}
                 className={errors.permanentSubDistrict ? 'border-red-500' : ''}
               />
               {errors.permanentSubDistrict && <p className="text-red-500 text-sm mt-1">{errors.permanentSubDistrict}</p>}
             </div>
 
             <div>
-              <Label>{t('registration.step3.village')}</Label>
+              <Label>{t('register.step3.village')}</Label>
               <Input
                 value={data.permanentAddress.villageHouseRoad}
                 onChange={(e) => updateData({ 
                   permanentAddress: { ...data.permanentAddress, villageHouseRoad: e.target.value }
                 })}
-                placeholder={t('registration.step3.village.placeholder')}
+                placeholder={t('register.step3.village.placeholder')}
               />
             </div>
 
             <div>
-              <Label>{t('registration.step3.zipcode')}</Label>
+              <Label>{t('register.step3.zipcode')}</Label>
               <Input
                 value={data.permanentAddress.zipCode}
                 onChange={(e) => updateData({ 
                   permanentAddress: { ...data.permanentAddress, zipCode: e.target.value }
                 })}
-                placeholder={t('registration.step3.zipcode.placeholder')}
+                placeholder={t('register.step3.zipcode.placeholder')}
               />
             </div>
           </div>
@@ -312,7 +311,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
 
       <div className="flex justify-end">
         <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
-          {t('registration.step3.continue')}
+          {t('register.step3.continue')}
         </Button>
       </div>
     </div>

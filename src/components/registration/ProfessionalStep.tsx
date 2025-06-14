@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -139,7 +138,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     const newErrors: Record<string, string> = {};
 
     if (!data.occupation) {
-      newErrors.occupation = t('registration.step4.errors.occupation.required');
+      newErrors.occupation = t('register.step4.errors.occupation.required');
     }
 
     setErrors(newErrors);
@@ -158,38 +157,38 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     return (
       <>
         <div>
-          <Label>{t('registration.step4.business.type')}</Label>
+          <Label>{t('register.step4.business.type')}</Label>
           <Select 
             value={data.businessType} 
             onValueChange={(value) => updateData({ businessType: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder={t('registration.step4.business.type.placeholder')} />
+              <SelectValue placeholder={t('register.step4.business.type.placeholder')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="manufacturing">{t('registration.step4.business.manufacturing')}</SelectItem>
-              <SelectItem value="trading">{t('registration.step4.business.trading')}</SelectItem>
-              <SelectItem value="service_based">{t('registration.step4.business.service')}</SelectItem>
-              <SelectItem value="agro_business">{t('registration.step4.business.agro')}</SelectItem>
-              <SelectItem value="other">{t('registration.step4.business.other')}</SelectItem>
+              <SelectItem value="manufacturing">{t('register.step4.business.manufacturing')}</SelectItem>
+              <SelectItem value="trading">{t('register.step4.business.trading')}</SelectItem>
+              <SelectItem value="service_based">{t('register.step4.business.service')}</SelectItem>
+              <SelectItem value="agro_business">{t('register.step4.business.agro')}</SelectItem>
+              <SelectItem value="other">{t('register.step4.business.other')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         {data.businessType && data.businessType !== 'other' && (
           <div>
-            <Label>{t('registration.step4.business.subcategory')}</Label>
+            <Label>{t('register.step4.business.subcategory')}</Label>
             <Select 
               value={data.businessSubCategory} 
               onValueChange={(value) => updateData({ businessSubCategory: value })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={t('registration.step4.business.subcategory.placeholder')} />
+                <SelectValue placeholder={t('register.step4.business.subcategory.placeholder')} />
               </SelectTrigger>
               <SelectContent>
                 {businessTypes[data.businessType as keyof typeof businessTypes]?.map((subcat) => (
                   <SelectItem key={subcat} value={subcat}>
-                    {t(`registration.step4.business.${subcat}`)}
+                    {t(`register.step4.business.${subcat}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -198,29 +197,29 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         )}
 
         <div>
-          <Label>{t('registration.step4.business.name')}</Label>
+          <Label>{t('register.step4.business.name')}</Label>
           <Input
             value={data.businessName || ''}
             onChange={(e) => updateData({ businessName: e.target.value })}
-            placeholder={t('registration.step4.business.name.placeholder')}
+            placeholder={t('register.step4.business.name.placeholder')}
           />
         </div>
 
         <div>
-          <Label>{t('registration.step4.designation')}</Label>
+          <Label>{t('register.step4.designation')}</Label>
           <Select 
             value={data.designation} 
             onValueChange={(value) => updateData({ designation: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder={t('registration.step4.designation.placeholder')} />
+              <SelectValue placeholder={t('register.step4.designation.placeholder')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="entrepreneur">{t('registration.step4.designation.entrepreneur')}</SelectItem>
-              <SelectItem value="senior_management">{t('registration.step4.designation.senior')}</SelectItem>
-              <SelectItem value="mid_management">{t('registration.step4.designation.mid')}</SelectItem>
-              <SelectItem value="officer_executive">{t('registration.step4.designation.officer')}</SelectItem>
-              <SelectItem value="general_staff">{t('registration.step4.designation.general')}</SelectItem>
+              <SelectItem value="entrepreneur">{t('register.step4.designation.entrepreneur')}</SelectItem>
+              <SelectItem value="senior_management">{t('register.step4.designation.senior')}</SelectItem>
+              <SelectItem value="mid_management">{t('register.step4.designation.mid')}</SelectItem>
+              <SelectItem value="officer_executive">{t('register.step4.designation.officer')}</SelectItem>
+              <SelectItem value="general_staff">{t('register.step4.designation.general')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -232,27 +231,27 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-          {t('registration.step4.title')}
+          {t('register.step4.title')}
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          {t('registration.step4.subtitle')}
+          {t('register.step4.subtitle')}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="md:col-span-2">
-          <Label>{t('registration.step4.occupation')} *</Label>
+          <Label>{t('register.step4.occupation')} *</Label>
           <Select 
             value={data.occupation} 
             onValueChange={(value) => updateData({ occupation: value })}
           >
             <SelectTrigger className={errors.occupation ? 'border-red-500' : ''}>
-              <SelectValue placeholder={t('registration.step4.occupation.placeholder')} />
+              <SelectValue placeholder={t('register.step4.occupation.placeholder')} />
             </SelectTrigger>
             <SelectContent>
               {occupations.map((occupation) => (
                 <SelectItem key={occupation} value={occupation}>
-                  {t(`registration.step4.occupation.${occupation}`)}
+                  {t(`register.step4.occupation.${occupation}`)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -414,7 +413,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 
       <div className="flex justify-end">
         <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
-          {t('registration.step4.complete')}
+          {t('register.step4.complete')}
         </Button>
       </div>
     </div>
