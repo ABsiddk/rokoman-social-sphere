@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import StepIndicator from './StepIndicator';
-import PhonePasswordStep from './PhonePasswordStep';
-import PersonalInfoStep from './PersonalInfoStep';
-import AddressStep from './AddressStep';
-import ProfessionalStep from './ProfessionalStep';
+import PhonePasswordStepContainer from './steps/PhonePasswordStepContainer';
+import PersonalInfoStepContainer from './steps/PersonalInfoStepContainer';
+import AddressStepContainer from './steps/AddressStepContainer';
+import ProfessionalStepContainer from './steps/ProfessionalStepContainer';
 
 export interface RegistrationData {
   // Step 1
@@ -132,7 +132,7 @@ const RegistrationForm = () => {
     switch (currentStep) {
       case 1:
         return (
-          <PhonePasswordStep
+          <PhonePasswordStepContainer
             data={registrationData}
             updateData={updateRegistrationData}
             onComplete={() => completeStep(1)}
@@ -140,7 +140,7 @@ const RegistrationForm = () => {
         );
       case 2:
         return (
-          <PersonalInfoStep
+          <PersonalInfoStepContainer
             data={registrationData}
             updateData={updateRegistrationData}
             onComplete={() => completeStep(2)}
@@ -148,7 +148,7 @@ const RegistrationForm = () => {
         );
       case 3:
         return (
-          <AddressStep
+          <AddressStepContainer
             data={registrationData}
             updateData={updateRegistrationData}
             onComplete={() => completeStep(3)}
@@ -156,7 +156,7 @@ const RegistrationForm = () => {
         );
       case 4:
         return (
-          <ProfessionalStep
+          <ProfessionalStepContainer
             data={registrationData}
             updateData={updateRegistrationData}
             onComplete={() => completeStep(4)}
