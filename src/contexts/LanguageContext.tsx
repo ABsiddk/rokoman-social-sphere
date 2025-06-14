@@ -1,22 +1,40 @@
+
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
 interface LanguageContextType {
   language: string;
   setLanguage: (lang: string) => void;
+  toggleLanguage: () => void;
   t: (key: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType>({
   language: 'en',
   setLanguage: () => {},
+  toggleLanguage: () => {},
   t: (key: string) => key,
 });
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
   const [language, setLanguage] = useState('en');
 
+  const toggleLanguage = useCallback(() => {
+    setLanguage(prev => prev === 'en' ? 'bn' : 'en');
+  }, []);
+
   const translations = {
     en: {
+      brand: {
+        name: 'OnnoRokom'
+      },
+      nav: {
+        home: 'Home',
+        profile: 'Profile',
+        dashboard: 'Dashboard',
+        admin: 'Admin',
+        login: 'Login',
+        logout: 'Logout'
+      },
       hero: {
         welcome: 'Welcome to the',
         community: 'OnnoRokom Community',
@@ -136,14 +154,14 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           dob: 'Date of Birth',
           gender: 'Gender',
           gender_placeholder: 'Select gender',
-          gender: {
+          gender_options: {
             male: 'Male',
             female: 'Female',
             other: 'Other'
           },
           religion: 'Religion',
           religion_placeholder: 'Select religion',
-          religion: {
+          religion_options: {
             islam: 'Islam',
             hinduism: 'Hinduism',
             christianity: 'Christianity',
@@ -152,7 +170,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           },
           marital: 'Marital Status',
           marital_placeholder: 'Select marital status',
-          marital: {
+          marital_options: {
             single: 'Single',
             married: 'Married',
             divorced: 'Divorced',
@@ -220,7 +238,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           subtitle: 'Tell us about your work and professional background',
           occupation: 'Occupation',
           occupation_placeholder: 'Select your occupation',
-          occupation: {
+          occupation_options: {
             business_commerce: 'Business & Commerce',
             government_jobs: 'Government and Semi-government Jobs',
             education_research: 'Education & Research',
@@ -262,7 +280,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           },
           designation: 'Designation/Role',
           designation_placeholder: 'Select your role',
-          designation: {
+          designation_options: {
             entrepreneur: 'Entrepreneur/Owner',
             senior: 'Senior Management',
             mid: 'Mid-level Management',
@@ -303,6 +321,17 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
       }
     },
     bn: {
+      brand: {
+        name: 'অন্যরকম'
+      },
+      nav: {
+        home: 'হোম',
+        profile: 'প্রোফাইল',
+        dashboard: 'ড্যাশবোর্ড',
+        admin: 'অ্যাডমিন',
+        login: 'লগইন',
+        logout: 'লগআউট'
+      },
       hero: {
         welcome: 'তে স্বাগতম',
         community: 'অন্যরকম কমিউনিটি',
@@ -422,14 +451,14 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           dob: 'জন্ম তারিখ',
           gender: 'লিঙ্গ',
           gender_placeholder: 'লিঙ্গ নির্বাচন করুন',
-          gender: {
+          gender_options: {
             male: 'পুরুষ',
             female: 'মহিলা',
             other: 'অন্যান্য'
           },
           religion: 'ধর্ম',
           religion_placeholder: 'ধর্ম নির্বাচন করুন',
-          religion: {
+          religion_options: {
             islam: 'ইসলাম',
             hinduism: 'হিন্দুধর্ম',
             christianity: 'খ্রিস্টধর্ম',
@@ -438,7 +467,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           },
           marital: 'বৈবাহিক অবস্থা',
           marital_placeholder: 'বৈবাহিক অবস্থা নির্বাচন করুন',
-          marital: {
+          marital_options: {
             single: 'অবিবাহিত',
             married: 'বিবাহিত',
             divorced: 'তালাকপ্রাপ্ত',
@@ -506,7 +535,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           subtitle: 'আপনার কাজ এবং পেশাগত পটভূমি সম্পর্কে বলুন',
           occupation: 'পেশা',
           occupation_placeholder: 'আপনার পেশা নির্বাচন করুন',
-          occupation: {
+          occupation_options: {
             business_commerce: 'ব্যবসা ও বাণিজ্য',
             government_jobs: 'সরকারি ও আধা-সরকারি চাকরি',
             education_research: 'শিক্ষা ও গবেষণা',
@@ -548,7 +577,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           },
           designation: 'পদবি/ভূমিকা',
           designation_placeholder: 'আপনার ভূমিকা নির্বাচন করুন',
-          designation: {
+          designation_options: {
             entrepreneur: 'উদ্যোক্তা/মালিক',
             senior: 'সিনিয়র ম্যানেজমেন্ট',
             mid: 'মিড-লেভেল ম্যানেজমেন্ট',
@@ -581,7 +610,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           demo: {
             title: 'পরীক্ষার জন্য ডেমো OTP:'
           },
-          error: {
+          errors: {
             incomplete: 'অনুগ্রহ করে সম্পূর্ণ ৬ ডিজিটের OTP লিখুন',
             invalid: 'ভুল OTP। অনুগ্রহ করে আবার চেষ্টা করুন।'
           }
@@ -604,7 +633,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
   }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
