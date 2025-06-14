@@ -1,6 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '../ui/input-otp';
-import { Button } from '../ui/button';
 import { ArrowLeft, Copy } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import glassButtonStyles from './phone-password/LiquidGlassButton.module.css';
@@ -75,6 +75,7 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
           <button
             onClick={onBack}
             className="inline-flex items-center text-[rgb(39,113,150)] hover:text-[rgb(39,113,150)]/80 dark:text-blue-400 dark:hover:text-blue-300 mb-4 transition-colors duration-200 font-medium"
+            type="button"
           >
             <ArrowLeft size={16} className="mr-1" />
             {t('common.back')}
@@ -102,7 +103,7 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
               className="justify-center"
             >
               <InputOTPGroup className="gap-3 md:gap-4">
-                {/* Animated border + bold + responsive sizing */}
+                {/* Remove animated border, double border width, strong highlight on focus */}
                 {[0,1,2,3,4,5].map(idx => (
                   <InputOTPSlot 
                     key={idx}
@@ -110,15 +111,14 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
                     className="
                       w-12 h-12 md:w-14 md:h-14 
                       text-lg sm:text-xl bg-white dark:bg-gray-700 
-                      border-4 border-gray-300 dark:border-gray-500 
+                      border-8 border-gray-300 dark:border-gray-500 
                       text-gray-900 dark:text-white font-bold 
                       transition-all duration-300 
                       focus-within:border-[rgb(39,113,150)] focus-within:shadow-lg 
                       ring-0 
-                      animate-[pulse_1.3s_ease-in-out_infinite]  
                       [@media(max-width:400px)]:w-10 [@media(max-width:400px)]:h-10
-                      [&.z-10]:border-[rgb(39,113,150)] [&.z-10]:animate-none 
-                      "
+                      [&.z-10]:border-[rgb(39,113,150)] 
+                    "
                   />
                 ))}
               </InputOTPGroup>
@@ -142,14 +142,14 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
             </label>
           </div>
 
+          {/* Main verify button using liquid glass */}
           <button
             onClick={handleVerify}
             disabled={otp.length !== 6}
             type="button"
             className={
               glassButtonStyles.liquidGlassButton +
-              ' w-full mt-2 font-medium text-lg text-[rgb(39,113,150)] dark:text-white ' +
-              'transition-all duration-200'
+              " w-full mt-2 font-medium text-lg text-[rgb(39,113,150)] dark:text-white transition-all duration-200"
             }
           >
             <span className={glassButtonStyles.liquidGlassButtonContent}>
@@ -162,14 +162,18 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
               <p className="text-gray-600 dark:text-gray-300 mb-2 font-medium">
                 {t('register.otp.not_received')}
               </p>
-              <Button
+              <button
                 onClick={handleResendOTP}
-                variant="outline"
-                size="sm"
-                className="bg-white dark:bg-gray-700 border-[rgb(39,113,150)] text-[rgb(39,113,150)] dark:text-white hover:bg-[rgb(39,113,150)]/10 dark:hover:bg-gray-600 font-medium"
+                type="button"
+                className={
+                  glassButtonStyles.liquidGlassButton +
+                  " w-full sm:w-auto font-medium text-base text-[rgb(39,113,150)] dark:text-white mt-2 py-2 transition-all duration-200"
+                }
               >
-                {t('register.otp.resend')}
-              </Button>
+                <span className={glassButtonStyles.liquidGlassButtonContent}>
+                  {t('register.otp.resend')}
+                </span>
+              </button>
             </div>
           )}
 
@@ -183,10 +187,16 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
                 <button
                   key={index}
                   onClick={() => copyDemoOTP(demoOTP)}
-                  className="flex items-center space-x-1 px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 font-medium"
+                  className={
+                    glassButtonStyles.liquidGlassButton +
+                    " px-3 py-1 rounded text-sm font-medium text-[rgb(39,113,150)] dark:text-white transition-all"
+                  }
+                  type="button"
                 >
-                  <span>{demoOTP}</span>
-                  <Copy size={12} />
+                  <span className={glassButtonStyles.liquidGlassButtonContent + " flex items-center space-x-1"}>
+                    <span>{demoOTP}</span>
+                    <Copy size={12} />
+                  </span>
                 </button>
               ))}
             </div>
@@ -198,3 +208,4 @@ const OTPVerification = ({ phoneNumber, onVerified, onBack }: OTPVerificationPro
 };
 
 export default OTPVerification;
+
