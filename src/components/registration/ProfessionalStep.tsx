@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -264,11 +265,11 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         {/* Workplace Address */}
         <div className="md:col-span-2">
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
-            {t('registration.step4.workplace.address')}
+            {t('register.step4.workplace.address')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label>{t('registration.step3.nationality')}</Label>
+              <Label>{t('register.step3.nationality')}</Label>
               <Select 
                 value={data.workplaceAddress.nationality} 
                 onValueChange={(value) => updateData({ 
@@ -276,17 +277,17 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
                 })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('registration.step3.nationality.placeholder')} />
+                  <SelectValue placeholder={t('register.step3.nationality.placeholder')} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Bangladesh">Bangladesh</SelectItem>
-                  <SelectItem value="Other">{t('registration.step3.nationality.other')}</SelectItem>
+                  <SelectItem value="Other">{t('register.step3.nationality.other')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <Label>{t('registration.step3.division')}</Label>
+              <Label>{t('register.step3.division')}</Label>
               <Select 
                 value={data.workplaceAddress.division} 
                 onValueChange={(value) => updateData({ 
@@ -294,7 +295,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
                 })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('registration.step3.division.placeholder')} />
+                  <SelectValue placeholder={t('register.step3.division.placeholder')} />
                 </SelectTrigger>
                 <SelectContent>
                   {divisions.map((division) => (
@@ -305,7 +306,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             </div>
 
             <div>
-              <Label>{t('registration.step3.district')}</Label>
+              <Label>{t('register.step3.district')}</Label>
               <Select 
                 value={data.workplaceAddress.district} 
                 onValueChange={(value) => updateData({ 
@@ -313,7 +314,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
                 })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('registration.step3.district.placeholder')} />
+                  <SelectValue placeholder={t('register.step3.district.placeholder')} />
                 </SelectTrigger>
                 <SelectContent>
                   {districts.map((district) => (
@@ -324,42 +325,42 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             </div>
 
             <div>
-              <Label>{t('registration.step3.subdistrict')}</Label>
+              <Label>{t('register.step3.subdistrict')}</Label>
               <Input
                 value={data.workplaceAddress.subDistrict}
                 onChange={(e) => updateData({ 
                   workplaceAddress: { ...data.workplaceAddress, subDistrict: e.target.value }
                 })}
-                placeholder={t('registration.step3.subdistrict.placeholder')}
+                placeholder={t('register.step3.subdistrict.placeholder')}
               />
             </div>
 
             <div>
-              <Label>{t('registration.step3.village')}</Label>
+              <Label>{t('register.step3.village')}</Label>
               <Input
                 value={data.workplaceAddress.villageHouseRoad}
                 onChange={(e) => updateData({ 
                   workplaceAddress: { ...data.workplaceAddress, villageHouseRoad: e.target.value }
                 })}
-                placeholder={t('registration.step3.village.placeholder')}
+                placeholder={t('register.step3.village.placeholder')}
               />
             </div>
 
             <div>
-              <Label>{t('registration.step3.zipcode')}</Label>
+              <Label>{t('register.step3.zipcode')}</Label>
               <Input
                 value={data.workplaceAddress.zipCode}
                 onChange={(e) => updateData({ 
                   workplaceAddress: { ...data.workplaceAddress, zipCode: e.target.value }
                 })}
-                placeholder={t('registration.step3.zipcode.placeholder')}
+                placeholder={t('register.step3.zipcode.placeholder')}
               />
             </div>
           </div>
         </div>
 
         <div>
-          <Label>{t('registration.step4.start.date')}</Label>
+          <Label>{t('register.step4.start.date')}</Label>
           <Input
             type="date"
             value={data.startDate}
@@ -368,7 +369,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
 
         <div>
-          <Label>{t('registration.step4.end.date')}</Label>
+          <Label>{t('register.step4.end.date')}</Label>
           <Input
             type="date"
             value={data.endDate}
@@ -385,27 +386,27 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
               onCheckedChange={(checked) => updateData({ currentlyWorking: !!checked })}
             />
             <Label htmlFor="currentlyWorking">
-              {t('registration.step4.currently.working')}
+              {t('register.step4.currently.working')}
             </Label>
           </div>
         </div>
 
         <div className="md:col-span-2">
-          <Label>{t('registration.step4.special.note')}</Label>
+          <Label>{t('register.step4.special.note')}</Label>
           <Textarea
             value={data.specialNote}
             onChange={(e) => updateData({ specialNote: e.target.value })}
-            placeholder={t('registration.step4.special.note.placeholder')}
+            placeholder={t('register.step4.special.note.placeholder')}
             rows={3}
           />
         </div>
 
         <div className="md:col-span-2">
-          <Label>{t('registration.step4.job.description')}</Label>
+          <Label>{t('register.step4.job.description')}</Label>
           <Textarea
             value={data.jobDescription}
             onChange={(e) => updateData({ jobDescription: e.target.value })}
-            placeholder={t('registration.step4.job.description.placeholder')}
+            placeholder={t('register.step4.job.description.placeholder')}
             rows={4}
           />
         </div>

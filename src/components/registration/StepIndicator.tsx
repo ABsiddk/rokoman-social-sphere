@@ -15,13 +15,13 @@ const StepIndicator = ({ currentStep, completedSteps, totalSteps }: StepIndicato
   const getStepTitle = (step: number) => {
     switch (step) {
       case 1:
-        return t('registration.step1.title');
+        return t('register.step1.title');
       case 2:
-        return t('registration.step2.title');
+        return t('register.step2.title');
       case 3:
-        return t('registration.step3.title');
+        return t('register.step3.title');
       case 4:
-        return t('registration.step4.title');
+        return t('register.step4.title');
       default:
         return '';
     }
