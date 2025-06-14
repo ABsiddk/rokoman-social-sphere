@@ -1,4 +1,3 @@
-
 import React from 'react';
 import BasicInfoSection from './BasicInfoSection';
 import NicknameSection from './NicknameSection';
@@ -56,6 +55,12 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           onNickname1Change={(val) => {
             const next = [...(data.nickNames ?? ['', '', '', '', ''])];
             next[0] = val;
+            updateData({ nickNames: next });
+          }}
+          nickname2={data.nickNames?.[1] || ''}
+          onNickname2Change={(val) => {
+            const next = [...(data.nickNames ?? ['', '', '', '', ''])];
+            next[1] = val;
             updateData({ nickNames: next });
           }}
           labelColor={labelColor}
