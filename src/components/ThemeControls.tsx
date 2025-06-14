@@ -78,11 +78,11 @@ const ThemeControls = () => {
                 };
                 document.addEventListener('mouseup', handleMouseUp);
               }}
-              className="relative p-2 rounded-lg bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] hover:shadow-lg transition-all duration-200 group"
+              className="relative p-2 rounded-lg bg-gradient-to-r from-[rgb(39,113,150)] via-[rgb(75,145,185)] to-[rgb(129,130,135)] hover:shadow-lg transition-all duration-200 group hover:from-[rgb(45,125,165)] hover:via-[rgb(85,155,195)] hover:to-[rgb(139,140,145)]"
             >
               {getModeIcon()}
               <ChevronDown 
-                className="absolute -bottom-1 -right-1 text-white bg-[rgb(39,113,150)] rounded-full p-0.5" 
+                className="absolute -bottom-1 -right-1 text-white bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] rounded-full p-0.5" 
                 size={12} 
               />
             </button>
@@ -90,7 +90,7 @@ const ThemeControls = () => {
         </PopoverTrigger>
         
         <PopoverContent 
-          className="w-80 p-4 bg-white dark:bg-[rgb(39,113,150)] border-[rgb(129,130,135)] shadow-xl"
+          className="w-80 p-4 bg-white dark:bg-gradient-to-br dark:from-[rgb(39,113,150)] dark:via-[rgb(54,128,165)] dark:to-[rgb(39,113,150)] border-[rgb(129,130,135)] shadow-xl"
           align="end"
         >
           <div className="space-y-4">
@@ -174,7 +174,7 @@ const ThemeControls = () => {
               <Button
                 size="sm"
                 onClick={saveSettings}
-                className="flex items-center space-x-1 bg-[rgb(39,113,150)] hover:bg-[rgb(39,113,150)]/90 text-white"
+                className="flex items-center space-x-1 bg-gradient-to-r from-[rgb(39,113,150)] via-[rgb(75,145,185)] to-[rgb(129,130,135)] hover:from-[rgb(45,125,165)] hover:via-[rgb(85,155,195)] hover:to-[rgb(139,140,145)] text-white"
               >
                 <Save size={14} />
                 <span>সেভ</span>

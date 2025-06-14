@@ -7,18 +7,18 @@ const Footer = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Tagline */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-[rgb(39,113,150)] to-[rgb(129,130,135)] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">O</span>
+              <div className="w-10 h-10 bg-gradient-to-br from-[rgb(39,113,150)] via-[rgb(75,145,185)] to-[rgb(129,130,135)] rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <span className="text-white font-bold text-lg drop-shadow-md">O</span>
               </div>
               <span className="text-xl font-bold">
-                <span className="text-white">OnnoRokom</span>
-                <span className="text-[rgb(129,130,135)]"> Community</span>
+                <span className="text-white drop-shadow-sm">OnnoRokom</span>
+                <span className="bg-gradient-to-r from-[rgb(39,113,150)] via-[rgb(75,145,185)] to-[rgb(129,130,135)] bg-clip-text text-transparent"> Community</span>
               </span>
             </div>
             <p className="text-gray-400 text-sm">
@@ -83,7 +83,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
             {t('footer.developed')}{' '}
-            <span className="text-[rgb(129,130,135)] font-semibold">{t('footer.company')}</span>
+            <span className="bg-gradient-to-r from-[rgb(39,113,150)] via-[rgb(75,145,185)] to-[rgb(129,130,135)] bg-clip-text text-transparent font-semibold">{t('footer.company')}</span>
           </p>
         </div>
       </div>
