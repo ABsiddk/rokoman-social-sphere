@@ -18,7 +18,7 @@ interface BasicInfoSectionProps {
 
 const teamCream = 'text-[#ffe6b2]'; // Cream color for main label
 const redHighlight = 'text-red-500'; // For error/highlight
-const fullNameLabelRed = 'text-[#ff4545]'; // Cartoonish red
+const fullNameLabelRed = '!text-[#ff4545]'; // Cartoonish red, force override
 
 const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   fullName,
@@ -40,7 +40,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   return (
     <>
       <div className="md:col-span-2">
-        {/* Full name label color changed to cartoon red */}
+        {/* Force full name label color to strong red regardless of parent styles */}
         <Label htmlFor="fullName" className={`${fullNameLabelRed} font-semibold`}>
           {t('register.step2.full_name')} *
         </Label>
