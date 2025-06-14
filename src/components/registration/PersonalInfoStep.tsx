@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -69,11 +68,10 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
           {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
         </div>
 
-        {/* Nicknames Section: pass translation keys */}
+        {/* Nicknames Section */}
         <NicknameSection
           nickNames={data.nickNames}
           onUpdate={(nickNames) => updateData({ nickNames })}
-          t={t}
         />
 
         {/* Date of Birth */}
@@ -181,7 +179,6 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
         <AdditionalPhonesSection
           additionalPhones={data.additionalPhones}
           onUpdate={(additionalPhones) => updateData({ additionalPhones })}
-          t={t}
         />
       </div>
 
@@ -195,4 +192,3 @@ const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProp
 };
 
 export default PersonalInfoStep;
-
