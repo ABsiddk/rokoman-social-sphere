@@ -13,7 +13,6 @@ interface BasicInfoSectionProps {
   t: (key: string) => string;
 }
 
-const fullNameLabelRed = '!text-[#ff4545]'; // Cartoonish red, force override
 const redHighlight = 'text-red-500';
 
 const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
@@ -26,13 +25,13 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
 
   return (
     <div className="md:col-span-2 animate-fade-in">
-      {/* Force label text and color for full name */}
+      {/* Changed label to "Full Name" and color to white */}
       <Label
         htmlFor="fullName"
         className="font-semibold"
-        style={{ color: "#ff4545" }}
+        style={{ color: "#fff" }}
       >
-        সনদ অনুযায়ী আপনার পূর্ণ নাম লিখুন *
+        Full Name
       </Label>
       <Input
         id="fullName"
@@ -47,7 +46,6 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
           {fullNameError}
         </p>
       )}
-      {/* No nickname fields, no buttons */}
     </div>
   );
 };
