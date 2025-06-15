@@ -7,7 +7,6 @@ import { Checkbox } from '../ui/checkbox';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
 import { useProfessionalValidation } from './professional/ProfessionalValidation';
-import BusinessFieldsSection from './professional/BusinessFieldsSection';
 import LiquidGlassSiennaButton from '../ui/LiquidGlassSiennaButton';
 
 interface ProfessionalStepProps {
@@ -54,7 +53,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
         {/* Removed the "Profession"/Occupation dropdown */}
         {/* Business fields no longer depend on occupation */}
-        <BusinessFieldsSection data={data} updateData={updateData} />
 
         <div>
           <Label className={labelColor}>{t('register.step4.start.date')}</Label>

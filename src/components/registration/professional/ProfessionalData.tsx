@@ -1,4 +1,3 @@
-
 export const occupations = [
   'business_commerce',
   'government_jobs',
@@ -15,83 +14,6 @@ export const occupations = [
   'homemaker',
   'others'
 ];
-
-export const businessTypes = {
-  manufacturing: [
-    'garments_rmg',
-    'food_beverage',
-    'pharmaceuticals',
-    'chemicals',
-    'electronics',
-    'other_production'
-  ],
-  trading: [
-    'wholesale',
-    'retail',
-    'import_export',
-    'ecommerce',
-    'other_trade'
-  ],
-  service_based: [
-    'banking_financial',
-    'insurance',
-    'consultancy',
-    'hospitality_tourism',
-    'real_estate',
-    'educational_services',
-    'healthcare_management',
-    'it_services',
-    'logistics_transportation',
-    'marketing_advertising',
-    'other_services'
-  ],
-  agro_business: [
-    'agro_processing',
-    'poultry_fisheries',
-    'agricultural_input',
-    'other_agricultural'
-  ]
-};
-
-export const designations = {
-  entrepreneur: [
-    'founder',
-    'managing_director',
-    'proprietor',
-    'partner',
-    'freelancer',
-    'other_ownership'
-  ],
-  senior_management: [
-    'ceo',
-    'cfo',
-    'coo',
-    'general_manager',
-    'director',
-    'other_senior'
-  ],
-  mid_management: [
-    'head_department',
-    'manager',
-    'assistant_manager',
-    'supervisor',
-    'other_middle'
-  ],
-  officer_executive: [
-    'officer',
-    'executive',
-    'senior_executive',
-    'sales_representative',
-    'customer_service',
-    'accounts_officer',
-    'other_officers'
-  ],
-  general_staff: [
-    'general_staff',
-    'worker',
-    'other_general'
-  ]
-};
 
 export const divisions = [
   'Dhaka Division',
@@ -114,4 +36,3 @@ export const districts = [
   'Rangpur', 'Dinajpur', 'Gaibandha', 'Kurigram', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Thakurgaon',
   'Mymensingh', 'Jamalpur', 'Netrokona', 'Sherpur'
 ];
-// ... end of file

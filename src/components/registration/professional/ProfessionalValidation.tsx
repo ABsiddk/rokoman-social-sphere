@@ -7,7 +7,7 @@ export const useProfessionalValidation = () => {
 
   const validateForm = (data: RegistrationData) => {
     const newErrors: Record<string, string> = {};
-    // Removed occupation validation
+    // All business/designation validation removed
     return newErrors;
   };
 

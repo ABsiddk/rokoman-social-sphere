@@ -194,11 +194,6 @@ const translations = {
     
     // Step 4 - Professional
     'register.step4.title': 'Professional Information',
-    'register.step4.occupation': 'Occupation',
-    'register.step4.business_type': 'Business Type',
-    'register.step4.business_subcategory': 'Business Sub-category',
-    'register.step4.business_name': 'Business Name',
-    'register.step4.designation': 'Designation',
     'register.step4.workplace_address': 'Workplace Address',
     'register.step4.special_note': 'Special Note',
     'register.step4.start_date': 'Start Date',
@@ -206,6 +201,7 @@ const translations = {
     'register.step4.currently_working': 'Currently Working',
     'register.step4.job_description': 'Job Description',
     'register.step4.complete_registration': 'Complete Registration',
+    // REMOVE: All keys beginning with register.step4.business, and register.step4.designation
     
     // Step 4 Errors
     'register.step4.errors.occupation.required': 'Please select an occupation',
@@ -440,11 +436,6 @@ const translations = {
     
     // Step 4 - Professional
     'register.step4.title': 'পেশাগত তথ্য',
-    'register.step4.occupation': 'পেশা',
-    'register.step4.business_type': 'ব্যবসার ধরন',
-    'register.step4.business_subcategory': 'ব্যবসার উপবিভাগ',
-    'register.step4.business_name': 'ব্যবসার নাম',
-    'register.step4.designation': 'পদবী',
     'register.step4.workplace_address': 'কর্মক্ষেত্রের ঠিকানা',
     'register.step4.special_note': 'বিশেষ নোট',
     'register.step4.start_date': 'শুরুর তারিখ',
@@ -452,6 +443,7 @@ const translations = {
     'register.step4.currently_working': 'বর্তমানে কাজ করছেন',
     'register.step4.job_description': 'কাজের বিবরণ',
     'register.step4.complete_registration': 'নিবন্ধন সম্পূর্ণ করুন',
+    // REMOVE: All keys beginning with register.step4.business, and register.step4.designation
     
     // Step 4 Errors
     'register.step4.errors.occupation.required': 'দয়া করে একটি পেশা নির্বাচন করুন',
@@ -468,7 +460,7 @@ const translations = {
     
     // Phone validation
     'registration.phone.error.bangladesh': 'বাংলাদেশের নম্বর অবশ্যই ০১ দিয়ে শুরু হতে হবে',
-    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যা�র হতে হবে',
+    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যার হতে হবে',
     'registration.phone.error.numbers': 'শুধুমাত্র সংখ্যা অনুমোদিত',
     
     // Password validation
