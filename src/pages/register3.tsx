@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -18,7 +19,6 @@ const Registerelement3 = () => {
     religion: '',
     maritalStatus: '',
     personalEmail: '',
-    officialEmail: '',
     additionalPhones: [],
     presentAddress: {
       nationality: 'Bangladesh',

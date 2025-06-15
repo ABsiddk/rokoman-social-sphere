@@ -23,7 +23,6 @@ const Registerelement2 = () => {
     religion: '',
     maritalStatus: '',
     personalEmail: '',
-    officialEmail: '',
     additionalPhones: [],
     presentAddress: {
       nationality: 'Bangladesh',
