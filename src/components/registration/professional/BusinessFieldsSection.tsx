@@ -7,6 +7,9 @@ import { useLanguage } from '../../../contexts/LanguageContext';
 import { RegistrationData } from '../RegistrationForm';
 import { businessTypes } from './ProfessionalData';
 
+const labelColor = "text-[rgb(77,89,119)] dark:text-[rgb(155,174,205)]";
+const inputBgColor = "bg-[rgb(252,252,253)] dark:bg-[rgb(33,37,44)] text-black dark:text-white border border-gray-300 dark:border-[#2e3749] focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-gray-400 dark:placeholder:text-gray-400";
+
 interface BusinessFieldsSectionProps {
   data: RegistrationData;
   updateData: (data: Partial<RegistrationData>) => void;
@@ -20,12 +23,12 @@ const BusinessFieldsSection = ({ data, updateData }: BusinessFieldsSectionProps)
   return (
     <>
       <div>
-        <Label>{t('register.step4.business.type')}</Label>
+        <Label className={labelColor}>{t('register.step4.business.type')}</Label>
         <Select 
           value={data.businessType} 
           onValueChange={(value) => updateData({ businessType: value })}
         >
-          <SelectTrigger>
+          <SelectTrigger className={inputBgColor}>
             <SelectValue placeholder={t('register.step4.business.type.placeholder')} />
           </SelectTrigger>
           <SelectContent>
@@ -40,12 +43,12 @@ const BusinessFieldsSection = ({ data, updateData }: BusinessFieldsSectionProps)
 
       {data.businessType && data.businessType !== 'other' && (
         <div>
-          <Label>{t('register.step4.business.subcategory')}</Label>
+          <Label className={labelColor}>{t('register.step4.business.subcategory')}</Label>
           <Select 
             value={data.businessSubCategory} 
             onValueChange={(value) => updateData({ businessSubCategory: value })}
           >
-            <SelectTrigger>
+            <SelectTrigger className={inputBgColor}>
               <SelectValue placeholder={t('register.step4.business.subcategory.placeholder')} />
             </SelectTrigger>
             <SelectContent>
@@ -60,8 +63,9 @@ const BusinessFieldsSection = ({ data, updateData }: BusinessFieldsSectionProps)
       )}
 
       <div>
-        <Label>{t('register.step4.business.name')}</Label>
+        <Label className={labelColor}>{t('register.step4.business.name')}</Label>
         <Input
+          className={inputBgColor}
           value={data.businessName || ''}
           onChange={(e) => updateData({ businessName: e.target.value })}
           placeholder={t('register.step4.business.name.placeholder')}
@@ -69,12 +73,12 @@ const BusinessFieldsSection = ({ data, updateData }: BusinessFieldsSectionProps)
       </div>
 
       <div>
-        <Label>{t('register.step4.designation')}</Label>
+        <Label className={labelColor}>{t('register.step4.designation')}</Label>
         <Select 
           value={data.designation} 
           onValueChange={(value) => updateData({ designation: value })}
         >
-          <SelectTrigger>
+          <SelectTrigger className={inputBgColor}>
             <SelectValue placeholder={t('register.step4.designation.placeholder')} />
           </SelectTrigger>
           <SelectContent>
