@@ -1,6 +1,4 @@
-
 import React, { useState } from 'react';
-import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
@@ -16,10 +14,9 @@ import WorkplaceAddressSection from './professional/WorkplaceAddressSection';
 interface ProfessionalStepProps {
   data: RegistrationData;
   updateData: (data: Partial<RegistrationData>) => void;
-  onComplete: () => void;
 }
 
-const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProps) => {
+const ProfessionalStep = ({ data, updateData }: ProfessionalStepProps) => {
   const { t } = useLanguage();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { validateForm } = useProfessionalValidation();
@@ -29,7 +26,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     setErrors(validationErrors);
     
     if (Object.keys(validationErrors).length === 0) {
-      onComplete();
+      
     }
   };
 
@@ -120,12 +117,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             rows={4}
           />
         </div>
-      </div>
-
-      <div className="flex justify-end">
-        <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
-          {t('register.step4.complete')}
-        </Button>
       </div>
     </div>
   );

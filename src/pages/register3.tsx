@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -58,11 +57,6 @@ const Registerelement3 = () => {
     setRegistrationData(prev => ({ ...prev, ...data }));
   };
 
-  const handleComplete = () => {
-    console.log('Professional information completed:', registrationData);
-    // Handle completion logic here
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <Header />
@@ -72,7 +66,6 @@ const Registerelement3 = () => {
             <ProfessionalStepContainer
               data={registrationData}
               updateData={updateRegistrationData}
-              onComplete={handleComplete}
             />
           </div>
         </div>
