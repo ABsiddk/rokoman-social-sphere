@@ -22,7 +22,6 @@ interface ProfessionTypeSelectorProps {
   onChange: (value: string) => void;
 }
 
-// For alignment: map label with gov button on web, center on mobile
 const ProfessionTypeSelector: React.FC<ProfessionTypeSelectorProps> = ({ value, onChange }) => {
   const { t } = useLanguage();
 
@@ -30,40 +29,44 @@ const ProfessionTypeSelector: React.FC<ProfessionTypeSelectorProps> = ({ value, 
     if (value !== optionKey) {
       onChange(optionKey);
     }
-    // If you ONLY want to deselect by clicking the same button, uncomment below:
-    // else onChange('');
+    // Optional: else onChange('');
   };
 
-  // Responsive: left align on md+, center on mobile
+  // Profession label above "government" button (left-aligned desktop, center mobile).
   return (
     <section className="mb-4">
-      {/* On desktop, label above gov button, all buttons left aligned */}
-      <div className="w-full flex flex-col md:items-start items-center">
-        <label className="block text-lg font-bold mb-3 text-left text-[rgb(46,76,130)] dark:text-cyan-200 w-full md:w-auto">
-          {t("register.step4.profession_type")}
-        </label>
-        <div className={cn(
-          styles.capsuleRow,
-          "w-full",
-          "md:justify-start justify-center"
-        )}>
-          {PROFESSION_OPTIONS.map((option) => (
-            <button
-              type="button"
-              key={option.key}
-              aria-pressed={value === option.key}
-              className={cn(
-                styles.capsuleButton,
-                value === option.key && "selected",
-                "super-liquid"
-              )}
-              onClick={() => handleSelect(option.key)}
-              tabIndex={0}
-            >
-              <span className="shine" />
-              {t(option.labelKey)}
-            </button>
-          ))}
+      <div className={cn("w-full flex-col md:flex-row flex md:items-start items-center md:mb-1 mb-2")}>
+        <div className="w-full">
+          <label
+            className="block text-lg font-bold mb-3 md:mb-2 text-left text-[rgb(46,76,130)] dark:text-cyan-200 w-full md:w-auto ml-0"
+            // on desktop, left align, on mobile, center below
+            style={{ marginLeft: 0 }}
+          >
+            {t("register.step4.profession_type")}
+          </label>
+          <div className={cn(
+            styles.capsuleRow,
+            "w-full md:w-auto",
+            "md:justify-start justify-center"
+          )}>
+            {PROFESSION_OPTIONS.map((option) => (
+              <button
+                type="button"
+                key={option.key}
+                aria-pressed={value === option.key}
+                className={cn(
+                  styles.capsuleButton,
+                  value === option.key && "selected",
+                  "super-liquid"
+                )}
+                onClick={() => handleSelect(option.key)}
+                tabIndex={0}
+              >
+                <span className="shine" />
+                {t(option.labelKey)}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

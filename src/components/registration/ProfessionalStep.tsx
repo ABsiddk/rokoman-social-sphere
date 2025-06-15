@@ -59,9 +59,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
   };
 
   return (
-    // Removed space-y-6 to tighten form vertical spacing
     <form onSubmit={handleSubmit} className={`gap-y-3 flex flex-col ${sectionBg}`}>
-      <div className="w-full flex justify-center mb-3">
+      <div className="w-full flex justify-center mb-2">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-cyan-200 drop-shadow-md tracking-tight">
           {t('register.step4.title')}
         </h1>
@@ -89,7 +88,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
               <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
                 {t('register.step4.bcs_session')}
               </Label>
-              {/* Remove all width/maxWidth, true dynamic sizing */}
               <LiquidGlassInput
                 id="bcsSession"
                 value={data.bcsSession || ''}
@@ -106,7 +104,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
       )}
 
-      {/* On all screens: make date boxes side by side, no unnecessary gap, truly fit text */}
       <div className="grid grid-cols-2 gap-2 md:gap-5 justify-between">
         <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.start_date')}</Label>
@@ -118,7 +115,11 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             className="mt-0.5"
             maxLength={24}
             style={{ minWidth: 0, maxWidth: "none" }}
+            error={errors.startDate}
           />
+          {errors.startDate && (
+            <span className="text-xs text-red-500 mt-1">{errors.startDate}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.end_date')}</Label>
@@ -131,7 +132,11 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             disabled={data.currentlyWorking}
             maxLength={24}
             style={{ minWidth: 0, maxWidth: "none" }}
+            error={errors.endDate}
           />
+          {errors.endDate && (
+            <span className="text-xs text-red-500 mt-1">{errors.endDate}</span>
+          )}
         </div>
         <div className="col-span-2">
           <div className="flex items-center space-x-2">
@@ -163,4 +168,3 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 };
 
 export default ProfessionalStep;
-

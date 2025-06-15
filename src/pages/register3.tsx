@@ -86,7 +86,7 @@ const Registerelement3 = () => {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col ${glassBgGradient} transition-colors duration-300 relative overflow-hidden`}>
+    <div className={`flex flex-col min-h-screen ${glassBgGradient} transition-colors duration-300 relative overflow-hidden`}>
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Animated blurry shapes for aesthetic consistency */}
         <div className="absolute top-[8%] right-[4%] w-40 h-40 bg-teal-200/40 rounded-full blur-3xl opacity-60 animate-fade-in" />
@@ -95,9 +95,8 @@ const Registerelement3 = () => {
       </div>
       <Header />
       <main className="flex-1 flex items-start justify-center p-0 m-0 w-full h-auto">
-        <div className="w-full h-auto mx-0 relative z-10 animate-fade-in transition-all duration-300">
-          {/* Removed max-w-6xl and removed padding/borders for full width */}
-          <div className="w-full h-auto rounded-none shadow-none px-0 py-0 bg-white/80 dark:bg-opacity-60 dark:bg-gray-900 backdrop-blur-md border-0 transition-all duration-300 animate-scale-in">
+        <div className="w-full h-auto mx-0 relative z-10 animate-fade-in transition-all duration-300 flex flex-col">
+          <div className="flex-1 flex flex-col w-full h-auto rounded-none shadow-none px-0 py-0 bg-white/80 dark:bg-opacity-60 dark:bg-gray-900 backdrop-blur-md border-0 transition-all duration-300 animate-scale-in">
             <ProfessionalStepContainer
               data={registrationData}
               updateData={updateRegistrationData}
