@@ -36,6 +36,7 @@ const NicknameSection = ({
           onChange={e => handleChange(e.target.value)}
           placeholder={t('register.step2.nickname_placeholder')}
           autoComplete="off"
+          className="w-full"
         />
       </div>
     </div>

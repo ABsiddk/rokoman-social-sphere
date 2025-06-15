@@ -34,6 +34,7 @@ const AdditionalPhonesSection = ({
           onChange={(e) => updateAdditionalPhone(e.target.value)}
           placeholder={t('register.step2.additional_phone_placeholder')}
           autoComplete="off"
+          className="w-full"
         />
       </div>
     </div>
