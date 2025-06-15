@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
-import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { RegistrationData } from '../RegistrationForm';
@@ -76,42 +75,10 @@ const WorkplaceAddressSection = ({ data, updateData }: WorkplaceAddressSectionPr
             </SelectContent>
           </Select>
         </div>
-
-        <div>
-          <Label>{t('register.step3.subdistrict')}</Label>
-          <Input
-            value={data.workplaceAddress.subDistrict}
-            onChange={(e) => updateData({ 
-              workplaceAddress: { ...data.workplaceAddress, subDistrict: e.target.value }
-            })}
-            placeholder={t('register.step3.subdistrict.placeholder')}
-          />
-        </div>
-
-        <div>
-          <Label>{t('register.step3.village')}</Label>
-          <Input
-            value={data.workplaceAddress.villageHouseRoad}
-            onChange={(e) => updateData({ 
-              workplaceAddress: { ...data.workplaceAddress, villageHouseRoad: e.target.value }
-            })}
-            placeholder={t('register.step3.village.placeholder')}
-          />
-        </div>
-
-        <div>
-          <Label>{t('register.step3.zipcode')}</Label>
-          <Input
-            value={data.workplaceAddress.zipCode}
-            onChange={(e) => updateData({ 
-              workplaceAddress: { ...data.workplaceAddress, zipCode: e.target.value }
-            })}
-            placeholder={t('register.step3.zipcode.placeholder')}
-          />
-        </div>
       </div>
     </div>
   );
 };
 
 export default WorkplaceAddressSection;
+
