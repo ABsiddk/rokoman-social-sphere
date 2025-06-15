@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PersonalInfoStepContainer from '../components/registration/steps/PersonalInfoStepContainer';
 import { RegistrationData } from '../components/registration/RegistrationForm';
+import { useNavigate } from 'react-router-dom';
 
 // Beautiful background gradient/blur for eye comfort & animation
 const glassBgGradient =
@@ -61,9 +62,13 @@ const Registerelement2 = () => {
     setRegistrationData(prev => ({ ...prev, ...data }));
   };
 
+  const navigate = useNavigate();
+
   const handleComplete = () => {
     console.log('Personal information completed:', registrationData);
-    // Handle completion logic here
+    // Persist data if needed for register3 (remove if not needed)
+    localStorage.setItem('registrationData', JSON.stringify(registrationData));
+    navigate('/register3');
   };
 
   return (
@@ -92,3 +97,4 @@ const Registerelement2 = () => {
 };
 
 export default Registerelement2;
+
