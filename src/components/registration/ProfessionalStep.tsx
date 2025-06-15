@@ -300,13 +300,15 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
           </div>
           {/* Work Address */}
           <div className="w-full flex flex-col mb-2 animate-fade-in">
+            <Label className={labelColor} htmlFor="workAddress">
+              {t('register.step4.work_address')}
+            </Label>
             <LiquidGlassInput
-              label={t('register.step4.work_address')}
+              id="workAddress"
               placeholder={t('register.step4.work_address.placeholder')}
               value={data.workAddress || ""}
               onChange={e => updateData({ workAddress: e.target.value })}
               maxLength={200}
-              id="workAddress"
               autoComplete="address-line1"
               className="mt-1"
               style={{ minWidth: 0, maxWidth: "none" }}
