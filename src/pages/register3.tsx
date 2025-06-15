@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -23,7 +22,6 @@ const Registerelement3 = () => {
     }
     return {
       phone: '',
-      countryCode: '+88',
       password: '',
       confirmPassword: '',
       fullName: '',

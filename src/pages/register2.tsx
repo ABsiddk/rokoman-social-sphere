@@ -13,7 +13,6 @@ const Registerelement2 = () => {
   // Initialize with empty personal info data
   const [registrationData, setRegistrationData] = React.useState<RegistrationData>({
     phone: '',
-    countryCode: '+88',
     password: '',
     confirmPassword: '',
     fullName: '',
