@@ -1,4 +1,3 @@
-
 import React from 'react';
 import BasicInfoSection from './BasicInfoSection';
 import NicknameSection from './NicknameSection';
@@ -36,9 +35,8 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
 }) => {
   const { t } = useLanguage();
 
-  // Handlers
+  // Handler for nickname (only first textbox in this version)
   const handleNicknames = (nickNames: string[]) => updateData({ nickNames });
-  const handleAdditionalPhones = (additionalPhones: string[]) => updateData({ additionalPhones });
 
   return (
     <div className="space-y-6 relative z-10 animate-fade-in">
@@ -48,6 +46,13 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <NicknameSection
+          nickNames={data.nickNames}
+          onUpdate={handleNicknames}
+          labelColor={labelColor}
+          inputBgColor={inputBgColor}
+          t={t}
+        />
         <BasicInfoSection
           fullName={data.fullName}
           fullNameError={errors.fullName}
@@ -64,13 +69,6 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
             next[1] = val;
             updateData({ nickNames: next });
           }}
-          labelColor={labelColor}
-          inputBgColor={inputBgColor}
-          t={t}
-        />
-        <NicknameSection
-          nickNames={data.nickNames}
-          onUpdate={handleNicknames}
           labelColor={labelColor}
           inputBgColor={inputBgColor}
           t={t}
