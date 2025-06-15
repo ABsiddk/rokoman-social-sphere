@@ -9,7 +9,6 @@ import { RegistrationData } from './RegistrationForm';
 import { useProfessionalValidation } from './professional/ProfessionalValidation';
 import { occupations } from './professional/ProfessionalData';
 import BusinessFieldsSection from './professional/BusinessFieldsSection';
-import WorkplaceAddressSection from './professional/WorkplaceAddressSection';
 
 interface ProfessionalStepProps {
   data: RegistrationData;
@@ -63,8 +62,6 @@ const ProfessionalStep = ({ data, updateData }: ProfessionalStepProps) => {
         </div>
 
         <BusinessFieldsSection data={data} updateData={updateData} />
-
-        <WorkplaceAddressSection data={data} updateData={updateData} />
 
         <div>
           <Label>{t('register.step4.start.date')}</Label>
