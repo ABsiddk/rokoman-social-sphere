@@ -35,9 +35,6 @@ const ProfessionalStep = ({ data, updateData }: ProfessionalStepProps) => {
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
           {t('register.step4.title')}
         </h2>
-        <p className="text-gray-600 dark:text-gray-300">
-          {t('register.step4.subtitle')}
-        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
