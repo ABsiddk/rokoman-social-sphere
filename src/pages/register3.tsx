@@ -64,16 +64,26 @@ const Registerelement3 = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-gradient-to-tr from-[#277196] via-[#36a9e1] to-[#c6e6fa] dark:from-[#103c57] dark:via-[#277196] dark:to-[#39536d] transition-colors duration-300">
       <Header />
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors duration-300">
-            <ProfessionalStepContainer
-              data={registrationData}
-              updateData={updateRegistrationData}
-              onComplete={handleComplete}
-            />
+      <main className="flex-1 flex items-center justify-center px-4 py-10">
+        <div className="relative w-full max-w-4xl mx-auto">
+          <div className="bg-white/80 dark:bg-[#277196]/80 backdrop-blur-lg border border-primary/20 rounded-2xl shadow-2xl p-0 sm:p-1 md:p-2 transition-colors duration-300 overflow-hidden">
+            <div className="px-8 py-8 sm:p-10">
+              <div className="text-center mb-8">
+                <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-sky-300 dark:from-white dark:via-primary dark:to-sky-200 mb-2 transition-colors duration-300">
+                  Professional Registration
+                </h1>
+                <p className="text-lg text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300">
+                  Tell us about your occupation, business, and workplace info below.
+                </p>
+              </div>
+              <ProfessionalStepContainer
+                data={registrationData}
+                updateData={updateRegistrationData}
+                onComplete={handleComplete}
+              />
+            </div>
           </div>
         </div>
       </main>
