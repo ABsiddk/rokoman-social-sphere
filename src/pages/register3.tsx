@@ -6,9 +6,9 @@ import ProfessionalStepContainer from '../components/registration/steps/Professi
 import { RegistrationData } from '../components/registration/RegistrationForm';
 import { useNavigate } from 'react-router-dom';
 
-// Glass bg gradient for visual comfort
+// Adjusted glass bg gradient for a more pronounced/deep color effect
 const glassBgGradient =
-  "bg-gradient-to-br from-green-100/80 via-blue-100/60 to-indigo-200/80 dark:from-gray-900 dark:via-[#22739A]/50 dark:to-gray-800/90";
+  "bg-gradient-to-br from-[#18697d]/95 via-[#22739A]/85 to-[#2ae1ab]/95 dark:from-[#0c273c]/98 dark:via-[#22739A]/85 dark:to-[#099577]/80";
 
 const Registerelement3 = () => {
   // On initial render, prefer localStorage value
@@ -88,7 +88,7 @@ const Registerelement3 = () => {
 
   return (
     <div className="relative h-screen min-h-[100dvh] w-full overflow-hidden">
-      {/* Fixed background layer with 1px gap at top and bottom */}
+      {/* Deepened background layer with 1px gap at top and bottom */}
       <div
         className={`
           fixed inset-x-0 top-1 bottom-1 z-0
@@ -99,9 +99,9 @@ const Registerelement3 = () => {
         aria-hidden="true"
       >
         {/* Animated blurry shapes for aesthetic consistency */}
-        <div className="absolute top-[8%] right-[4%] w-40 h-40 bg-teal-200/40 rounded-full blur-3xl opacity-60 animate-fade-in" />
-        <div className="absolute bottom-0 left-[15%] w-32 h-32 bg-indigo-300/50 rounded-full blur-2xl opacity-30 animate-fade-in" />
-        <div className="absolute bottom-[12%] right-[20%] w-36 h-36 bg-blue-300/60 rounded-full blur-2xl opacity-20 animate-fade-in" />
+        <div className="absolute top-[8%] right-[4%] w-40 h-40 bg-teal-300/50 rounded-full blur-3xl opacity-75 animate-fade-in" />
+        <div className="absolute bottom-0 left-[15%] w-32 h-32 bg-indigo-400/50 rounded-full blur-2xl opacity-40 animate-fade-in" />
+        <div className="absolute bottom-[12%] right-[20%] w-36 h-36 bg-blue-400/60 rounded-full blur-2xl opacity-30 animate-fade-in" />
       </div>
       <div className="relative z-10 flex flex-col h-full min-h-[100dvh]">
         <Header />
