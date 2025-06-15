@@ -194,10 +194,10 @@ const translations = {
     
     // Step 4 - Professional
     'register.step4.title': 'Professional Information',
-    'register.step4.workplace_address': 'Workplace Address',
-    'register.step4.special_note': 'Special Note',
     'register.step4.start_date': 'Start Date',
+    'register.step4.start_date.placeholder': 'Select your employment start date',
     'register.step4.end_date': 'End Date',
+    'register.step4.end_date.placeholder': 'Select your employment end date',
     'register.step4.currently_working': 'Currently Working',
     'register.step4.job_description': 'Job Description',
     'register.step4.complete_registration': 'Complete Registration',
@@ -436,10 +436,10 @@ const translations = {
     
     // Step 4 - Professional
     'register.step4.title': 'পেশাগত তথ্য',
-    'register.step4.workplace_address': 'কর্মক্ষেত্রের ঠিকানা',
-    'register.step4.special_note': 'বিশেষ নোট',
     'register.step4.start_date': 'শুরুর তারিখ',
+    'register.step4.start_date.placeholder': 'আপনার চাকরির শুরুর তারিখ নির্বাচন করুন',
     'register.step4.end_date': 'শেষের তারিখ',
+    'register.step4.end_date.placeholder': 'আপনার চাকরির শেষের তারিখ নির্বাচন করুন',
     'register.step4.currently_working': 'বর্তমানে কাজ করছেন',
     'register.step4.job_description': 'কাজের বিবরণ',
     'register.step4.complete_registration': 'নিবন্ধন সম্পূর্ণ করুন',
@@ -460,7 +460,7 @@ const translations = {
     
     // Phone validation
     'registration.phone.error.bangladesh': 'বাংলাদেশের নম্বর অবশ্যই ০১ দিয়ে শুরু হতে হবে',
-    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যার হতে হবে',
+    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যা�র হতে হবে',
     'registration.phone.error.numbers': 'শুধুমাত্র সংখ্যা অনুমোদিত',
     
     // Password validation

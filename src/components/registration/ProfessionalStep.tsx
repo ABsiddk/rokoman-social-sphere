@@ -55,25 +55,25 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         {/* Business fields no longer depend on occupation */}
 
         <div>
-          <Label className={labelColor}>{t('register.step4.start.date')}</Label>
+          <Label className={labelColor}>{t('register.step4.start_date')}</Label>
           <Input
             type="date"
             className={inputBgColor}
             value={data.startDate}
             onChange={(e) => updateData({ startDate: e.target.value })}
-            placeholder={t('register.step4.start.date.placeholder')}
+            placeholder={t('register.step4.start_date.placeholder')}
           />
         </div>
 
         <div>
-          <Label className={labelColor}>{t('register.step4.end.date')}</Label>
+          <Label className={labelColor}>{t('register.step4.end_date')}</Label>
           <Input
             type="date"
             className={inputBgColor}
             value={data.endDate}
             onChange={(e) => updateData({ endDate: e.target.value })}
             disabled={data.currentlyWorking}
-            placeholder={t('register.step4.end.date.placeholder')}
+            placeholder={t('register.step4.end_date.placeholder')}
           />
         </div>
 
@@ -85,7 +85,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
               onCheckedChange={(checked) => updateData({ currentlyWorking: !!checked })}
             />
             <Label htmlFor="currentlyWorking" className={labelColor}>
-              {t('register.step4.currently.working')}
+              {t('register.step4.currently_working')}
             </Label>
           </div>
         </div>
