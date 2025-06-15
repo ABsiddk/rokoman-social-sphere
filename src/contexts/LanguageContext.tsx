@@ -214,7 +214,7 @@ const translations = {
     'register.step4.profession_description': 'Give a brief description of your profession',
     'register.step4.profession_description.placeholder': 'Describe your role and responsibilities...',
     'register.step4.work_address': 'Enter your address',
-    'register.step4.work_address.placeholder': 'Enter your work/home address',
+    'register.step4.work_address.placeholder': 'Enter your home address',
     // REMOVE: All keys beginning with register.step4.business, and register.step4.designation
     
     // Step 4 Errors
@@ -485,7 +485,7 @@ const translations = {
     'register.step4.profession_description': 'আপনার পেশার একটি সংক্ষিপ্ত বিবরণ দিন',
     'register.step4.profession_description.placeholder': 'আপনার ভূমিকা এবং দায়িত্ব বর্ণনা করুন...',
     'register.step4.work_address': 'আপনার ঠিকানা লিখুন',
-    'register.step4.work_address.placeholder': 'আপনার কর্মস্থল/বাসার ঠিকানা লিখুন',
+    'register.step4.work_address.placeholder': 'আপনার বাড়ির ঠিকানা লিখুন',
     // REMOVE: All keys beginning with register.step4.business, and register.step4.designation
     
     // Step 4 Errors
