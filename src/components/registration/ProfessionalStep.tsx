@@ -8,6 +8,7 @@ import LiquidGlassSiennaButton from '../ui/LiquidGlassSiennaButton';
 import ProfessionTypeSelector from './professional/ProfessionTypeSelector';
 import LiquidGlassInput from '../ui/LiquidGlassInput';
 import SearchableInput from "../ui/SearchableInput";
+import BCSOptionsSection from './professional/BCSOptionsSection';
 import {
   institutionSuggestions,
   departmentSuggestions,
@@ -30,14 +31,12 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
   const sectionBg = "rounded-xl px-5 py-6 mb-4 bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-900 ";
 
   const handleProfessionTypeChange = (val: string) => {
-    if (val !== 'government') {
-      updateData({ professionType: val, isBCS: false, bcsSession: '' });
-    } else {
-      updateData({ professionType: val });
-    }
+    updateData({ professionType: val });
+    // Optionally (not strictly needed): auto-reset BCS if you want to restrict by government only
+    // updateData({ professionType: val, isBCS: false, bcsSession: '' });
   };
 
-  const handleBCSCheckboxChange = (checked: boolean) => {
+  const handleBCSChangeRadio = (checked: boolean) => {
     if (!checked) {
       updateData({ isBCS: false, bcsSession: '' });
     } else {
@@ -45,8 +44,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     }
   };
 
-  const handleBCSSessionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateData({ bcsSession: e.target.value });
+  const handleBCSSessionChange = (val: string) => {
+    updateData({ bcsSession: val });
   };
 
   const handleSubmit = (e?: React.FormEvent) => {
@@ -76,7 +75,16 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         onChange={handleProfessionTypeChange}
       />
 
-      {/* NEW: Searchable professional info inputs */}
+      {/* New: BCS options immediately below profession type, always visible */}
+      <BCSOptionsSection
+        isBCS={!!data.isBCS}
+        bcsSession={data.bcsSession}
+        onBCSChange={handleBCSChangeRadio}
+        onSessionChange={handleBCSSessionChange}
+        error={errors.bcsSession}
+      />
+
+      {/* Existing professional info search boxes */}
       <div
         className="w-full flex flex-col gap-2 md:flex-row md:gap-4"
         style={{ marginBottom: "0.3rem" }}
@@ -118,40 +126,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
           />
         </div>
       </div>
-
-      {data.professionType === 'government' && (
-        <div className="w-full flex flex-col items-start animate-fade-in mb-1">
-          <div className="flex items-center space-x-2 py-1">
-            <Checkbox
-              id="isBCS"
-              checked={!!data.isBCS}
-              onCheckedChange={checked => handleBCSCheckboxChange(!!checked)}
-            />
-            <Label htmlFor="isBCS" className={`${labelColor} text-base font-semibold`}>
-              {t('register.step4.is_bcs')}
-            </Label>
-          </div>
-          {data.isBCS && (
-            <div className="pl-6 py-0 animate-fade-in flex-1 min-w-0">
-              <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
-                {t('register.step4.bcs_session')}
-              </Label>
-              {/* Remove all width/maxWidth, true dynamic sizing */}
-              <LiquidGlassInput
-                id="bcsSession"
-                value={data.bcsSession || ''}
-                onChange={handleBCSSessionChange}
-                error={errors.bcsSession}
-                placeholder={t('register.step4.bcs_session.placeholder')}
-                autoComplete="off"
-                maxLength={32}
-                className="mt-0.5"
-                style={{ minWidth: 0, maxWidth: "none" }}
-              />
-            </div>
-          )}
-        </div>
-      )}
 
       {/* On all screens: make date boxes side by side, no unnecessary gap, truly fit text */}
       <div className="grid grid-cols-2 gap-2 md:gap-5 justify-between">
@@ -210,3 +184,5 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 };
 
 export default ProfessionalStep;
+
+// === This file is 213+ lines. Consider asking for a refactor into smaller files for better maintainability! ===
