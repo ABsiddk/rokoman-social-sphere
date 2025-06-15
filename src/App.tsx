@@ -13,7 +13,7 @@ import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Registerelement1 from "./pages/register1";
 import Registerelement2 from "./pages/register2";
-import Registerelement3 from "./pages/registerelement3";
+import Register3 from "./pages/register3";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,7 +35,7 @@ const App = () => (
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Registerelement1 />} />
                 <Route path="/register2" element={<Registerelement2 />} />
-                <Route path="/register3" element={<Registerelement3 />} />
+                <Route path="/register3" element={<Register3 />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
