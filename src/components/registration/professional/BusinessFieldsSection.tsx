@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import { Input } from '../../ui/input';
@@ -64,7 +65,6 @@ const BusinessFieldsSection = ({ data, updateData }: BusinessFieldsSectionProps)
           value={data.businessName || ''}
           onChange={(e) => updateData({ businessName: e.target.value })}
           placeholder={t('register.step4.business.name.placeholder')}
-          className="placeholder:text-muted-foreground dark:placeholder-white border-primary"
         />
       </div>
 

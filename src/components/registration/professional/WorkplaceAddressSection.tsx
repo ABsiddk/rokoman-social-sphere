@@ -85,7 +85,6 @@ const WorkplaceAddressSection = ({ data, updateData }: WorkplaceAddressSectionPr
               workplaceAddress: { ...data.workplaceAddress, subDistrict: e.target.value }
             })}
             placeholder={t('register.step3.subdistrict.placeholder')}
-            className="placeholder:text-muted-foreground dark:placeholder-white border-primary"
           />
         </div>
 
@@ -97,7 +96,6 @@ const WorkplaceAddressSection = ({ data, updateData }: WorkplaceAddressSectionPr
               workplaceAddress: { ...data.workplaceAddress, villageHouseRoad: e.target.value }
             })}
             placeholder={t('register.step3.village.placeholder')}
-            className="placeholder:text-muted-foreground dark:placeholder-white border-primary"
           />
         </div>
 
@@ -109,7 +107,6 @@ const WorkplaceAddressSection = ({ data, updateData }: WorkplaceAddressSectionPr
               workplaceAddress: { ...data.workplaceAddress, zipCode: e.target.value }
             })}
             placeholder={t('register.step3.zipcode.placeholder')}
-            className="placeholder:text-muted-foreground dark:placeholder-white border-primary"
           />
         </div>
       </div>
