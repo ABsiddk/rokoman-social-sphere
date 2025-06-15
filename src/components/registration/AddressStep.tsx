@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -54,7 +53,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
       {/* Everything below Permanent Address is removed as requested */}
 
       <div className="flex justify-end">
-        <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
+        <Button /* rely on theme, no bg overrides */>
           {t('register.step3.continue')}
         </Button>
       </div>
