@@ -52,6 +52,8 @@ export interface RegistrationData {
   endDate: string;
   currentlyWorking: boolean;
   professionType: string;
+  isBCS?: boolean;
+  bcsSession?: string;
 }
 
 const RegistrationForm = () => {
@@ -99,7 +101,9 @@ const RegistrationForm = () => {
     startDate: '',
     endDate: '',
     currentlyWorking: false,
-    professionType: ''
+    professionType: '',
+    isBCS: false,
+    bcsSession: ''
   });
 
   const updateRegistrationData = (data: Partial<RegistrationData>) => {

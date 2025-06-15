@@ -1,8 +1,7 @@
+
 import React, { useState } from 'react';
 import { Input } from '../ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
-import { Textarea } from '../ui/textarea';
 import { Checkbox } from '../ui/checkbox';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
@@ -22,11 +21,33 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
   const { validateForm } = useProfessionalValidation();
   const [submitting, setSubmitting] = useState(false);
 
-  // For consistency
   const labelColor = "text-[rgb(77,89,119)] dark:text-[rgb(155,174,205)]";
   const inputBgColor = "bg-[rgb(252,252,253)] dark:bg-[rgb(33,37,44)] text-black dark:text-white border border-gray-300 dark:border-[#2e3749] focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-gray-400 dark:placeholder:text-gray-400";
   const sectionBg =
     "rounded-xl px-5 py-6 mb-4 bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-900 ";
+
+  // On change for professionType: reset BCS-specific fields if changing away from "government"
+  const handleProfessionTypeChange = (val: string) => {
+    if (val !== 'government') {
+      updateData({ professionType: val, isBCS: false, bcsSession: '' });
+    } else {
+      updateData({ professionType: val });
+    }
+  };
+
+  // On toggle "isBCS": clear bcsSession if turning off
+  const handleBCSCheckboxChange = (checked: boolean) => {
+    if (!checked) {
+      updateData({ isBCS: false, bcsSession: '' });
+    } else {
+      updateData({ isBCS: true });
+    }
+  };
+
+  // Handle bcsSession change
+  const handleBCSSessionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateData({ bcsSession: e.target.value });
+  };
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -35,7 +56,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 
     if (Object.keys(validationErrors).length === 0) {
       setSubmitting(true);
-      // Simulate api or onComplete
       setTimeout(() => {
         setSubmitting(false);
         if (onComplete) onComplete();
@@ -47,7 +67,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     <form onSubmit={handleSubmit} className={`space-y-6 ${sectionBg}`}>
       {/* Main title at top */}
       <div className="w-full flex justify-center mb-5">
-        {/* Changed to a darker, more readable color in light mode */}
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-cyan-200 drop-shadow-md tracking-tight">
           {t('register.step4.title') || 'Professional Information'}
         </h1>
@@ -55,11 +74,42 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
       {/* Profession type selection section */}
       <ProfessionTypeSelector
         value={data.professionType}
-        onChange={val => updateData({ professionType: val })}
+        onChange={handleProfessionTypeChange}
       />
-      <div className="text-center">
-        {/* Subtitle if necessary */}
-      </div>
+      {/* BCS section - only visible if Government is selected */}
+      {data.professionType === 'government' && (
+        <div className="w-full flex flex-col items-start animate-fade-in mb-4">
+          <div className="flex items-center space-x-2 py-2">
+            <Checkbox
+              id="isBCS"
+              checked={!!data.isBCS}
+              onCheckedChange={checked => handleBCSCheckboxChange(!!checked)}
+            />
+            <Label htmlFor="isBCS" className={`${labelColor} text-base font-semibold`}>
+              {t('register.step4.is_bcs') || 'Is this BCS?'}
+            </Label>
+          </div>
+          {/* Show BCS session input only if checkbox is checked */}
+          {data.isBCS && (
+            <div className="w-full flex flex-col space-y-1 pl-6 py-1 animate-fade-in">
+              <Label htmlFor="bcsSession" className={`${labelColor} text-sm`}>
+                {t('register.step4.bcs_session') || 'How many BCS?'}
+              </Label>
+              <Input
+                id="bcsSession"
+                value={data.bcsSession || ''}
+                onChange={handleBCSSessionChange}
+                className={inputBgColor + (errors.bcsSession ? ' border-red-500' : '')}
+                placeholder={t('register.step4.bcs_session.placeholder') || 'Enter your BCS session'}
+                autoComplete="off"
+              />
+              {errors.bcsSession && (
+                <span className="text-sm text-red-600">{errors.bcsSession}</span>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
         {/* Removed the "Profession"/Occupation dropdown */}
