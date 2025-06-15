@@ -7,6 +7,9 @@ import AdditionalPhonesSection from './AdditionalPhonesSection';
 import LiquidGlassButton from '../../ui/LiquidGlassButton';
 import { useLanguage } from '../../../contexts/LanguageContext';
 
+const labelColor = 'text-[rgb(145,153,165)]';
+const inputBgColor = 'bg-[rgb(55,65,81)] text-white border-none focus:ring-2 focus:ring-primary';
+
 interface PersonalInfoFormLayoutProps {
   data: {
     fullName: string;
@@ -24,9 +27,6 @@ interface PersonalInfoFormLayoutProps {
   onSubmit: () => void;
 }
 
-const labelColor = 'text-[rgb(145,153,165)]';
-const inputBgColor = 'bg-[rgb(55,65,81)] text-white border-none focus:ring-2 focus:ring-primary';
-
 const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
   data,
   errors,
@@ -35,11 +35,6 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
 }) => {
   const { t } = useLanguage();
 
-  // Handler for nickname (only first textbox in this version)
-  const handleNicknames = (nickNames: string[]) => updateData({ nickNames });
-  // Add back the handler for additional phones
-  const handleAdditionalPhones = (additionalPhones: string[]) => updateData({ additionalPhones });
-
   return (
     <div className="space-y-6 relative z-10 animate-fade-in">
       <div className="text-center">
@@ -47,14 +42,7 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           {t('register.step2.title')}
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <NicknameSection
-          nickNames={data.nickNames}
-          onUpdate={handleNicknames}
-          labelColor={labelColor}
-          inputBgColor={inputBgColor}
-          t={t}
-        />
+      <div className="grid grid-cols-1 gap-6">
         <BasicInfoSection
           fullName={data.fullName}
           fullNameError={errors.fullName}
@@ -75,42 +63,6 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           inputBgColor={inputBgColor}
           t={t}
         />
-        <PersonalDetailsSection
-          dateOfBirth={data.dateOfBirth}
-          onDateOfBirthChange={(val) => updateData({ dateOfBirth: val })}
-          gender={data.gender}
-          onGenderChange={(val) => updateData({ gender: val })}
-          religion={data.religion}
-          onReligionChange={(val) => updateData({ religion: val })}
-          maritalStatus={data.maritalStatus}
-          onMaritalStatusChange={(val) => updateData({ maritalStatus: val })}
-          labelColor={labelColor}
-          inputBgColor={inputBgColor}
-          t={t}
-        />
-        <EmailSection
-          personalEmail={data.personalEmail}
-          personalEmailError={errors.personalEmail}
-          onPersonalEmailChange={(val) => updateData({ personalEmail: val })}
-          officialEmail={data.officialEmail}
-          officialEmailError={errors.officialEmail}
-          onOfficialEmailChange={(val) => updateData({ officialEmail: val })}
-          labelColor={labelColor}
-          inputBgColor={inputBgColor}
-          t={t}
-        />
-        <AdditionalPhonesSection
-          additionalPhones={data.additionalPhones}
-          onUpdate={handleAdditionalPhones}
-          labelColor={labelColor}
-          inputBgColor={inputBgColor}
-          t={t}
-        />
-      </div>
-      <div className="flex justify-end">
-        <LiquidGlassButton onClick={onSubmit} className="animate-fade-in">
-          {t('register.step2.save_continue')}
-        </LiquidGlassButton>
       </div>
     </div>
   );
