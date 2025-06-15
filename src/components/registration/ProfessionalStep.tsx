@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
@@ -78,37 +77,39 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         onChange={handleProfessionTypeChange}
       />
 
-      {/* Move the BCS options directly below profession type, for all profession types */}
-      <div className="w-full flex flex-col items-start animate-fade-in mb-1">
-        <div className="flex items-center space-x-2 py-1">
-          <Checkbox
-            id="isBCS"
-            checked={!!data.isBCS}
-            onCheckedChange={checked => handleBCSCheckboxChange(!!checked)}
-          />
-          <Label htmlFor="isBCS" className={`${labelColor} text-base font-semibold`}>
-            {t('register.step4.is_bcs')}
-          </Label>
-        </div>
-        {data.isBCS && (
-          <div className="pl-6 py-0 animate-fade-in flex-1 min-w-0">
-            <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
-              {t('register.step4.bcs_session')}
-            </Label>
-            <LiquidGlassInput
-              id="bcsSession"
-              value={data.bcsSession || ''}
-              onChange={handleBCSSessionChange}
-              error={errors.bcsSession}
-              placeholder={t('register.step4.bcs_session.placeholder')}
-              autoComplete="off"
-              maxLength={32}
-              className="mt-0.5"
-              style={{ minWidth: 0, maxWidth: "none" }}
+      {/* Show BCS cadre options only for government profession type */}
+      {data.professionType === 'government' && (
+        <div className="w-full flex flex-col items-start animate-fade-in mb-1">
+          <div className="flex items-center space-x-2 py-1">
+            <Checkbox
+              id="isBCS"
+              checked={!!data.isBCS}
+              onCheckedChange={checked => handleBCSCheckboxChange(!!checked)}
             />
+            <Label htmlFor="isBCS" className={`${labelColor} text-base font-semibold`}>
+              {t('register.step4.is_bcs')}
+            </Label>
           </div>
-        )}
-      </div>
+          {data.isBCS && (
+            <div className="pl-6 py-0 animate-fade-in flex-1 min-w-0">
+              <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
+                {t('register.step4.bcs_session')}
+              </Label>
+              <LiquidGlassInput
+                id="bcsSession"
+                value={data.bcsSession || ''}
+                onChange={handleBCSSessionChange}
+                error={errors.bcsSession}
+                placeholder={t('register.step4.bcs_session.placeholder')}
+                autoComplete="off"
+                maxLength={32}
+                className="mt-0.5"
+                style={{ minWidth: 0, maxWidth: "none" }}
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Professional info inputs */}
       <div
@@ -210,4 +211,3 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 };
 
 export default ProfessionalStep;
-
