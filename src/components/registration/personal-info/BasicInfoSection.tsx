@@ -25,13 +25,13 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
 
   return (
     <div className="md:col-span-2 animate-fade-in">
-      {/* Changed label to "Full Name" and color to white */}
+      {/* Changed label as requested */}
       <Label
         htmlFor="fullName"
         className="font-semibold"
         style={{ color: "#fff" }}
       >
-        Full Name
+        Enter your full name as per certificate
       </Label>
       <Input
         id="fullName"
