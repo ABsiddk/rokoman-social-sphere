@@ -49,8 +49,8 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           {t('register.step2.title')}
         </h2>
       </div>
+      {/* Full Name and Nickname side-by-side */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-        {/* Full Name */}
         <BasicInfoSection
           fullName={data.fullName}
           fullNameError={errors.fullName}
@@ -59,7 +59,6 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           inputBgColor={inputBgColor}
           t={t}
         />
-        {/* Nickname */}
         <NicknameSection
           nickNames={data.nickNames}
           onUpdate={nicks => updateData({ nickNames: nicks })}
@@ -68,8 +67,8 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           t={t}
         />
       </div>
+      {/* Personal detail fields spanning two columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-        {/* Date of Birth, Gender, Religion, Marital Status */}
         <PersonalDetailsSection
           dateOfBirth={data.dateOfBirth}
           onDateOfBirthChange={val => updateData({ dateOfBirth: val })}
@@ -84,8 +83,8 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           t={t}
         />
       </div>
+      {/* Personal Email and Additional Phone side-by-side */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-        {/* Email Section - only personal email */}
         <EmailSection
           personalEmail={data.personalEmail}
           personalEmailError={errors.personalEmail}
@@ -94,9 +93,6 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           inputBgColor={inputBgColor}
           t={t}
         />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-        {/* Additional Phones - only 1 field */}
         <AdditionalPhonesSection
           additionalPhones={data.additionalPhones}
           onUpdate={phones => updateData({ additionalPhones: phones })}

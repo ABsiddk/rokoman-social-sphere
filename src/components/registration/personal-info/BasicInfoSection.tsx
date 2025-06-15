@@ -22,9 +22,8 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   inputBgColor = 'bg-[rgb(55,65,81)] text-white border-none focus:ring-2 focus:ring-primary',
   t,
 }) => {
-
   return (
-    <div className="md:col-span-2 animate-fade-in">
+    <div className="animate-fade-in">
       {/* Synchronized label with language change */}
       <Label
         htmlFor="fullName"
