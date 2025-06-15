@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
@@ -8,7 +7,6 @@ import { Checkbox } from '../ui/checkbox';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
 import { useProfessionalValidation } from './professional/ProfessionalValidation';
-import { occupations } from './professional/ProfessionalData';
 import BusinessFieldsSection from './professional/BusinessFieldsSection';
 import LiquidGlassSiennaButton from '../ui/LiquidGlassSiennaButton';
 
@@ -54,31 +52,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-        <div className="md:col-span-2">
-          <Label className={labelColor}>
-            {t('register.step4.occupation')} *
-          </Label>
-          <Select
-            value={data.occupation}
-            onValueChange={(value) => updateData({ occupation: value })}
-          >
-            <SelectTrigger className={`${inputBgColor} ${errors.occupation ? 'border-red-500' : ''}`}>
-              <SelectValue placeholder={t('register.step4.occupation.placeholder')} />
-            </SelectTrigger>
-            <SelectContent>
-              {occupations.map((occupation) => (
-                <SelectItem key={occupation} value={occupation}>
-                  {t(`register.step4.occupation.${occupation}`)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {errors.occupation && (
-            <p className="text-red-500 text-sm mt-1">{errors.occupation}</p>
-          )}
-        </div>
-
-        {/* Business fields section if occupation is business */}
+        {/* Removed the "Profession"/Occupation dropdown */}
+        {/* Business fields no longer depend on occupation */}
         <BusinessFieldsSection data={data} updateData={updateData} />
 
         <div>

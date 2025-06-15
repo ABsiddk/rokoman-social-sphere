@@ -31,7 +31,7 @@ export interface RegistrationData {
     villageHouseRoad: string;
     zipCode: string;
   };
-  // Note: permanentAddress, sameAsPresentAddress, occupation, professional fields are still present in data type for compatibility, but won’t be used in UI.
+  // Removed occupation + related UI, but permanentAddress, sameAsPresentAddress, and professional fields remain for compatibility.
 
   permanentAddress: {
     nationality: string;
@@ -42,7 +42,7 @@ export interface RegistrationData {
     zipCode: string;
   };
   sameAsPresentAddress: boolean;
-  occupation: string;
+  // occupation: string; (REMOVED)
   businessType?: string;
   businessSubCategory?: string;
   businessName?: string;
@@ -96,7 +96,7 @@ const RegistrationForm = () => {
       zipCode: ''
     },
     sameAsPresentAddress: false,
-    occupation: '',
+    // occupation: '',  (REMOVED)
     workplaceAddress: {
       nationality: 'Bangladesh',
       division: '',

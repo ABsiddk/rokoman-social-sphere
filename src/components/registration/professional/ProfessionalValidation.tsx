@@ -7,11 +7,7 @@ export const useProfessionalValidation = () => {
 
   const validateForm = (data: RegistrationData) => {
     const newErrors: Record<string, string> = {};
-
-    if (!data.occupation) {
-      newErrors.occupation = t('register.step4.errors.occupation.required');
-    }
-
+    // Removed occupation validation
     return newErrors;
   };
 

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import { Input } from '../../ui/input';
@@ -18,7 +17,8 @@ interface BusinessFieldsSectionProps {
 const BusinessFieldsSection = ({ data, updateData }: BusinessFieldsSectionProps) => {
   const { t } = useLanguage();
 
-  if (data.occupation !== 'business_commerce') return null;
+  // Previously only for business_commerce, now always visible or conditionally present based on businessType, etc.
+  // The "businessType" fields will be shown if businessType is defined
 
   return (
     <>
@@ -52,6 +52,7 @@ const BusinessFieldsSection = ({ data, updateData }: BusinessFieldsSectionProps)
               <SelectValue placeholder={t('register.step4.business.subcategory.placeholder')} />
             </SelectTrigger>
             <SelectContent>
+              {/* eslint-disable-next-line */}
               {businessTypes[data.businessType as keyof typeof businessTypes]?.map((subcat) => (
                 <SelectItem key={subcat} value={subcat}>
                   {t(`register.step4.business.${subcat}`)}

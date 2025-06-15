@@ -50,7 +50,6 @@ const Registerelement3 = () => {
         zipCode: ''
       },
       sameAsPresentAddress: false,
-      occupation: '',
       workplaceAddress: {
         nationality: 'Bangladesh',
         division: '',
