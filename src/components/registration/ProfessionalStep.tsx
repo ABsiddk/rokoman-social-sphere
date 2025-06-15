@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
@@ -84,7 +83,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             </Label>
           </div>
           {data.isBCS && (
-            <div className="pl-6 py-1 animate-fade-in flex-1 min-w-0" /* ensures width inheritance */>
+            <div className="pl-6 py-1 animate-fade-in flex-1 min-w-0">
               <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
                 {t('register.step4.bcs_session')}
               </Label>
@@ -96,8 +95,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
                 placeholder={t('register.step4.bcs_session.placeholder')}
                 autoComplete="off"
                 maxLength={32}
-                // Standardize input and date box sizing, full width matching below date boxes
-                className="mt-0.5 w-full md:max-w-[330px]"
+                // Removed width/max-width so input width matches placeholder dynamically
+                className="mt-0.5"
                 style={{ minWidth: 0 }}
               />
             </div>
@@ -105,8 +104,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
       )}
 
-      {/* On all screen sizes, make date boxes side by side and equal widths */}
-      <div className="grid grid-cols-2 gap-4 md:gap-7">
+      {/* On all screen sizes, make date boxes side by side and lengths fit placeholders */}
+      <div className="grid grid-cols-2 gap-4 md:gap-7 justify-between">
         <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.start_date')}</Label>
           <LiquidGlassInput
@@ -114,9 +113,9 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             value={data.startDate}
             onChange={e => updateData({ startDate: e.target.value })}
             placeholder={t('register.step4.start_date.placeholder')}
-            className="mt-0.5 w-full md:max-w-[330px]"
+            className="mt-0.5"
             maxLength={24}
-            style={{minWidth:0}}
+            style={{ minWidth: 0 }}
           />
         </div>
         <div className="flex flex-col">
@@ -126,10 +125,10 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             value={data.endDate}
             onChange={e => updateData({ endDate: e.target.value })}
             placeholder={t('register.step4.end_date.placeholder')}
-            className="mt-0.5 w-full md:max-w-[330px]"
+            className="mt-0.5"
             disabled={data.currentlyWorking}
             maxLength={24}
-            style={{minWidth:0}}
+            style={{ minWidth: 0 }}
           />
         </div>
         <div className="col-span-2">
