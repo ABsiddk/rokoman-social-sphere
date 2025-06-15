@@ -1,0 +1,131 @@
+
+.capsuleRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.capsuleButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 999em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--capsule-fg-light, #1B283D);
+  background: linear-gradient(110deg, rgba(255,255,255,.45) 0%, rgba(5,117,170,0.95) 36%, rgba(42,210,172,0.93) 93%);
+  box-shadow: 0 6px 38px 0 rgba(27,60,112,0.17), 0 1.5px 5.5px 0 rgba(39,113,150,0.12);
+  backdrop-filter: blur(10px) saturate(140%);
+  border: 2.5px solid rgba(5, 132, 196, .17);
+  margin: 0.25rem 0;
+  outline: none;
+  transition: 
+    box-shadow .24s cubic-bezier(.61, .14, .55, .5), 
+    border-color .16s cubic-bezier(.42,0,.58,1), 
+    background .18s;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.capsuleButton .shine {
+  position: absolute;
+  top: -37%;
+  left: -30%;
+  width: 160%;
+  height: 150%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg, 
+    rgba(255,255,255,0.28) 8%, 
+    rgba(9,183,247,0.10) 24%, 
+    rgba(255,255,255,0.44) 54%,
+    rgba(78,213,234,0.10) 68%, 
+    rgba(255,255,255,0.21) 92%
+  );
+  filter: blur(7px);
+  opacity: 0.84;
+  border-radius: 85px;
+  animation: shineAnim 4s infinite linear;
+}
+
+@keyframes shineAnim {
+  0% { transform: translateX(-26%); opacity:.53; }
+  54% { transform: translateX(38%); opacity:.89; }
+  100% { transform: translateX(100%); opacity:.53; }
+}
+
+.capsuleButton:before {
+  content: '';
+  position: absolute;
+  left: 18%;
+  top: 13%;
+  width: 24px;
+  height: 12px;
+  background: rgba(255,255,255,0.62);
+  border-radius: 999px 999px 999px 999px / 999px 999px 999px 999px;
+  opacity: 0.36;
+  filter: blur(2px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.capsuleButton.selected,
+.capsuleButton:active {
+  border-color: #26B1A0;
+  box-shadow: 0 10px 44px 4px rgba(26,160,194,0.23);
+  background: linear-gradient(95deg, rgba(70,190,242,0.88) 1%, rgba(35,203,176,.99) 88%);
+  color: #fff;
+}
+
+.capsuleButton.selected .shine,
+.capsuleButton:active .shine {
+  opacity: 1;
+  filter: blur(4px);
+}
+
+.capsuleButton:focus {
+  box-shadow: 0 0 0 3px rgba(21,180,205,0.19);
+  border-color: #22cfc9;
+}
+
+.capsuleButton:not(.selected):hover {
+  box-shadow: 0 12px 38px 0 rgba(10,100,134,0.14), 0 1.5px 5.5px 0 rgba(21,113,150,0.11);
+}
+
+@media (prefers-color-scheme: dark) {
+  .capsuleButton {
+    background: linear-gradient(114deg, rgba(26,41,58,0.44) 0%, rgba(20,45,82,0.93) 40%, rgba(41,195,202,0.59) 90%);
+    color: var(--capsule-fg-dark, #F4FAFB);
+    border-color: rgba(35,238,215,.25);
+  }
+  .capsuleButton.selected,
+  .capsuleButton:active {
+    background: linear-gradient(94deg, rgba(41,195,202,0.94) 0%, rgba(17,162,209,0.90) 98%);
+    color: #fff;
+    border-color: #03dac6;
+  }
+}
+
+/* Water droplets */
+.capsuleButton:after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  bottom: 11px;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(ellipse at 60% 55%,rgba(255,255,255,.7) 65%,rgba(5,154,210,0.08) 100%);
+  opacity: 0.17;
+  border-radius: 50%;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 3px 14px 2px rgba(27,60,112,0.12);
+}

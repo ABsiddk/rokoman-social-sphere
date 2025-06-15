@@ -51,7 +51,8 @@ const Registerelement2 = () => {
     },
     startDate: '',
     endDate: '',
-    currentlyWorking: false
+    currentlyWorking: false,
+    professionType: '' // <-- NEW
   });
 
   const updateRegistrationData = (data: Partial<RegistrationData>) => {

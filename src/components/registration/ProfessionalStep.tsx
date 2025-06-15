@@ -8,6 +8,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
 import { useProfessionalValidation } from './professional/ProfessionalValidation';
 import LiquidGlassSiennaButton from '../ui/LiquidGlassSiennaButton';
+import ProfessionTypeSelector from './professional/ProfessionTypeSelector';
 
 interface ProfessionalStepProps {
   data: RegistrationData;
@@ -44,6 +45,11 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-6 ${sectionBg}`}>
+      {/* Profession type selection section */}
+      <ProfessionTypeSelector
+        value={data.professionType}
+        onChange={val => updateData({ professionType: val })}
+      />
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
           {t('register.step4.title')}

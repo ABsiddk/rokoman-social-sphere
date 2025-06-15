@@ -194,6 +194,12 @@ const translations = {
     
     // Step 4 - Professional
     'register.step4.title': 'Professional Information',
+    'register.step4.profession_type': 'Type of profession',
+    'register.step4.profession.government': 'Government',
+    'register.step4.profession.private': 'Private',
+    'register.step4.profession.business': 'Business/Entrepreneur',
+    'register.step4.profession.student': 'Student',
+    'register.step4.profession.other': 'Other',
     'register.step4.start_date': 'Start Date',
     'register.step4.start_date.placeholder': 'Select your employment start date',
     'register.step4.end_date': 'End Date',
@@ -436,6 +442,12 @@ const translations = {
     
     // Step 4 - Professional
     'register.step4.title': 'পেশাগত তথ্য',
+    'register.step4.profession_type': 'পেশার ধরন',
+    'register.step4.profession.government': 'সরকারি',
+    'register.step4.profession.private': 'বেসরকারি',
+    'register.step4.profession.business': 'ব্যবসা/উদ্যোক্তা',
+    'register.step4.profession.student': 'ছাত্র/ছাত্রী',
+    'register.step4.profession.other': 'অন্যান্য',
     'register.step4.start_date': 'শুরুর তারিখ',
     'register.step4.start_date.placeholder': 'আপনার চাকরির শুরুর তারিখ নির্বাচন করুন',
     'register.step4.end_date': 'শেষের তারিখ',

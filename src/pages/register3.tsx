@@ -60,7 +60,8 @@ const Registerelement3 = () => {
       },
       startDate: '',
       endDate: '',
-      currentlyWorking: false
+      currentlyWorking: false,
+      professionType: '' // <-- NEW
     };
   };
 
