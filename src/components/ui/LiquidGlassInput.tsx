@@ -1,3 +1,4 @@
+
 import React, { useRef, useLayoutEffect, useState } from "react";
 import styles from "./LiquidGlassInput.module.css";
 
@@ -26,9 +27,10 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
       ? "bn"
       : "en";
 
-    // Responsive auto-size
+    // Auto-size for text/date inputs unless user set width
     const autoSize = !style?.width && !className?.includes("w-");
     const relevantType = !props.type || props.type === "text" || props.type === "date";
+    // For BCS batch/date fields, always enable
     const autowidthForce = (props.id === "bcsSession" || props.type === "date");
 
     useLayoutEffect(() => {
@@ -36,39 +38,43 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
         if (!spanRef.current) return;
         const isMobileNow = isMobile();
 
+        // Use value or placeholder for width measurement
         let valueForWidth: string =
           typeof props.value === "string" && props.value.length > 0
             ? props.value
             : props.placeholder || "";
+        // Add one space for caret room
         spanRef.current.textContent = valueForWidth + " ";
 
-        // Font tweak
-        let fontSize = isMobileNow ? (lang === 'bn' ? "1.01rem" : "0.96rem") : "1rem";
+        // Font size adjust for script and device
+        let fontSize = isMobileNow ? (lang === 'bn' ? "1rem" : "0.95rem") : "1rem";
+
         spanRef.current.style.fontFamily = "inherit";
         spanRef.current.style.letterSpacing = "inherit";
         spanRef.current.style.fontWeight = "500";
         spanRef.current.style.fontSize = fontSize;
 
-        // Padding
+        // Use minimal padding for mobile (0.6rem), standard for desktop, extra for wide scripts
         const pxPad = isMobileNow
-          ? (lang === 'bn' ? 11.5 : 9.6)
+          ? (lang === 'bn' ? 11 : 9.6)
           : (lang === 'bn' ? 18 : 16);
 
-        // Minimums for mobile-aware UX
         const min = isMobileNow ? 48 : 54;
-        // Half-grid for mobile date parallel
+
+        // Calculate available grid width for start/end date
+        // Subtract 40px for padding, 8px for gap, divide by 2 for side-by-side
         let max = 600;
         if (isMobileNow && (props.type === "date" || props.id === "bcsSession")) {
           max = Math.max(
-            Math.floor((window.innerWidth - 40 - 8) / 2),
+            Math.floor((window.innerWidth - 40 - 8) / 2), // 40px = px-4*2, 8px = gap-2
             70
           );
         }
+
         let measured = Math.ceil(spanRef.current.offsetWidth + pxPad * 2);
         setInputWidth(Math.max(min, Math.min(measured, max)));
       }
-      // eslint-disable-next-line
-    }, [props.placeholder, props.value, lang, autoSize, relevantType, autowidthForce]);
+    }, [props.placeholder, props.value, autoSize, relevantType, lang, autowidthForce]);
 
     return (
       <div
@@ -86,8 +92,8 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
             width: ((autoSize && relevantType) || autowidthForce) && inputWidth ? inputWidth : style?.width,
             minWidth: ((autoSize && relevantType) || autowidthForce) ? (isMobile() ? 48 : 54) : undefined,
             transition: "width 0.27s cubic-bezier(.61,.14,.55,.5)",
-            fontSize: isMobile() ? (lang === 'bn' ? "1.01rem" : "0.96rem") : "1rem",
-            padding: isMobile() ? (lang === 'bn' ? "0 0.73rem" : "0 0.6rem") : (lang === 'bn' ? "0 1.11rem" : "0 1rem"),
+            fontSize: isMobile() ? (lang === 'bn' ? "1rem" : "0.95rem") : "1rem",
+            padding: isMobile() ? (lang === 'bn' ? "0 0.7rem" : "0 0.6rem") : (lang === 'bn' ? "0 1.1rem" : "0 1rem"),
             ...style,
           }}
           {...props}
@@ -101,12 +107,12 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
             top: "-200%",
             left: 0,
             fontWeight: 500,
-            fontSize: isMobile() ? (lang === 'bn' ? "1.01rem" : "0.96rem") : "1rem",
+            fontSize: isMobile() ? (lang === 'bn' ? "1rem" : "0.95rem") : "1rem",
             letterSpacing: "inherit",
             whiteSpace: "pre",
             visibility: "hidden",
             pointerEvents: "none",
-            padding: isMobile() ? (lang === 'bn' ? "0 0.73rem" : "0 0.6rem") : (lang === 'bn' ? "0 1.11rem" : "0 1rem"),
+            padding: isMobile() ? (lang === 'bn' ? "0 0.7rem" : "0 0.6rem") : (lang === 'bn' ? "0 1.1rem" : "0 1rem"),
             fontFamily: "inherit",
           }}
           aria-hidden

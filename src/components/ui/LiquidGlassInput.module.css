@@ -83,12 +83,13 @@
 }
 @media (max-width: 600px) {
   .liquidGlassInputContainer, .liquidGlassInput {
-    font-size: 0.96rem !important;
+    font-size: 0.95rem !important;
     height: 36px;
-    padding: 0 0.61rem !important;
+    padding: 0 0.6rem !important;
     transition: width 0.22s cubic-bezier(.61,.14,.55,.5);
     min-width: 48px;
     width: auto;
     max-width: unset;
   }
+  /* Tweak padding/font for Bangla script on mobile via data attribute if needed */
 }

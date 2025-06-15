@@ -10,8 +10,6 @@
   .capsuleRow {
     justify-content: flex-start;
     /* Left align children on desktop (md+) */
-    align-items: flex-start;
-    margin-left: 0.125rem;
   }
 }
 .capsuleButton {
