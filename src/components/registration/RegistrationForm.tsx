@@ -58,6 +58,7 @@ export interface RegistrationData {
   institutionName?: string;
   department?: string;
   designation?: string;
+  jobLocation?: string;
 }
 
 const RegistrationForm = () => {
@@ -110,7 +111,8 @@ const RegistrationForm = () => {
     bcsSession: '',
     institutionName: '',
     department: '',
-    designation: ''
+    designation: '',
+    jobLocation: ''
   });
 
   const updateRegistrationData = (data: Partial<RegistrationData>) => {

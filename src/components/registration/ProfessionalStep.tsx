@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
@@ -14,6 +13,7 @@ import {
   getDepartmentSuggestions,
   getDesignationSuggestions,
 } from "./professional/ProfessionalSuggestions";
+import { bangladeshDistricts } from "./professional/ProfessionalSuggestions";
 
 interface ProfessionalStepProps {
   data: RegistrationData;
@@ -201,7 +201,27 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
       </div>
 
-      <div className="w-full flex justify-center mt-4">
+      {/* --- INSERTED: Job Location field before the submit button --- */}
+      <div className="w-full flex flex-col items-start mb-2 animate-fade-in">
+        <div className="w-full md:w-2/3 sm:w-full">
+          <SearchableInput
+            label={t('register.step4.job_location') || "Job Location"}
+            placeholder={t('register.step4.job_location.placeholder') || "Select your work district"}
+            suggestions={bangladeshDistricts}
+            value={data.jobLocation || ""}
+            onChange={val => updateData({ jobLocation: val })}
+            autoComplete="address-level2"
+            id="jobLocation"
+            maxLength={32}
+            className="mt-1"
+            style={{ minWidth: 0, maxWidth: "none" }}
+          />
+        </div>
+      </div>
+      {/* --- END Job Location field --- */}
+
+      {/* Submit button left-aligned */}
+      <div className="w-full mt-4 flex md:justify-start sm:justify-start justify-start">
         <LiquidGlassSiennaButton
           type="submit"
           disabled={submitting}

@@ -267,6 +267,9 @@ const translations = {
     'register.step4.department.placeholder': 'e.g. Computer Science',
     'register.step4.designation': 'Designation',
     'register.step4.designation.placeholder': 'e.g. Manager',
+    // ---- NEW for job location ----
+    'register.step4.job_location': 'Job Location',
+    'register.step4.job_location.placeholder': 'Select your work district',
   },
   bn: {
     // Brand  
@@ -487,7 +490,7 @@ const translations = {
     
     // Phone validation
     'registration.phone.error.bangladesh': 'বাংলাদেশের নম্বর অবশ্যই ০১ দিয়ে শুরু হতে হবে',
-    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যার হতে হবে',
+    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যা�র হতে হবে',
     'registration.phone.error.numbers': 'শুধুমাত্র সংখ্যা অনুমোদিত',
     
     // Password validation
@@ -526,6 +529,9 @@ const translations = {
     'register.step4.department.placeholder': 'যেমন কম্পিউটার বিজ্ঞান',
     'register.step4.designation': 'পদবি',
     'register.step4.designation.placeholder': 'যেমন ম্যানেজার',
+    // ---- NEW for job location ----
+    'register.step4.job_location': 'কর্মস্থল',
+    'register.step4.job_location.placeholder': 'আপনার কর্মস্থলের জেলা নির্বাচন করুন',
   }
 };
 
