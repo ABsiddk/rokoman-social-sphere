@@ -154,6 +154,7 @@ const translations = {
     'register.step2.nickname_placeholder': 'The name your family and friends call you by.',
     'register.step2.add_nickname': '+ Add Nickname',
     'register.step2.date_of_birth': 'Date of Birth',
+    'register.step2.date_of_birth_placeholder': 'Select your date of birth',
     'register.step2.gender': 'Gender',
     'register.step2.religion': 'Religion',
     'register.step2.marital_status': 'Marital Status',
@@ -387,6 +388,7 @@ const translations = {
     'register.step2.nickname_placeholder': 'আপনার পরিবার ও বন্ধুরা যে নামে আপনাকে ডাকে',
     'register.step2.add_nickname': '+ ডাকনাম যোগ করুন',
     'register.step2.date_of_birth': 'জন্ম তারিখ',
+    'register.step2.date_of_birth_placeholder': 'আপনার জন্ম তারিখ নির্বাচন করুন',
     'register.step2.gender': 'লিঙ্গ',
     'register.step2.religion': 'ধর্ম',
     'register.step2.marital_status': 'বৈবাহিক অবস্থা',
@@ -442,7 +444,7 @@ const translations = {
     
     // Phone validation
     'registration.phone.error.bangladesh': 'বাংলাদেশের নম্বর অবশ্যই ০১ দিয়ে শুরু হতে হবে',
-    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যার হতে হবে',
+    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যা�র হতে হবে',
     'registration.phone.error.numbers': 'শুধুমাত্র সংখ্যা অনুমোদিত',
     
     // Password validation

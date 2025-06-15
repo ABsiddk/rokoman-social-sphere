@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Label } from '../../ui/label';
 import { Button } from '../../ui/button';
@@ -70,7 +69,7 @@ const PersonalDetailsSection: React.FC<PersonalDetailsSectionProps> = ({
               {parsedDate ? format(parsedDate, "PPP") : t('register.step2.date_of_birth_placeholder')}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
+          <PopoverContent className="w-auto p-0 bg-[rgb(55,65,81)] text-white z-50 border-none" align="start">
             <Calendar
               mode="single"
               selected={parsedDate}
@@ -84,7 +83,7 @@ const PersonalDetailsSection: React.FC<PersonalDetailsSectionProps> = ({
                 date > new Date() || date < new Date('1900-01-01')
               }
               initialFocus
-              className={cn("p-3 pointer-events-auto")}
+              className={cn("p-3 pointer-events-auto bg-[rgb(55,65,81)] text-white")}
             />
           </PopoverContent>
         </Popover>
