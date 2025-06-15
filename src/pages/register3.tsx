@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -86,26 +85,30 @@ const Registerelement3 = () => {
     // Future navigation: e.g. navigate('/registration-success');
   };
 
+  // Wrap ENTIRE page in background color. Remove any gaps above header/footer by absolute positioning background shapes in a totally covering bg div.
   return (
-    <div className={`min-h-screen flex flex-col ${glassBgGradient} transition-colors duration-300 relative overflow-hidden`}>
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {/* Animated blurry shapes for aesthetic consistency */}
+    <div className={`min-h-screen flex flex-col ${glassBgGradient} transition-colors duration-300 relative overflow-x-hidden w-full`}>
+      {/* Absolute blurry shapes for visual, always fill screen even above header/footer */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
         <div className="absolute top-[8%] right-[4%] w-40 h-40 bg-teal-200/40 rounded-full blur-3xl opacity-60 animate-fade-in" />
         <div className="absolute bottom-0 left-[15%] w-32 h-32 bg-indigo-300/50 rounded-full blur-2xl opacity-30 animate-fade-in" />
         <div className="absolute bottom-[12%] right-[20%] w-36 h-36 bg-blue-300/60 rounded-full blur-2xl opacity-20 animate-fade-in" />
       </div>
-      <Header />
-      <main className="flex-1 flex flex-col items-center justify-center px-0 m-0 w-full h-full min-h-[calc(100vh-90px)]">
-        <div className="w-full h-auto mx-0 relative z-10 animate-fade-in transition-all duration-300 flex flex-col items-center">
-          <div className="w-full h-auto rounded-none shadow-none px-0 py-0 bg-white/80 dark:bg-opacity-60 dark:bg-gray-900 backdrop-blur-md border-0 transition-all duration-300 animate-scale-in flex flex-col items-center">
-            <ProfessionalStepContainer
-              data={registrationData}
-              updateData={updateRegistrationData}
-            />
+      {/* Content: header, main, footer - z-10 to keep above absolute bg */}
+      <div className="relative z-10 flex flex-col min-h-screen w-full">
+        <Header />
+        <main className="flex-1 flex flex-col items-center justify-center px-0 m-0 w-full min-h-[calc(100vh-90px)]">
+          <div className="w-full h-auto mx-0 flex flex-col items-center justify-center animate-fade-in transition-all duration-300">
+            <div className="w-full h-auto rounded-none shadow-none px-0 py-0 bg-white/80 dark:bg-opacity-60 dark:bg-gray-900 backdrop-blur-md border-0 transition-all duration-300 animate-scale-in flex flex-col items-center">
+              <ProfessionalStepContainer
+                data={registrationData}
+                updateData={updateRegistrationData}
+              />
+            </div>
           </div>
-        </div>
-      </main>
-      <Footer />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };
