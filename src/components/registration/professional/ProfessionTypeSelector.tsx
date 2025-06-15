@@ -29,44 +29,25 @@ const ProfessionTypeSelector: React.FC<ProfessionTypeSelectorProps> = ({ value, 
     if (value !== optionKey) {
       onChange(optionKey);
     }
+    // else onChange('');
   };
 
-  // Separate the Government button and place the label right above it
-  // Render Government button with label, then render the rest in a row
-
-  // First option is always government
-  const [firstOption, ...otherOptions] = PROFESSION_OPTIONS;
-
+  // Always center label and buttons, regardless of screen size.
   return (
     <section className="mb-4 w-full flex flex-col items-center">
-      <div className={cn(styles.capsuleRow, "w-full flex flex-col items-center gap-0")}>
-        {/* Label directly above government button */}
-        <label
-          htmlFor={`profession-${firstOption.key}`}
-          className="block text-lg font-bold mb-2 text-center text-[rgb(46,76,130)] dark:text-cyan-200 w-full"
-        >
-          {t("register.step4.profession_type")}
-        </label>
-        <button
-          type="button"
-          id={`profession-${firstOption.key}`}
-          aria-pressed={value === firstOption.key}
-          className={cn(
-            styles.capsuleButton,
-            value === firstOption.key && "selected",
-            "super-liquid",
-            "mb-2"
-          )}
-          onClick={() => handleSelect(firstOption.key)}
-          tabIndex={0}
-        >
-          <span className="shine" />
-          {t(firstOption.labelKey)}
-        </button>
-      </div>
-      {/* Render the rest horizontally centered */}
-      <div className={cn(styles.capsuleRow, "w-full justify-center")}>
-        {otherOptions.map((option) => (
+      {/* Label always above buttons and centered */}
+      <label
+        className="block text-lg font-bold mb-3 text-center text-[rgb(46,76,130)] dark:text-cyan-200 w-full"
+      >
+        {t("register.step4.profession_type")}
+      </label>
+      <div
+        className={cn(
+          styles.capsuleRow,
+          "w-full justify-center"
+        )}
+      >
+        {PROFESSION_OPTIONS.map((option) => (
           <button
             type="button"
             key={option.key}
