@@ -37,6 +37,8 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
 
   // Handler for nickname (only first textbox in this version)
   const handleNicknames = (nickNames: string[]) => updateData({ nickNames });
+  // Add back the handler for additional phones
+  const handleAdditionalPhones = (additionalPhones: string[]) => updateData({ additionalPhones });
 
   return (
     <div className="space-y-6 relative z-10 animate-fade-in">
