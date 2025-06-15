@@ -49,7 +49,8 @@ const ThemeControls = () => {
   const getModeIcon = () => {
     switch (mode) {
       case 'light':
-        return <Sun className="text-yellow-500" size={20} />;
+        // Changed from yellow to blue
+        return <Sun className="text-blue-400" size={20} />;
       case 'dark':
         return <Moon className="text-blue-400" size={20} />;
       case 'system':
