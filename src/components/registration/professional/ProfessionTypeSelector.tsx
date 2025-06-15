@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./ProfessionTypeCapsule.module.css";
 import { useLanguage } from "../../../contexts/LanguageContext";
-import { cn } from "../../../lib/utils"; // for combining classes
+import { cn } from "../../../lib/utils";
 
 type ProfessionOption = {
   key: string;
@@ -25,14 +25,16 @@ interface ProfessionTypeSelectorProps {
 const ProfessionTypeSelector: React.FC<ProfessionTypeSelectorProps> = ({ value, onChange }) => {
   const { t } = useLanguage();
 
+  // This handler locks selection: only clicking another button changes the selection,
+  // clicking same button does nothing, never deselects on outside click.
   const handleSelect = (optionKey: string) => {
-    if (value === optionKey) onChange("");
-    else onChange(optionKey);
+    if (value === optionKey) return;
+    onChange(optionKey);
   };
 
   return (
     <section className="mb-4">
-      <label className="block text-lg font-bold text-primary dark:text-cyan-200 mb-3">
+      <label className="block text-lg font-bold text-primary dark:text-cyan-200 mb-3 text-center">
         {t("register.step4.profession_type")}
       </label>
       <div className={styles.capsuleRow}>
@@ -43,7 +45,8 @@ const ProfessionTypeSelector: React.FC<ProfessionTypeSelectorProps> = ({ value, 
             aria-pressed={value === option.key}
             className={cn(
               styles.capsuleButton,
-              value === option.key && "selected"
+              value === option.key && "selected",
+              "super-liquid"
             )}
             onClick={() => handleSelect(option.key)}
             tabIndex={0}

@@ -17,7 +17,7 @@ interface ProfessionalStepProps {
 }
 
 const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProps) => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { validateForm } = useProfessionalValidation();
   const [submitting, setSubmitting] = useState(false);
@@ -45,15 +45,19 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-6 ${sectionBg}`}>
+      {/* Main title at top */}
+      <div className="w-full flex justify-center mb-5">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary dark:text-cyan-200 drop-shadow-md tracking-tight">
+          {t('register.step4.title') || 'Professional Information'}
+        </h1>
+      </div>
       {/* Profession type selection section */}
       <ProfessionTypeSelector
         value={data.professionType}
         onChange={val => updateData({ professionType: val })}
       />
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-          {t('register.step4.title')}
-        </h2>
+        {/* Subtitle if necessary */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
@@ -97,7 +101,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
       </div>
 
-      {/* Confirmation Button: synchronized name and styling */}
+      {/* Confirmation Button */}
       <div className="w-full flex justify-center mt-6">
         <LiquidGlassSiennaButton
           type="submit"

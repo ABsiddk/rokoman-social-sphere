@@ -1,11 +1,11 @@
 
 .capsuleRow {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .capsuleButton {
@@ -13,104 +13,117 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 120px;
-  height: 48px;
-  padding: 0 24px;
+  min-width: 130px;
+  height: 56px;
+  padding: 0 36px;
   border-radius: 999em;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--capsule-fg-light, #1B283D);
-  background: linear-gradient(110deg, rgba(255,255,255,.45) 0%, rgba(5,117,170,0.95) 36%, rgba(42,210,172,0.93) 93%);
-  box-shadow: 0 6px 38px 0 rgba(27,60,112,0.17), 0 1.5px 5.5px 0 rgba(39,113,150,0.12);
-  backdrop-filter: blur(10px) saturate(140%);
-  border: 2.5px solid rgba(5, 132, 196, .17);
-  margin: 0.25rem 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--capsule-fg-light, #143248);
+  background: linear-gradient(112deg, rgba(255,255,255,.53) 0%, rgba(5,117,170,0.97) 31%, rgba(26,236,200,0.96) 100%);
+  box-shadow: 0 9px 44px 0 rgba(27,60,112,0.22), 0 2.5px 6.5px 0 rgba(39,113,150,0.14);
+  backdrop-filter: blur(12px) saturate(165%);
+  border: 3px solid rgba(5, 132, 196, .19);
+  margin: .35rem 0;
   outline: none;
   transition: 
-    box-shadow .24s cubic-bezier(.61, .14, .55, .5), 
-    border-color .16s cubic-bezier(.42,0,.58,1), 
-    background .18s;
+    box-shadow .29s cubic-bezier(.61, .14, .55, .5), 
+    border-color .18s cubic-bezier(.42,0,.58,1), 
+    background .18s,
+    filter .19s cubic-bezier(.4,0,.2,1);
   cursor: pointer;
   overflow: hidden;
   z-index: 1;
+  /* New: "super liquid responsiveness" */
+  will-change: background, border-color, box-shadow, filter;
 }
 
 .capsuleButton .shine {
   position: absolute;
-  top: -37%;
-  left: -30%;
-  width: 160%;
-  height: 150%;
-  pointer-events: none;
+  top: -32%;
+  left: -24%;
+  width: 145%;
+  height: 133%;
   background: linear-gradient(
-    90deg, 
-    rgba(255,255,255,0.28) 8%, 
-    rgba(9,183,247,0.10) 24%, 
-    rgba(255,255,255,0.44) 54%,
-    rgba(78,213,234,0.10) 68%, 
-    rgba(255,255,255,0.21) 92%
+    93deg, 
+    rgba(255,255,255,0.39) 11%, 
+    rgba(9,183,247,0.12) 32%, 
+    rgba(255,255,255,0.54) 48%,
+    rgba(72,251,217,0.20) 64%, 
+    rgba(255,255,255,0.13) 96%
   );
-  filter: blur(7px);
-  opacity: 0.84;
-  border-radius: 85px;
-  animation: shineAnim 4s infinite linear;
+  filter: blur(12px);
+  opacity: 0.91;
+  border-radius: 96px;
+  pointer-events: none;
+  animation: shineAnim 3.2s infinite linear;
+  z-index: 2;
 }
-
 @keyframes shineAnim {
-  0% { transform: translateX(-26%); opacity:.53; }
-  54% { transform: translateX(38%); opacity:.89; }
-  100% { transform: translateX(100%); opacity:.53; }
+  0% { transform: translateX(-18%); opacity:.55; }
+  35% { transform: translateX(12%); opacity:.93; }
+  75% { transform: translateX(55%); opacity:.77; }
+  100% { transform: translateX(130%); opacity:.55; }
 }
 
 .capsuleButton:before {
   content: '';
   position: absolute;
-  left: 18%;
-  top: 13%;
-  width: 24px;
-  height: 12px;
-  background: rgba(255,255,255,0.62);
+  left: 17%;
+  top: 10%;
+  width: 29px;
+  height: 14px;
+  background: rgba(255,255,255,0.75);
   border-radius: 999px 999px 999px 999px / 999px 999px 999px 999px;
-  opacity: 0.36;
-  filter: blur(2px);
-  z-index: 2;
+  opacity: 0.41;
+  filter: blur(3px);
+  z-index: 3;
   pointer-events: none;
 }
 
 .capsuleButton.selected,
 .capsuleButton:active {
-  border-color: #26B1A0;
-  box-shadow: 0 10px 44px 4px rgba(26,160,194,0.23);
-  background: linear-gradient(95deg, rgba(70,190,242,0.88) 1%, rgba(35,203,176,.99) 88%);
+  /* Super bright, glassy, saturated look */
+  border-color: #27fcd0;
+  box-shadow: 0 16px 62px 10px rgba(32,250,189,0.38), 0 5px 18px 0 rgba(15,224,185,0.25);
+  background: linear-gradient(91deg, rgba(19,215,249,0.99) 1%, rgba(54,254,206,.99) 88%);
   color: #fff;
+  filter: brightness(4) saturate(2.3) drop-shadow(0 0 10px #78ffe9);
+  /* 4x the brightness of previous styling! */
 }
 
 .capsuleButton.selected .shine,
 .capsuleButton:active .shine {
   opacity: 1;
-  filter: blur(4px);
+  filter: blur(6px) brightness(1.61) saturate(1.95);
 }
 
 .capsuleButton:focus {
-  box-shadow: 0 0 0 3px rgba(21,180,205,0.19);
-  border-color: #22cfc9;
+  box-shadow: 0 0 0 4px rgba(21,230,255,0.23);
+  border-color: #17fff6;
 }
 
-.capsuleButton:not(.selected):hover {
-  box-shadow: 0 12px 38px 0 rgba(10,100,134,0.14), 0 1.5px 5.5px 0 rgba(21,113,150,0.11);
+/* Super-liquid hover effect */
+.capsuleButton:not(.selected):hover,
+.capsuleButton:not(.selected):focus-visible {
+  box-shadow: 0 18px 44px 0 rgba(19,205,210,0.22), 0 2.5px 6.5px 0 rgba(21,215,211,0.19);
+  background: linear-gradient(107deg, rgba(80,226,242,0.47) 9%, rgba(54,254,206,0.19) 97%);
+  filter: brightness(1.29) saturate(1.5);
 }
 
 @media (prefers-color-scheme: dark) {
   .capsuleButton {
     background: linear-gradient(114deg, rgba(26,41,58,0.44) 0%, rgba(20,45,82,0.93) 40%, rgba(41,195,202,0.59) 90%);
     color: var(--capsule-fg-dark, #F4FAFB);
-    border-color: rgba(35,238,215,.25);
+    border-color: rgba(35,238,215,.27);
   }
   .capsuleButton.selected,
   .capsuleButton:active {
-    background: linear-gradient(94deg, rgba(41,195,202,0.94) 0%, rgba(17,162,209,0.90) 98%);
+    background: linear-gradient(96deg, rgba(41,255,252,0.99) 0%, rgba(11,211,219,0.92) 98%);
     color: #fff;
-    border-color: #03dac6;
+    border-color: #01fce6;
+    filter: brightness(4.2) saturate(2.2) drop-shadow(0 0 10px #01fde7);
   }
 }
 
@@ -118,14 +131,27 @@
 .capsuleButton:after {
   content: '';
   position: absolute;
-  right: 14px;
-  bottom: 11px;
-  width: 15px;
-  height: 15px;
-  background: radial-gradient(ellipse at 60% 55%,rgba(255,255,255,.7) 65%,rgba(5,154,210,0.08) 100%);
-  opacity: 0.17;
+  right: 25px;
+  bottom: 13px;
+  width: 17px;
+  height: 17px;
+  background: radial-gradient(ellipse at 60% 55%,rgba(255,255,255,.76) 69%,rgba(5,196,210,0.15) 100%);
+  opacity: 0.18;
   border-radius: 50%;
   z-index: 3;
   pointer-events: none;
-  box-shadow: 0 3px 14px 2px rgba(27,60,112,0.12);
+  box-shadow: 0 4px 18px 2px rgba(27,60,112,0.15);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .capsuleRow {
+    gap: .7rem;
+  }
+  .capsuleButton {
+    min-width: 90px;
+    font-size: .96rem;
+    padding: 0 18px;
+    height: 41px;
+  }
 }

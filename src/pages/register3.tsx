@@ -95,14 +95,12 @@ const Registerelement3 = () => {
       </div>
       <Header />
       <main className="container mx-auto px-4 py-8 flex items-center justify-center min-h-[90vh]">
-        <div className="max-w-4xl w-full mx-auto relative z-10 animate-fade-in">
+        <div className="max-w-6xl w-full mx-auto relative z-10 animate-fade-in transition-all duration-300" style={{marginLeft: 'auto', marginRight: 'auto'}}>
           {/* Glass style container for symmetry */}
           <div className="rounded-2xl shadow-xl px-6 py-8 sm:p-10 bg-white/80 dark:bg-opacity-60 dark:bg-gray-900 backdrop-blur-md border border-gray-200 dark:border-[#1B2936] transition-all duration-300 animate-scale-in">
             <ProfessionalStepContainer
               data={registrationData}
               updateData={updateRegistrationData}
-              // Pass handleComplete if internal "continue" button is implemented
-              // If not, add submit button here like in register2
             />
           </div>
         </div>
