@@ -133,7 +133,7 @@ const translations = {
     'register.verify': 'Verify',
     
     // Step 1 - Phone & Password
-    'register.step1.title': 'Phone & Password',
+    'register.step1.title': 'Phone Number and OTP Verification',
     'register.step1.phone': 'Phone Number',
     'register.step1.phone_placeholder': 'Enter your 11-digit phone number',
     'register.step1.password': 'New Password',
@@ -404,7 +404,7 @@ const translations = {
     'register.verify': 'যাচাই করুন',
     
     // Step 1 - Phone & Password
-    'register.step1.title': 'ফোন এবং পাসওয়ার্ড',
+    'register.step1.title': 'ফোন নম্বর এবং ওটিপি যাচাইকরণ',
     'register.step1.phone': 'ফোন নম্বর',
     'register.step1.phone_placeholder': 'আপনার ১১ সংখ্যার ফোন নম্বর লিখুন',
     'register.step1.password': 'নতুন পাসওয়ার্ড',
