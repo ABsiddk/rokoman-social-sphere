@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -87,7 +86,7 @@ const Registerelement3 = () => {
   };
 
   return (
-    <div className={`min-h-0 w-full h-auto ${glassBgGradient} transition-colors duration-300 relative overflow-hidden`}>
+    <div className={`min-h-screen flex flex-col ${glassBgGradient} transition-colors duration-300 relative overflow-hidden`}>
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Animated blurry shapes for aesthetic consistency */}
         <div className="absolute top-[8%] right-[4%] w-40 h-40 bg-teal-200/40 rounded-full blur-3xl opacity-60 animate-fade-in" />
@@ -95,7 +94,7 @@ const Registerelement3 = () => {
         <div className="absolute bottom-[12%] right-[20%] w-36 h-36 bg-blue-300/60 rounded-full blur-2xl opacity-20 animate-fade-in" />
       </div>
       <Header />
-      <main className="w-full h-auto flex items-start justify-center p-0 m-0">
+      <main className="flex-1 flex items-start justify-center p-0 m-0 w-full h-auto">
         <div className="w-full h-auto mx-0 relative z-10 animate-fade-in transition-all duration-300">
           {/* Removed max-w-6xl and removed padding/borders for full width */}
           <div className="w-full h-auto rounded-none shadow-none px-0 py-0 bg-white/80 dark:bg-opacity-60 dark:bg-gray-900 backdrop-blur-md border-0 transition-all duration-300 animate-scale-in">
@@ -112,4 +111,3 @@ const Registerelement3 = () => {
 };
 
 export default Registerelement3;
-

@@ -11,56 +11,77 @@ const isMobile = () =>
   (window.innerWidth <= 600 ||
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 
+// Detect Bengali/Bangla or CJK scripts for width adjustment
+const isWideScript = (text: string = "") =>
+  /[\u0980-\u09FF\u0900-\u097F\u3040-\u30FF\u4E00-\u9FFF]/.test(text);
+
 const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProps>(
   ({ className = "", style, error, ...props }, ref) => {
     const [inputWidth, setInputWidth] = useState<number | undefined>(undefined);
     const spanRef = useRef<HTMLSpanElement | null>(null);
 
-    // Auto-size only for text/date input and if user hasn’t set width already.
+    // Language or script of placeholder/value detected
+    const lang = (
+      typeof props.value === "string" && isWideScript(props.value)
+    ) || (typeof props.placeholder === "string" && isWideScript(props.placeholder))
+      ? "bn"
+      : "en";
+
+    // Auto-size for text/date inputs unless user set width
     const autoSize = !style?.width && !className?.includes("w-");
     const relevantType = !props.type || props.type === "text" || props.type === "date";
+    // For BCS batch/date fields, always enable
+    const autowidthForce = (props.id === "bcsSession" || props.type === "date");
 
     useLayoutEffect(() => {
-      if (autoSize && relevantType && spanRef.current) {
+      if ((autoSize && relevantType) || autowidthForce) {
+        if (!spanRef.current) return;
         const isMobileNow = isMobile();
 
-        let valueForWidth =
+        // Use value or placeholder for width measurement
+        let valueForWidth: string =
           typeof props.value === "string" && props.value.length > 0
             ? props.value
             : props.placeholder || "";
-        // Add one space at the end for caret
+        // Add one space for caret room
         spanRef.current.textContent = valueForWidth + " ";
 
-        // Font sizing and padding: match mobile/desktop
+        // Font size adjust for script and device
+        let fontSize = isMobileNow ? (lang === 'bn' ? "1rem" : "0.95rem") : "1rem";
+
         spanRef.current.style.fontFamily = "inherit";
         spanRef.current.style.letterSpacing = "inherit";
         spanRef.current.style.fontWeight = "500";
-        spanRef.current.style.fontSize = isMobileNow ? "0.95rem" : "1rem";
-        // Padding must match input padding in px (1rem=16px, 0.95rem~15.2px)
-        const pxPad = isMobileNow ? 9.6 : 16;
-        // Add both left+right padding (x2)
-        const min = isMobileNow ? 48 : 54;
-        // For side-by-side grid, subtract grid gap (gap-2 = 8px)
-        const formOuterPad = isMobileNow ? 20 : 0; // container px-4 => 16px, let's use 20px for safety
+        spanRef.current.style.fontSize = fontSize;
 
-        let measured = spanRef.current.offsetWidth + pxPad * 2;
-        // On mobile, cap so two fit side-by-side
-        let max = isMobileNow
-          ? Math.max(
-              Math.floor((window.innerWidth - formOuterPad * 2 - 8) / 2), // 8px grid gap for gap-2
-              70 // never get smaller than this, but allow long Bangla placeholder!
-            )
-          : 600;
+        // Use minimal padding for mobile (0.6rem), standard for desktop, extra for wide scripts
+        const pxPad = isMobileNow
+          ? (lang === 'bn' ? 11 : 9.6)
+          : (lang === 'bn' ? 18 : 16);
+
+        const min = isMobileNow ? 48 : 54;
+
+        // Calculate available grid width for start/end date
+        // Subtract 40px for padding, 8px for gap, divide by 2 for side-by-side
+        let max = 600;
+        if (isMobileNow && (props.type === "date" || props.id === "bcsSession")) {
+          max = Math.max(
+            Math.floor((window.innerWidth - 40 - 8) / 2), // 40px = px-4*2, 8px = gap-2
+            70
+          );
+        }
+
+        let measured = Math.ceil(spanRef.current.offsetWidth + pxPad * 2);
         setInputWidth(Math.max(min, Math.min(measured, max)));
       }
-    }, [props.placeholder, props.value, autoSize, relevantType]);
+    }, [props.placeholder, props.value, autoSize, relevantType, lang, autowidthForce]);
 
     return (
       <div
         className={styles.liquidGlassInputContainer}
         style={{
-          width: autoSize && relevantType && inputWidth ? inputWidth : undefined,
-          minWidth: autoSize && relevantType ? (isMobile() ? 48 : 54) : undefined,
+          width: ((autoSize && relevantType) || autowidthForce) && inputWidth ? inputWidth : undefined,
+          minWidth: ((autoSize && relevantType) || autowidthForce) ? (isMobile() ? 48 : 54) : undefined,
           ...style,
         }}
       >
@@ -68,11 +89,11 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
           ref={ref}
           className={`${styles.liquidGlassInput} ${className} ${error ? "border-red-500" : ""}`}
           style={{
-            width: autoSize && relevantType && inputWidth ? inputWidth : style?.width,
-            minWidth: autoSize && relevantType ? (isMobile() ? 48 : 54) : undefined,
+            width: ((autoSize && relevantType) || autowidthForce) && inputWidth ? inputWidth : style?.width,
+            minWidth: ((autoSize && relevantType) || autowidthForce) ? (isMobile() ? 48 : 54) : undefined,
             transition: "width 0.27s cubic-bezier(.61,.14,.55,.5)",
-            fontSize: isMobile() ? "0.95rem" : "1rem",
-            padding: isMobile() ? "0 0.6rem" : "0 1rem",
+            fontSize: isMobile() ? (lang === 'bn' ? "1rem" : "0.95rem") : "1rem",
+            padding: isMobile() ? (lang === 'bn' ? "0 0.7rem" : "0 0.6rem") : (lang === 'bn' ? "0 1.1rem" : "0 1rem"),
             ...style,
           }}
           {...props}
@@ -86,12 +107,12 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
             top: "-200%",
             left: 0,
             fontWeight: 500,
-            fontSize: isMobile() ? "0.95rem" : "1rem",
+            fontSize: isMobile() ? (lang === 'bn' ? "1rem" : "0.95rem") : "1rem",
             letterSpacing: "inherit",
             whiteSpace: "pre",
             visibility: "hidden",
             pointerEvents: "none",
-            padding: isMobile() ? "0 0.6rem" : "0 1rem",
+            padding: isMobile() ? (lang === 'bn' ? "0 0.7rem" : "0 0.6rem") : (lang === 'bn' ? "0 1.1rem" : "0 1rem"),
             fontFamily: "inherit",
           }}
           aria-hidden
@@ -106,4 +127,3 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
 
 LiquidGlassInput.displayName = "LiquidGlassInput";
 export default LiquidGlassInput;
-
