@@ -26,7 +26,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
   const sectionBg =
     "rounded-xl px-5 py-6 mb-4 bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-900 ";
 
-  // On change for professionType: reset BCS-specific fields if changing away from "government"
   const handleProfessionTypeChange = (val: string) => {
     if (val !== 'government') {
       updateData({ professionType: val, isBCS: false, bcsSession: '' });
@@ -35,7 +34,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     }
   };
 
-  // On toggle "isBCS": clear bcsSession if turning off
   const handleBCSCheckboxChange = (checked: boolean) => {
     if (!checked) {
       updateData({ isBCS: false, bcsSession: '' });
@@ -44,7 +42,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     }
   };
 
-  // Handle bcsSession change
   const handleBCSSessionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateData({ bcsSession: e.target.value });
   };
@@ -65,7 +62,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-6 ${sectionBg}`}>
-      {/* Main title at top */}
       <div className="w-full flex justify-center mb-5">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-cyan-200 drop-shadow-md tracking-tight">
           {t('register.step4.title') || 'Professional Information'}
@@ -169,3 +165,4 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 };
 
 export default ProfessionalStep;
+
