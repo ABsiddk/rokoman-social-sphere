@@ -8,7 +8,6 @@ import AddressStepContainer from './steps/AddressStepContainer';
 export interface RegistrationData {
   // Step 1
   phone: string;
-  countryCode: string;
   password: string;
   confirmPassword: string;
   
@@ -75,7 +74,6 @@ const RegistrationForm = () => {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [registrationData, setRegistrationData] = useState<RegistrationData>({
     phone: '',
-    countryCode: '+88',
     password: '',
     confirmPassword: '',
     fullName: '',

@@ -1,13 +1,12 @@
 
 import React, { useState } from 'react';
-import { Button } from '../ui/button';
+// import { Button } from '../ui/button';
+import LiquidGlassButton from '../ui/LiquidGlassButton';
 import { Label } from '../ui/label';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
 import OTPVerification from './OTPVerification';
-import CountryCodeSelect from './phone-password/CountryCodeSelect';
 import PhoneInput from './phone-password/PhoneInput';
-import { countryOptions } from './phone-password/countryOptions';
 import { validatePhone } from './phone-password/validationUtils';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,7 +30,7 @@ const PhonePasswordStep = ({ data, updateData }: PhonePasswordStepProps) => {
 
   const handleSendOTP = () => {
     const newErrors: Record<string, string> = {};
-    const phoneError = validatePhone(data.phone, data.countryCode, t);
+    const phoneError = validatePhone(data.phone, t);
     if (phoneError) newErrors.phone = phoneError;
 
     if (Object.keys(newErrors).length > 0) {
@@ -48,9 +47,10 @@ const PhonePasswordStep = ({ data, updateData }: PhonePasswordStepProps) => {
   };
 
   if (showOTP) {
+    // Bangladesh only, so phoneNumber is always "+88 phone"
     return (
       <OTPVerification
-        phoneNumber={`${data.countryCode} ${data.phone}`}
+        phoneNumber={`+88 ${data.phone}`}
         onVerified={handleOTPVerified}
         onBack={() => setShowOTP(false)}
       />
@@ -66,34 +66,32 @@ const PhonePasswordStep = ({ data, updateData }: PhonePasswordStepProps) => {
       </div>
 
       <div className="space-y-6">
-        {/* Country Code and Phone Number */}
+        {/* Phone Number only */}
         <div className="space-y-3">
           <Label htmlFor="phone" className="text-gray-700 dark:text-gray-300 font-medium text-sm">
             {t('register.step1.phone')} <span className="text-red-500">*</span>
           </Label>
-          <div className="flex gap-2 w-full">
-            <CountryCodeSelect
-              value={data.countryCode}
-              onChange={(value) => updateData({ countryCode: value })}
-              countries={countryOptions}
-            />
+          <div className="w-full">
             <PhoneInput
               value={data.phone}
               onChange={handlePhoneChange}
-              countryCode={data.countryCode}
               error={errors.phone}
             />
           </div>
           {errors.phone && <p className="text-red-500 text-sm font-medium mt-2">{errors.phone}</p>}
         </div>
 
-        <Button
-          onClick={handleSendOTP}
-          className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 dark:from-green-600 dark:to-green-700 dark:hover:from-green-700 dark:hover:to-green-800 text-white font-semibold py-3 h-12 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
-          size="lg"
-        >
-          {t('register.step1.send_otp')}
-        </Button>
+        {/* Centered, animated silky glass button */}
+        <div className="flex justify-center w-full">
+          <LiquidGlassButton
+            onClick={handleSendOTP}
+            className="w-full sm:w-auto font-semibold py-3 h-12 px-6 text-white dark:text-cyan-100 text-base" // eye-comfort/contrast color!
+            disabled={data.phone.length === 0}
+            type="button"
+            >
+            {t('register.step1.send_otp')}
+          </LiquidGlassButton>
+        </div>
       </div>
     </div>
   );

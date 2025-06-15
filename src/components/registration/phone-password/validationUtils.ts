@@ -1,12 +1,11 @@
 
-export const validatePhone = (phone: string, countryCode: string, t: (key: string) => string) => {
-  if (countryCode === '+88') {
-    if (!phone.startsWith('01')) {
-      return t('registration.phone.error.bangladesh');
-    }
-    if (phone.length !== 11) {
-      return t('registration.phone.error.length');
-    }
+export const validatePhone = (phone: string, t: (key: string) => string) => {
+  // Bangladesh ONLY: must start with 01, 11 digits, all numbers.
+  if (!phone.startsWith('01')) {
+    return t('registration.phone.error.bangladesh');
+  }
+  if (phone.length !== 11) {
+    return t('registration.phone.error.length');
   }
   if (!/^\d+$/.test(phone)) {
     return t('registration.phone.error.numbers');
