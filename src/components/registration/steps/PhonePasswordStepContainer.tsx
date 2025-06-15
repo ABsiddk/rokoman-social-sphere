@@ -6,7 +6,6 @@ import { RegistrationData } from '../RegistrationForm';
 interface StepProps {
   data: RegistrationData;
   updateData: (data: Partial<RegistrationData>) => void;
-  onComplete: () => void;
 }
 const PhonePasswordStepContainer = (props: StepProps) => <PhonePasswordStep {...props} />;
 

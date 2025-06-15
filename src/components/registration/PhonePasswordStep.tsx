@@ -9,17 +9,18 @@ import CountryCodeSelect from './phone-password/CountryCodeSelect';
 import PhoneInput from './phone-password/PhoneInput';
 import { countryOptions } from './phone-password/countryOptions';
 import { validatePhone } from './phone-password/validationUtils';
+import { useNavigate } from 'react-router-dom';
 
 interface PhonePasswordStepProps {
   data: RegistrationData;
   updateData: (data: Partial<RegistrationData>) => void;
-  onComplete: () => void;
 }
 
-const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepProps) => {
+const PhonePasswordStep = ({ data, updateData }: PhonePasswordStepProps) => {
   const { t } = useLanguage();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [showOTP, setShowOTP] = useState(false);
+  const navigate = useNavigate();
 
   const handlePhoneChange = (value: string) => {
     updateData({ phone: value });
@@ -41,11 +42,16 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
     setShowOTP(true);
   };
 
+  const handleOTPVerified = () => {
+    // Navigate to register2 page after OTP verification
+    navigate('/register2');
+  };
+
   if (showOTP) {
     return (
       <OTPVerification
         phoneNumber={`${data.countryCode} ${data.phone}`}
-        onVerified={onComplete}
+        onVerified={handleOTPVerified}
         onBack={() => setShowOTP(false)}
       />
     );

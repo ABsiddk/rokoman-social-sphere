@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import StepIndicator from './StepIndicator';
 import PhonePasswordStepContainer from './steps/PhonePasswordStepContainer';
 import PersonalInfoStepContainer from './steps/PersonalInfoStepContainer';
 import AddressStepContainer from './steps/AddressStepContainer';
-// No longer import ProfessionalStepContainer
 
 export interface RegistrationData {
   // Step 1
@@ -137,7 +135,7 @@ const RegistrationForm = () => {
           <PhonePasswordStepContainer
             data={registrationData}
             updateData={updateRegistrationData}
-            onComplete={() => completeStep(1)}
+            // Remove onComplete for this step, handled by navigate in PhonePasswordStep
           />
         );
       case 2:
@@ -196,4 +194,3 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
-
