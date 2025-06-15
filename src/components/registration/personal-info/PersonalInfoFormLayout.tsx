@@ -1,10 +1,11 @@
+
 import React from 'react';
 import BasicInfoSection from './BasicInfoSection';
 import NicknameSection from './NicknameSection';
 import PersonalDetailsSection from './PersonalDetailsSection';
 import EmailSection from './EmailSection';
 import AdditionalPhonesSection from './AdditionalPhonesSection';
-import LiquidGlassButton from '../../ui/LiquidGlassButton';
+import LiquidGlassSiennaButton from '../../ui/LiquidGlassSiennaButton';
 import { useLanguage } from '../../../contexts/LanguageContext';
 
 const labelColor = 'text-[rgb(145,153,165)]';
@@ -36,13 +37,21 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
   const { t } = useLanguage();
 
   return (
-    <div className="space-y-6 relative z-10 animate-fade-in">
+    <form
+      className="space-y-6 relative z-10 animate-fade-in"
+      onSubmit={e => {
+        e.preventDefault();
+        onSubmit();
+      }}
+      autoComplete="off"
+    >
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 drop-shadow-lg animate-fade-in">
           {t('register.step2.title')}
         </h2>
       </div>
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+        {/* Full Name */}
         <BasicInfoSection
           fullName={data.fullName}
           fullNameError={errors.fullName}
@@ -51,8 +60,66 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           inputBgColor={inputBgColor}
           t={t}
         />
+        {/* Nickname */}
+        <NicknameSection
+          nickNames={data.nickNames}
+          onUpdate={nicks => updateData({ nickNames: nicks })}
+          labelColor={labelColor}
+          inputBgColor={inputBgColor}
+          t={t}
+        />
       </div>
-    </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+        {/* Date of Birth, Gender, Religion, Marital Status */}
+        <PersonalDetailsSection
+          dateOfBirth={data.dateOfBirth}
+          onDateOfBirthChange={val => updateData({ dateOfBirth: val })}
+          gender={data.gender}
+          onGenderChange={val => updateData({ gender: val })}
+          religion={data.religion}
+          onReligionChange={val => updateData({ religion: val })}
+          maritalStatus={data.maritalStatus}
+          onMaritalStatusChange={val => updateData({ maritalStatus: val })}
+          labelColor={labelColor}
+          inputBgColor={inputBgColor}
+          t={t}
+        />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+        {/* Email Section */}
+        <EmailSection
+          personalEmail={data.personalEmail}
+          personalEmailError={errors.personalEmail}
+          onPersonalEmailChange={val => updateData({ personalEmail: val })}
+          officialEmail={data.officialEmail}
+          officialEmailError={errors.officialEmail}
+          onOfficialEmailChange={val => updateData({ officialEmail: val })}
+          labelColor={labelColor}
+          inputBgColor={inputBgColor}
+          t={t}
+        />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+        {/* Additional Phones */}
+        <AdditionalPhonesSection
+          additionalPhones={data.additionalPhones}
+          onUpdate={phones => updateData({ additionalPhones: phones })}
+          labelColor={labelColor}
+          inputBgColor={inputBgColor}
+          t={t}
+        />
+      </div>
+      {/* Save and Continue button at the bottom */}
+      <div className="flex justify-end mt-8">
+        <LiquidGlassSiennaButton
+          type="submit"
+          className="bg-emerald-600/80 hover:bg-emerald-700/90 active:bg-emerald-900 text-white font-bold text-lg px-8 py-3 min-w-[160px] rounded-xl animate-fade-in"
+          style={{ boxShadow: '0 6px 24px 0 rgba(40, 180, 99, 0.19), 0 1.5px 6px 0 rgba(52, 168, 83,0.23)' }}
+        >
+          {t('register.step2.save_and_continue')}
+        </LiquidGlassSiennaButton>
+      </div>
+    </form>
   );
 };
 
