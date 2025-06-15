@@ -6,12 +6,7 @@
   margin-top: 0.5rem;
   margin-bottom: 2rem;
 }
-@media (min-width: 768px) {
-  .capsuleRow {
-    justify-content: flex-start;
-    /* Left align children on desktop (md+) */
-  }
-}
+
 .capsuleButton {
   position: relative;
   display: inline-flex;
