@@ -1,0 +1,84 @@
+
+.liquidGlassInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  max-width: 330px;
+}
+.liquidGlassInput {
+  width: 100%;
+  min-width: 0;
+  max-width: 330px;
+  height: 44px;
+  border-radius: 15px;
+  padding: 0 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #0a3154;
+  background: linear-gradient(114deg, rgba(255,255,255,0.53) 0%, rgba(5,117,170,0.67) 94%);
+  border: 2.3px solid rgba(5,117,170,0.21);
+  box-shadow: 0 2.5px 16px 0 rgba(20,205,240,0.14);
+  outline: none;
+  transition: 
+    box-shadow .21s cubic-bezier(.61,.14,.55,.5), 
+    border-color .18s cubic-bezier(.42,0,.58,1), 
+    background .18s;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(9px) saturate(150%);
+}
+.liquidGlassInput:focus {
+  border-color: #19eecd;
+  box-shadow: 0 0 14px 0 #21ffe9, 0 1.8px 6.5px 0 #51fde2aa;
+  background: linear-gradient(96deg, rgba(19,215,249,0.73) 10%, rgba(54,254,206,.59) 92%);
+}
+.liquidGlassInput::-webkit-input-placeholder {
+  color: #5f7685;
+}
+.liquidGlassInput::placeholder {
+  color: #5f7685;
+}
+.liquidGlassInput[disabled] {
+  opacity: 0.67;
+  cursor: not-allowed;
+}
+
+.liquidGlassShine {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+@keyframes glassShine {
+  0% { left: -80%; opacity: .7;}
+  50% { left: 110%; opacity: 1;}
+  100% { left: 110%; opacity: 0.15;}
+}
+.liquidGlassShine::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -80%;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(91deg,rgba(255,255,255,0.55) 0%,rgba(102,255,226,0.22) 100%);
+  filter: blur(8px);
+  opacity: 0.22;
+  animation: glassShine 2.7s infinite linear;
+  border-radius: 15px;
+}
+@media (max-width: 425px) {
+  .liquidGlassInputContainer, .liquidGlassInput {
+    max-width: 99vw;
+    font-size: 0.97rem;
+    height: 39px;
+    padding: 0 0.6rem;
+  }
+}
+

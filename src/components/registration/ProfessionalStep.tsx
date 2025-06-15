@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -8,6 +7,7 @@ import { RegistrationData } from './RegistrationForm';
 import { useProfessionalValidation } from './professional/ProfessionalValidation';
 import LiquidGlassSiennaButton from '../ui/LiquidGlassSiennaButton';
 import ProfessionTypeSelector from './professional/ProfessionTypeSelector';
+import LiquidGlassInput from '../ui/LiquidGlassInput';
 
 interface ProfessionalStepProps {
   data: RegistrationData;
@@ -22,9 +22,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
   const [submitting, setSubmitting] = useState(false);
 
   const labelColor = "text-[rgb(77,89,119)] dark:text-[rgb(155,174,205)]";
-  const inputBgColor = "bg-[rgb(252,252,253)] dark:bg-[rgb(33,37,44)] text-black dark:text-white border border-gray-300 dark:border-[#2e3749] focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-gray-400 dark:placeholder:text-gray-400";
-  const sectionBg =
-    "rounded-xl px-5 py-6 mb-4 bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-900 ";
+  const sectionBg = "rounded-xl px-5 py-6 mb-4 bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-900 ";
 
   const handleProfessionTypeChange = (val: string) => {
     if (val !== 'government') {
@@ -64,15 +62,15 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     <form onSubmit={handleSubmit} className={`space-y-6 ${sectionBg}`}>
       <div className="w-full flex justify-center mb-5">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-cyan-200 drop-shadow-md tracking-tight">
-          {t('register.step4.title') || 'Professional Information'}
+          {t('register.step4.title')}
         </h1>
       </div>
-      {/* Profession type selection section */}
+
       <ProfessionTypeSelector
         value={data.professionType}
         onChange={handleProfessionTypeChange}
       />
-      {/* BCS section - only visible if Government is selected */}
+
       {data.professionType === 'government' && (
         <div className="w-full flex flex-col items-start animate-fade-in mb-4">
           <div className="flex items-center space-x-2 py-2">
@@ -82,64 +80,60 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
               onCheckedChange={checked => handleBCSCheckboxChange(!!checked)}
             />
             <Label htmlFor="isBCS" className={`${labelColor} text-base font-semibold`}>
-              {t('register.step4.is_bcs') || 'Is this BCS?'}
+              {t('register.step4.is_bcs')}
             </Label>
           </div>
-          {/* Show BCS session input only if checkbox is checked */}
           {data.isBCS && (
-            <div className="w-full flex flex-col space-y-1 pl-6 py-1 animate-fade-in">
-              <Label htmlFor="bcsSession" className={`${labelColor} text-sm`}>
-                {t('register.step4.bcs_session') || 'How many BCS?'}
+            <div className="pl-6 py-1 animate-fade-in">
+              <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
+                {t('register.step4.bcs_session')}
               </Label>
-              <Input
+              <LiquidGlassInput
                 id="bcsSession"
                 value={data.bcsSession || ''}
                 onChange={handleBCSSessionChange}
-                className={inputBgColor + (errors.bcsSession ? ' border-red-500' : '')}
-                placeholder={t('register.step4.bcs_session.placeholder') || 'Enter your BCS session'}
+                error={errors.bcsSession}
+                placeholder={t('register.step4.bcs_session.placeholder')}
                 autoComplete="off"
+                maxLength={32}
               />
-              {errors.bcsSession && (
-                <span className="text-sm text-red-600">{errors.bcsSession}</span>
-              )}
             </div>
           )}
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-        {/* Removed the "Profession"/Occupation dropdown */}
-        {/* Business fields no longer depend on occupation */}
-
-        <div>
+        <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.start_date')}</Label>
-          <Input
+          <LiquidGlassInput
             type="date"
-            className={inputBgColor}
             value={data.startDate}
-            onChange={(e) => updateData({ startDate: e.target.value })}
+            onChange={e => updateData({ startDate: e.target.value })}
             placeholder={t('register.step4.start_date.placeholder')}
+            className="mt-0.5"
+            maxLength={24}
+            style={{minWidth:0}}
           />
         </div>
-
-        <div>
+        <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.end_date')}</Label>
-          <Input
+          <LiquidGlassInput
             type="date"
-            className={inputBgColor}
             value={data.endDate}
-            onChange={(e) => updateData({ endDate: e.target.value })}
-            disabled={data.currentlyWorking}
+            onChange={e => updateData({ endDate: e.target.value })}
             placeholder={t('register.step4.end_date.placeholder')}
+            className="mt-0.5"
+            disabled={data.currentlyWorking}
+            maxLength={24}
+            style={{minWidth:0}}
           />
         </div>
-
         <div className="md:col-span-2">
           <div className="flex items-center space-x-2">
             <Checkbox
               id="currentlyWorking"
               checked={data.currentlyWorking}
-              onCheckedChange={(checked) => updateData({ currentlyWorking: !!checked })}
+              onCheckedChange={checked => updateData({ currentlyWorking: !!checked })}
             />
             <Label htmlFor="currentlyWorking" className={labelColor}>
               {t('register.step4.currently_working')}
@@ -148,7 +142,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
       </div>
 
-      {/* Confirmation Button */}
       <div className="w-full flex justify-center mt-6">
         <LiquidGlassSiennaButton
           type="submit"
@@ -156,8 +149,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
           className="w-full md:w-auto !bg-[linear-gradient(96deg,rgba(5,117,170,0.88)14%,rgba(42,210,172,0.93)71%)] text-white shadow-lg py-3 px-12 font-bold"
         >
           {submitting
-            ? t('register.step4.completing') || t('register.step2.completing') || 'Submitting...'
-            : t('register.step4.complete_registration') || 'Complete Registration'}
+            ? t('register.step4.completing') || 'Submitting...'
+            : t('register.step4.complete_registration')}
         </LiquidGlassSiennaButton>
       </div>
     </form>
@@ -165,4 +158,3 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 };
 
 export default ProfessionalStep;
-
