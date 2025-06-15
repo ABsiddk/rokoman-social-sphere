@@ -47,18 +47,6 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           fullName={data.fullName}
           fullNameError={errors.fullName}
           onFullNameChange={(val) => updateData({ fullName: val })}
-          nickname1={data.nickNames?.[0] || ''}
-          onNickname1Change={(val) => {
-            const next = [...(data.nickNames ?? ['', '', '', '', ''])];
-            next[0] = val;
-            updateData({ nickNames: next });
-          }}
-          nickname2={data.nickNames?.[1] || ''}
-          onNickname2Change={(val) => {
-            const next = [...(data.nickNames ?? ['', '', '', '', ''])];
-            next[1] = val;
-            updateData({ nickNames: next });
-          }}
           labelColor={labelColor}
           inputBgColor={inputBgColor}
           t={t}
