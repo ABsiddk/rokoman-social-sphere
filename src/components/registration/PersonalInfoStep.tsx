@@ -12,7 +12,7 @@ interface PersonalInfoStepProps {
 }
 
 const NICKNAME_FIELDS = 5;
-const ADDITIONAL_PHONE_FIELDS = 3;
+const ADDITIONAL_PHONE_FIELDS = 1; // Changed from 3 to 1
 
 const PersonalInfoStep = ({ data, updateData, onComplete }: PersonalInfoStepProps) => {
   const { t, language } = useLanguage();

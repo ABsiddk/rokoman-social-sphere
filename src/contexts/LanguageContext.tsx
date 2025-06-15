@@ -175,11 +175,8 @@ const translations = {
     'register.step2.marital.widowed': 'Widowed',
     'register.step2.personal_email': 'Personal Email',
     'register.step2.personal_email_placeholder': 'your.email@example.com',
-    'register.step2.official_email': 'Official Email',
-    'register.step2.official_email_placeholder': 'work.email@company.com',
     'register.step2.additional_phone': 'Additional Phone Number',
     'register.step2.additional_phone_placeholder': 'Alternative phone number',
-    'register.step2.add_phone': '+ Add Additional Phone',
     'register.step2.save_continue': 'Save and Continue',
     
     // Step 3 - Address
@@ -424,11 +421,8 @@ const translations = {
     'register.step2.marital.widowed': 'বিধবা/বিপত্নীক',
     'register.step2.personal_email': 'ব্যক্তিগত ইমেইল',
     'register.step2.personal_email_placeholder': 'your.email@example.com',
-    'register.step2.official_email': 'অফিসিয়াল ইমেইল',
-    'register.step2.official_email_placeholder': 'work.email@company.com',
     'register.step2.additional_phone': 'অতিরিক্ত ফোন নম্বর',
     'register.step2.additional_phone_placeholder': 'বিকল্প ফোন নম্বর',
-    'register.step2.add_phone': '+ অতিরিক্ত ফোন যোগ করুন',
     'register.step2.save_continue': 'সংরক্ষণ করুন এবং চালিয়ে যান',
     
     // Step 3 - Address

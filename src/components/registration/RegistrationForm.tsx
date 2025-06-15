@@ -20,7 +20,6 @@ export interface RegistrationData {
   religion: string;
   maritalStatus: string;
   personalEmail: string;
-  officialEmail: string;
   additionalPhones: string[];
   
   // Step 3
@@ -79,7 +78,6 @@ const RegistrationForm = () => {
     religion: '',
     maritalStatus: '',
     personalEmail: '',
-    officialEmail: '',
     additionalPhones: [],
     presentAddress: {
       nationality: 'Bangladesh',

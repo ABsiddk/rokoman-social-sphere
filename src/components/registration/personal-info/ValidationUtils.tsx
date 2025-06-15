@@ -16,9 +16,7 @@ export const usePersonalInfoValidation = () => {
       newErrors.personalEmail = t('register.step2.errors.email.invalid');
     }
 
-    if (data.officialEmail && !/\S+@\S+\.\S+/.test(data.officialEmail)) {
-      newErrors.officialEmail = t('register.step2.errors.email.invalid');
-    }
+    // officialEmail validation removed
 
     return newErrors;
   };

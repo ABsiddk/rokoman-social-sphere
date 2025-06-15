@@ -18,29 +18,24 @@ const AdditionalPhonesSection = ({
   inputBgColor = 'bg-[rgb(55,65,81)] text-white border-none focus:ring-2 focus:ring-primary',
   t,
 }: AdditionalPhonesSectionProps) => {
-  const updateAdditionalPhone = (idx: number, value: string) => {
-    const updated = [...additionalPhones];
-    updated[idx] = value;
-    onUpdate(updated);
+  // Only one additional phone field allowed
+  const updateAdditionalPhone = (value: string) => {
+    onUpdate([value]);
   };
 
   return (
-    <>
-      {[...Array(3)].map((_, i) => (
-        <div key={i}>
-          <Label htmlFor={`addPhone${i + 1}`} className={labelColor}>
-            {t('register.step2.additional_phone')} {i + 1}
-          </Label>
-          <Input
-            id={`addPhone${i + 1}`}
-            value={additionalPhones?.[i] || ''}
-            onChange={(e) => updateAdditionalPhone(i, e.target.value)}
-            placeholder={t('register.step2.additional_phone_placeholder')}
-            className={`${inputBgColor} placeholder-white dark:placeholder-white`}
-          />
-        </div>
-      ))}
-    </>
+    <div>
+      <Label htmlFor="addPhone1" className={labelColor}>
+        {t('register.step2.additional_phone')}
+      </Label>
+      <Input
+        id="addPhone1"
+        value={additionalPhones?.[0] || ''}
+        onChange={(e) => updateAdditionalPhone(e.target.value)}
+        placeholder={t('register.step2.additional_phone_placeholder')}
+        className={`${inputBgColor} placeholder-white dark:placeholder-white`}
+      />
+    </div>
   );
 };
 

@@ -20,7 +20,6 @@ interface PersonalInfoFormLayoutProps {
     religion: string;
     maritalStatus: string;
     personalEmail: string;
-    officialEmail: string;
     additionalPhones: string[];
   };
   errors: Record<string, string>;
@@ -86,21 +85,18 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-        {/* Email Section */}
+        {/* Email Section - only personal email */}
         <EmailSection
           personalEmail={data.personalEmail}
           personalEmailError={errors.personalEmail}
           onPersonalEmailChange={val => updateData({ personalEmail: val })}
-          officialEmail={data.officialEmail}
-          officialEmailError={errors.officialEmail}
-          onOfficialEmailChange={val => updateData({ officialEmail: val })}
           labelColor={labelColor}
           inputBgColor={inputBgColor}
           t={t}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-        {/* Additional Phones */}
+        {/* Additional Phones - only 1 field */}
         <AdditionalPhonesSection
           additionalPhones={data.additionalPhones}
           onUpdate={phones => updateData({ additionalPhones: phones })}
@@ -116,7 +112,7 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
           className="bg-emerald-600/80 hover:bg-emerald-700/90 active:bg-emerald-900 text-white font-bold text-lg px-8 py-3 min-w-[160px] rounded-xl animate-fade-in"
           style={{ boxShadow: '0 6px 24px 0 rgba(40, 180, 99, 0.19), 0 1.5px 6px 0 rgba(52, 168, 83,0.23)' }}
         >
-          {t('register.step2.save_and_continue')}
+          {t('register.step2.save_continue')}
         </LiquidGlassSiennaButton>
       </div>
     </form>
