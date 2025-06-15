@@ -38,7 +38,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
         value={fullName}
         onChange={(e) => onFullNameChange(e.target.value)}
         placeholder={t('register.step2.full_name_placeholder')}
-        className={`${inputBgColor} ${fullNameError ? 'border-red-500' : ''}`}
+        className={`${inputBgColor} placeholder-white ${fullNameError ? 'border-red-500' : ''}`}
         autoComplete="off"
       />
       {fullNameError && (
