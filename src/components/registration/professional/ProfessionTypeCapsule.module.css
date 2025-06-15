@@ -1,4 +1,3 @@
-
 .capsuleRow {
   display: flex;
   gap: 1.5rem;
@@ -20,7 +19,7 @@
   font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: var(--capsule-fg-light, #143248);
+  color: #222A32; /* improved for light background */
   background: linear-gradient(112deg, rgba(255,255,255,.53) 0%, rgba(5,117,170,0.97) 31%, rgba(26,236,200,0.96) 100%);
   box-shadow: 0 9px 44px 0 rgba(27,60,112,0.22), 0 2.5px 6.5px 0 rgba(39,113,150,0.14);
   backdrop-filter: blur(12px) saturate(165%);
@@ -31,11 +30,11 @@
     box-shadow .29s cubic-bezier(.61, .14, .55, .5), 
     border-color .18s cubic-bezier(.42,0,.58,1), 
     background .18s,
-    filter .19s cubic-bezier(.4,0,.2,1);
+    filter .19s cubic-bezier(.4,0,.2,1),
+    color .19s;
   cursor: pointer;
   overflow: hidden;
   z-index: 1;
-  /* New: "super liquid responsiveness" */
   will-change: background, border-color, box-shadow, filter;
 }
 
@@ -86,17 +85,16 @@
 .capsuleButton:active {
   /* Super bright, glassy, saturated look */
   border-color: #27fcd0;
-  box-shadow: 0 16px 62px 10px rgba(32,250,189,0.38), 0 5px 18px 0 rgba(15,224,185,0.25);
-  background: linear-gradient(91deg, rgba(19,215,249,0.99) 1%, rgba(54,254,206,.99) 88%);
+  box-shadow: 0 24px 78px 14px rgba(32,250,189,0.53), 0 12px 44px 0 rgba(15,224,185,0.35); /* bigger, brighter */
+  background: linear-gradient(91deg, rgba(19,215,249,0.99) 10%, rgba(54,254,206,.99) 92%);
   color: #fff;
-  filter: brightness(4) saturate(2.3) drop-shadow(0 0 10px #78ffe9);
-  /* 4x the brightness of previous styling! */
+  filter: brightness(4.2) saturate(2.2) drop-shadow(0 0 12px #78ffe9);
 }
 
 .capsuleButton.selected .shine,
 .capsuleButton:active .shine {
   opacity: 1;
-  filter: blur(6px) brightness(1.61) saturate(1.95);
+  filter: blur(6px) brightness(1.95) saturate(2.5);
 }
 
 .capsuleButton:focus {
@@ -114,6 +112,7 @@
 
 @media (prefers-color-scheme: dark) {
   .capsuleButton {
+    color: #F4FAFB; /* Use light text in dark mode */
     background: linear-gradient(114deg, rgba(26,41,58,0.44) 0%, rgba(20,45,82,0.93) 40%, rgba(41,195,202,0.59) 90%);
     color: var(--capsule-fg-dark, #F4FAFB);
     border-color: rgba(35,238,215,.27);
@@ -149,9 +148,10 @@
     gap: .7rem;
   }
   .capsuleButton {
-    min-width: 90px;
+    min-width: 90vw;
+    width: 100vw;
     font-size: .96rem;
-    padding: 0 18px;
+    padding: 0 2vw;
     height: 41px;
   }
 }

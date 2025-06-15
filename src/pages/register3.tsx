@@ -86,7 +86,7 @@ const Registerelement3 = () => {
   };
 
   return (
-    <div className={`min-h-screen ${glassBgGradient} transition-colors duration-300 relative overflow-hidden`}>
+    <div className={`min-h-screen w-full h-full ${glassBgGradient} transition-colors duration-300 relative overflow-hidden`}>
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Animated blurry shapes for aesthetic consistency */}
         <div className="absolute top-[8%] right-[4%] w-40 h-40 bg-teal-200/40 rounded-full blur-3xl opacity-60 animate-fade-in" />
@@ -94,10 +94,10 @@ const Registerelement3 = () => {
         <div className="absolute bottom-[12%] right-[20%] w-36 h-36 bg-blue-300/60 rounded-full blur-2xl opacity-20 animate-fade-in" />
       </div>
       <Header />
-      <main className="container mx-auto px-4 py-8 flex items-center justify-center min-h-[90vh]">
-        <div className="max-w-6xl w-full mx-auto relative z-10 animate-fade-in transition-all duration-300" style={{marginLeft: 'auto', marginRight: 'auto'}}>
-          {/* Glass style container for symmetry */}
-          <div className="rounded-2xl shadow-xl px-6 py-8 sm:p-10 bg-white/80 dark:bg-opacity-60 dark:bg-gray-900 backdrop-blur-md border border-gray-200 dark:border-[#1B2936] transition-all duration-300 animate-scale-in">
+      <main className="w-full h-full flex items-center justify-center min-h-[100vh] p-0 m-0">
+        <div className="w-full h-full mx-0 relative z-10 animate-fade-in transition-all duration-300">
+          {/* Removed max-w-6xl and removed padding/borders for full width */}
+          <div className="w-full h-full rounded-none shadow-none px-0 py-0 bg-white/80 dark:bg-opacity-60 dark:bg-gray-900 backdrop-blur-md border-0 transition-all duration-300 animate-scale-in">
             <ProfessionalStepContainer
               data={registrationData}
               updateData={updateRegistrationData}

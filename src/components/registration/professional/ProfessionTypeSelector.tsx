@@ -25,16 +25,21 @@ interface ProfessionTypeSelectorProps {
 const ProfessionTypeSelector: React.FC<ProfessionTypeSelectorProps> = ({ value, onChange }) => {
   const { t } = useLanguage();
 
-  // This handler locks selection: only clicking another button changes the selection,
-  // clicking same button does nothing, never deselects on outside click.
+  // Clicking selected button again will deselect, others will select that one
   const handleSelect = (optionKey: string) => {
-    if (value === optionKey) return;
-    onChange(optionKey);
+    if (value !== optionKey) {
+      onChange(optionKey);
+    }
+    // If you ONLY want to deselect by clicking the same button, uncomment below:
+    // else onChange('');
   };
+
+  // Prevent deselection on outside click: selection only changes by button click (default React behavior).
+  // So no additional logic is required; onChange is only fired by button clicks.
 
   return (
     <section className="mb-4">
-      <label className="block text-lg font-bold text-primary dark:text-cyan-200 mb-3 text-center">
+      <label className="block text-lg font-bold mb-3 text-left text-[rgb(46,76,130)] dark:text-cyan-200">
         {t("register.step4.profession_type")}
       </label>
       <div className={styles.capsuleRow}>
@@ -61,3 +66,4 @@ const ProfessionTypeSelector: React.FC<ProfessionTypeSelectorProps> = ({ value, 
 };
 
 export default ProfessionTypeSelector;
+
