@@ -84,7 +84,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             </Label>
           </div>
           {data.isBCS && (
-            <div className="pl-6 py-1 animate-fade-in">
+            <div className="pl-6 py-1 animate-fade-in flex-1 min-w-0" /* ensures width inheritance */>
               <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
                 {t('register.step4.bcs_session')}
               </Label>
@@ -96,13 +96,17 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
                 placeholder={t('register.step4.bcs_session.placeholder')}
                 autoComplete="off"
                 maxLength={32}
+                // Standardize input and date box sizing, full width matching below date boxes
+                className="mt-0.5 w-full md:max-w-[330px]"
+                style={{ minWidth: 0 }}
               />
             </div>
           )}
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+      {/* On all screen sizes, make date boxes side by side and equal widths */}
+      <div className="grid grid-cols-2 gap-4 md:gap-7">
         <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.start_date')}</Label>
           <LiquidGlassInput
@@ -110,7 +114,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             value={data.startDate}
             onChange={e => updateData({ startDate: e.target.value })}
             placeholder={t('register.step4.start_date.placeholder')}
-            className="mt-0.5"
+            className="mt-0.5 w-full md:max-w-[330px]"
             maxLength={24}
             style={{minWidth:0}}
           />
@@ -122,13 +126,13 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             value={data.endDate}
             onChange={e => updateData({ endDate: e.target.value })}
             placeholder={t('register.step4.end_date.placeholder')}
-            className="mt-0.5"
+            className="mt-0.5 w-full md:max-w-[330px]"
             disabled={data.currentlyWorking}
             maxLength={24}
             style={{minWidth:0}}
           />
         </div>
-        <div className="md:col-span-2">
+        <div className="col-span-2">
           <div className="flex items-center space-x-2">
             <Checkbox
               id="currentlyWorking"

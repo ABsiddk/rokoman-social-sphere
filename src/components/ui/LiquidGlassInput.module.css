@@ -6,6 +6,7 @@
   width: 100%;
   max-width: 330px;
 }
+
 .liquidGlassInput {
   width: 100%;
   min-width: 0;
@@ -33,12 +34,30 @@
   box-shadow: 0 0 14px 0 #21ffe9, 0 1.8px 6.5px 0 #51fde2aa;
   background: linear-gradient(96deg, rgba(19,215,249,0.73) 10%, rgba(54,254,206,.59) 92%);
 }
-.liquidGlassInput::-webkit-input-placeholder {
-  color: #5f7685;
-}
+
+/* White placeholder in dark, dark placeholder in light */
 .liquidGlassInput::placeholder {
-  color: #5f7685;
+  color: #232323;
+  opacity: 1;
 }
+@media (prefers-color-scheme: dark) {
+  .liquidGlassInput::placeholder {
+    color: #fff;
+    opacity: 0.95;
+  }
+}
+
+/* Also for non-webkit browsers */
+.liquidGlassInput::-webkit-input-placeholder {
+  color: #232323;
+}
+@media (prefers-color-scheme: dark) {
+  .liquidGlassInput::-webkit-input-placeholder {
+    color: #fff;
+    opacity: 0.95;
+  }
+}
+
 .liquidGlassInput[disabled] {
   opacity: 0.67;
   cursor: not-allowed;
@@ -73,12 +92,12 @@
   animation: glassShine 2.7s infinite linear;
   border-radius: 15px;
 }
-@media (max-width: 425px) {
+
+@media (max-width: 600px) {
   .liquidGlassInputContainer, .liquidGlassInput {
-    max-width: 99vw;
-    font-size: 0.97rem;
-    height: 39px;
+    max-width: 98vw;
+    font-size: 0.95rem;
+    height: 36px;
     padding: 0 0.6rem;
   }
 }
-
