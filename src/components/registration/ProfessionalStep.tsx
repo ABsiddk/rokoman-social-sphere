@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
@@ -9,9 +10,9 @@ import ProfessionTypeSelector from './professional/ProfessionTypeSelector';
 import LiquidGlassInput from '../ui/LiquidGlassInput';
 import SearchableInput from "../ui/SearchableInput";
 import {
-  institutionSuggestions,
-  departmentSuggestions,
-  designationSuggestions,
+  getInstitutionSuggestions,
+  getDepartmentSuggestions,
+  getDesignationSuggestions,
 } from "./professional/ProfessionalSuggestions";
 
 interface ProfessionalStepProps {
@@ -62,6 +63,11 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
       }, 400);
     }
   };
+
+  // NEW: Get profession-specific suggestions
+  const institutionSuggestions = getInstitutionSuggestions(data.professionType);
+  const departmentSuggestions = getDepartmentSuggestions(data.professionType);
+  const designationSuggestions = getDesignationSuggestions(data.professionType);
 
   return (
     <form onSubmit={handleSubmit} className={`gap-y-3 flex flex-col ${sectionBg}`}>
