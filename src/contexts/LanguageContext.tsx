@@ -260,6 +260,13 @@ const translations = {
     'marital.married': 'Married',
     'marital.divorced': 'Divorced',
     'marital.widowed': 'Widowed',
+    // --- Added for ProfessionalStep searchable inputs ---
+    'register.step4.institution_name': 'Institution Name',
+    'register.step4.institution_name.placeholder': 'e.g. University of Dhaka',
+    'register.step4.department': 'Department', 
+    'register.step4.department.placeholder': 'e.g. Computer Science',
+    'register.step4.designation': 'Designation',
+    'register.step4.designation.placeholder': 'e.g. Manager',
   },
   bn: {
     // Brand  
@@ -480,7 +487,7 @@ const translations = {
     
     // Phone validation
     'registration.phone.error.bangladesh': 'বাংলাদেশের নম্বর অবশ্যই ০১ দিয়ে শুরু হতে হবে',
-    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যা�র হতে হবে',
+    'registration.phone.error.length': 'ফোন নম্বর অবশ্যই ১১ সংখ্যার হতে হবে',
     'registration.phone.error.numbers': 'শুধুমাত্র সংখ্যা অনুমোদিত',
     
     // Password validation
@@ -512,6 +519,13 @@ const translations = {
     'marital.married': 'বিবাহিত',
     'marital.divorced': 'তালাকপ্রাপ্ত',
     'marital.widowed': 'বিধবা/বিপত্নীক',
+    // --- Added for ProfessionalStep searchable inputs ---
+    'register.step4.institution_name': 'প্রতিষ্ঠানের নাম',
+    'register.step4.institution_name.placeholder': 'যেমন ঢাকা বিশ্ববিদ্যালয়',
+    'register.step4.department': 'বিভাগ',
+    'register.step4.department.placeholder': 'যেমন কম্পিউটার বিজ্ঞান',
+    'register.step4.designation': 'পদবি',
+    'register.step4.designation.placeholder': 'যেমন ম্যানেজার',
   }
 };
 
