@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
@@ -33,10 +32,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   inputBgColor = 'bg-[rgb(55,65,81)] text-white border-none focus:ring-2 focus:ring-primary',
   t,
 }) => {
-  // Local state to control the visibility of Nickname 2 input
-  const [showNickname2, setShowNickname2] = useState(!!nickname2);
-
-  const handleAddNickname2 = () => setShowNickname2(true);
+  // REMOVE all nickname button logic – only show Nickname 1 as requested
 
   return (
     <>
@@ -76,45 +72,10 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
           className={inputBgColor}
         />
         <div className={`text-xs mt-1 ${teamCream}`}>
-          {/* Updated help text */}
           {t('register.step2.nickname1_hint') ?? 'The name you are known by in your family and friends.'}
         </div>
       </div>
-
-      <div className="animate-fade-in">
-        {!showNickname2 ? (
-          <div className="flex items-center gap-2 mt-2">
-            <LiquidGlassButton
-              type="button"
-              disabled
-              className="cursor-default !bg-transparent !shadow-none"
-              style={{ opacity: 0.54, pointerEvents: 'none' }}
-            >
-              {t('register.step2.nickname')} 2
-            </LiquidGlassButton>
-            <LiquidGlassButton
-              type="button"
-              className=""
-              onClick={handleAddNickname2}
-            >
-              + {t('register.step2.add_nickname') ?? 'Add Nickname'}
-            </LiquidGlassButton>
-          </div>
-        ) : (
-          <div className="mt-2">
-            <Label htmlFor="nickname2" className={labelColor}>
-              {t('register.step2.nickname')} 2
-            </Label>
-            <Input
-              id="nickname2"
-              value={nickname2}
-              onChange={e => onNickname2Change?.(e.target.value)}
-              placeholder={t('register.step2.nickname_placeholder')}
-              className={inputBgColor}
-            />
-          </div>
-        )}
-      </div>
+      {/* No more nickname-related buttons */}
     </>
   );
 };
