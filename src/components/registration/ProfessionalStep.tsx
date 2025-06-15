@@ -12,8 +12,10 @@ import {
   getInstitutionSuggestions,
   getDepartmentSuggestions,
   getDesignationSuggestions,
+  bangladeshDistricts,
+  getGradeLevelSuggestions,
+  getSessionYearSuggestions,
 } from "./professional/ProfessionalSuggestions";
-import { bangladeshDistricts } from "./professional/ProfessionalSuggestions";
 
 interface ProfessionalStepProps {
   data: RegistrationData;
@@ -30,11 +32,34 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
   const labelColor = "text-[rgb(77,89,119)] dark:text-[rgb(155,174,205)]";
   const sectionBg = "rounded-xl px-5 py-6 mb-4 bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-900 ";
 
+  // Handle profession type and clear special fields
   const handleProfessionTypeChange = (val: string) => {
-    if (val !== 'government') {
-      updateData({ professionType: val, isBCS: false, bcsSession: '' });
+    if (val === 'student') {
+      // Clear job related fields if switching to student
+      updateData({
+        professionType: val,
+        isBCS: false,
+        bcsSession: '',
+        startDate: '',
+        endDate: '',
+        currentlyWorking: false,
+        jobLocation: '',
+        gradeLevel: '',
+        sessionYear: '',
+        department: '',  // do not show/use for student
+        designation: '', // do not show/use for student
+      });
     } else {
-      updateData({ professionType: val });
+      // Clear student-related fields if switching away
+      updateData({
+        professionType: val, 
+        isBCS: false, 
+        bcsSession: '', 
+        gradeLevel: '', 
+        sessionYear: '',
+        department: '',
+        designation: '',
+      });
     }
   };
 
@@ -64,10 +89,15 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     }
   };
 
-  // NEW: Get profession-specific suggestions
+  // Suggestions for institution, department, designation & student levels/sessions
   const institutionSuggestions = getInstitutionSuggestions(data.professionType);
   const departmentSuggestions = getDepartmentSuggestions(data.professionType);
   const designationSuggestions = getDesignationSuggestions(data.professionType);
+  const gradeLevelSuggestions = getGradeLevelSuggestions(data.professionType);
+  const sessionYearSuggestions = getSessionYearSuggestions(data.professionType);
+
+  // Student-specific: true if student form should be shown
+  const isStudent = data.professionType === 'student';
 
   return (
     <form onSubmit={handleSubmit} className={`gap-y-3 flex flex-col ${sectionBg}`}>
@@ -83,8 +113,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         onChange={handleProfessionTypeChange}
       />
 
-      {/* Show BCS cadre options only for government profession type */}
-      {data.professionType === 'government' && (
+      {/* Show BCS options if applicable (non-student, government only) */}
+      {!isStudent && data.professionType === 'government' && (
         <div className="w-full flex flex-col items-start animate-fade-in mb-1">
           <div className="flex items-center space-x-2 py-1">
             <Checkbox
@@ -117,12 +147,10 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
       )}
 
-      {/* Professional info inputs */}
-      <div
-        className="w-full flex flex-col gap-2 md:flex-row md:gap-4"
-        style={{ marginBottom: "0.3rem" }}
-      >
+      {/* --- Main student/professional field block --- */}
+      <div className="w-full flex flex-col gap-2 md:flex-row md:gap-4">
         <div className="flex-1 min-w-[120px]">
+          {/* Institution Name: always shown */}
           <SearchableInput
             label={t('register.step4.institution_name') || "Institution Name"}
             placeholder={t('register.step4.institution_name.placeholder') || "e.g. University of Dhaka"}
@@ -134,93 +162,131 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             maxLength={48}
           />
         </div>
-        <div className="flex-1 min-w-[120px]">
-          <SearchableInput
-            label={t('register.step4.department') || "Department"}
-            placeholder={t('register.step4.department.placeholder') || "e.g. Computer Science"}
-            suggestions={departmentSuggestions}
-            value={data.department || ""}
-            onChange={val => updateData({ department: val })}
-            autoComplete="department"
-            id="department"
-            maxLength={48}
-          />
-        </div>
-        <div className="flex-1 min-w-[120px]">
-          <SearchableInput
-            label={t('register.step4.designation') || "Designation"}
-            placeholder={t('register.step4.designation.placeholder') || "e.g. Manager"}
-            suggestions={designationSuggestions}
-            value={data.designation || ""}
-            onChange={val => updateData({ designation: val })}
-            autoComplete="title"
-            id="designation"
-            maxLength={48}
-          />
-        </div>
+        {!isStudent && (
+          <>
+            <div className="flex-1 min-w-[120px]">
+              <SearchableInput
+                label={t('register.step4.department') || "Department"}
+                placeholder={t('register.step4.department.placeholder') || "e.g. Computer Science"}
+                suggestions={departmentSuggestions}
+                value={data.department || ""}
+                onChange={val => updateData({ department: val })}
+                autoComplete="department"
+                id="department"
+                maxLength={48}
+              />
+            </div>
+            <div className="flex-1 min-w-[120px]">
+              <SearchableInput
+                label={t('register.step4.designation') || "Designation"}
+                placeholder={t('register.step4.designation.placeholder') || "e.g. Manager"}
+                suggestions={designationSuggestions}
+                value={data.designation || ""}
+                onChange={val => updateData({ designation: val })}
+                autoComplete="title"
+                id="designation"
+                maxLength={48}
+              />
+            </div>
+          </>
+        )}
+        {/* When Student: show Grade Level & Session Year instead */}
+        {isStudent && (
+          <>
+            <div className="flex-1 min-w-[120px]">
+              <SearchableInput
+                label={t('register.step4.grade_level')}
+                placeholder={t('register.step4.grade_level.placeholder')}
+                suggestions={gradeLevelSuggestions}
+                value={data.gradeLevel || ""}
+                onChange={val => updateData({ gradeLevel: val })}
+                autoComplete="education"
+                id="gradeLevel"
+                maxLength={40}
+              />
+            </div>
+            <div className="flex-1 min-w-[120px]">
+              <SearchableInput
+                label={t('register.step4.session_year')}
+                placeholder={t('register.step4.session_year.placeholder')}
+                suggestions={sessionYearSuggestions}
+                value={data.sessionYear || ""}
+                onChange={val => updateData({ sessionYear: val })}
+                autoComplete="off"
+                id="sessionYear"
+                maxLength={20}
+              />
+            </div>
+          </>
+        )}
       </div>
+      {/* END fields row */}
 
-      {/* Date fields and currently working */}
-      <div className="grid grid-cols-2 gap-2 md:gap-5 justify-between">
-        <div className="flex flex-col">
-          <Label className={labelColor}>{t('register.step4.start_date')}</Label>
-          <LiquidGlassInput
-            type="date"
-            value={data.startDate}
-            onChange={e => updateData({ startDate: e.target.value })}
-            placeholder={t('register.step4.start_date.placeholder')}
-            className="mt-0.5"
-            maxLength={24}
-            style={{ minWidth: 0, maxWidth: "none" }}
-          />
-        </div>
-        <div className="flex flex-col">
-          <Label className={labelColor}>{t('register.step4.end_date')}</Label>
-          <LiquidGlassInput
-            type="date"
-            value={data.endDate}
-            onChange={e => updateData({ endDate: e.target.value })}
-            placeholder={t('register.step4.end_date.placeholder')}
-            className="mt-0.5"
-            disabled={data.currentlyWorking}
-            maxLength={24}
-            style={{ minWidth: 0, maxWidth: "none" }}
-          />
-        </div>
-        <div className="col-span-2">
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="currentlyWorking"
-              checked={data.currentlyWorking}
-              onCheckedChange={checked => updateData({ currentlyWorking: !!checked })}
-            />
-            <Label htmlFor="currentlyWorking" className={labelColor}>
-              {t('register.step4.currently_working')}
-            </Label>
+      {/* Date fields, job location fields etc: only show if not student */}
+      {!isStudent && (
+        <>
+          {/* Date fields (start and end) & currently working */}
+          <div className="grid grid-cols-2 gap-2 md:gap-5 justify-between">
+            <div className="flex flex-col">
+              <Label className={labelColor}>{t('register.step4.start_date')}</Label>
+              <LiquidGlassInput
+                type="date"
+                value={data.startDate}
+                onChange={e => updateData({ startDate: e.target.value })}
+                placeholder={t('register.step4.start_date.placeholder')}
+                className="mt-0.5"
+                maxLength={24}
+                style={{ minWidth: 0, maxWidth: "none" }}
+              />
+            </div>
+            <div className="flex flex-col">
+              <Label className={labelColor}>{t('register.step4.end_date')}</Label>
+              <LiquidGlassInput
+                type="date"
+                value={data.endDate}
+                onChange={e => updateData({ endDate: e.target.value })}
+                placeholder={t('register.step4.end_date.placeholder')}
+                className="mt-0.5"
+                disabled={data.currentlyWorking}
+                maxLength={24}
+                style={{ minWidth: 0, maxWidth: "none" }}
+              />
+            </div>
+            <div className="col-span-2">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="currentlyWorking"
+                  checked={data.currentlyWorking}
+                  onCheckedChange={checked => updateData({ currentlyWorking: !!checked })}
+                />
+                <Label htmlFor="currentlyWorking" className={labelColor}>
+                  {t('register.step4.currently_working')}
+                </Label>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* --- INSERTED: Job Location field before the submit button --- */}
-      <div className="w-full flex flex-col items-start mb-2 animate-fade-in">
-        <div className="w-full md:w-2/3 sm:w-full">
-          <SearchableInput
-            label={t('register.step4.job_location') || "Job Location"}
-            placeholder={t('register.step4.job_location.placeholder') || "Select your work district"}
-            suggestions={bangladeshDistricts}
-            value={data.jobLocation || ""}
-            onChange={val => updateData({ jobLocation: val })}
-            autoComplete="address-level2"
-            id="jobLocation"
-            maxLength={32}
-            className="mt-1"
-            style={{ minWidth: 0, maxWidth: "none" }}
-          />
-        </div>
-      </div>
-      {/* --- END Job Location field --- */}
+          {/* Job Location field before the submit button */}
+          <div className="w-full flex flex-col items-start mb-2 animate-fade-in">
+            <div className="w-full md:w-2/3 sm:w-full">
+              <SearchableInput
+                label={t('register.step4.job_location') || "Job Location"}
+                placeholder={t('register.step4.job_location.placeholder') || "Select your work district"}
+                suggestions={bangladeshDistricts}
+                value={data.jobLocation || ""}
+                onChange={val => updateData({ jobLocation: val })}
+                autoComplete="address-level2"
+                id="jobLocation"
+                maxLength={32}
+                className="mt-1"
+                style={{ minWidth: 0, maxWidth: "none" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
 
-      {/* Submit button left-aligned */}
+      {/* Submit Button: always shown */}
       <div className="w-full mt-4 flex md:justify-start sm:justify-start justify-start">
         <LiquidGlassSiennaButton
           type="submit"

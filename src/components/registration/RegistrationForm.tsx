@@ -59,6 +59,10 @@ export interface RegistrationData {
   department?: string;
   designation?: string;
   jobLocation?: string;
+  
+  // Step 4 additions for Student
+  gradeLevel?: string;
+  sessionYear?: string;
 }
 
 const RegistrationForm = () => {
@@ -112,7 +116,9 @@ const RegistrationForm = () => {
     institutionName: '',
     department: '',
     designation: '',
-    jobLocation: ''
+    jobLocation: '',
+    gradeLevel: '',
+    sessionYear: ''
   });
 
   const updateRegistrationData = (data: Partial<RegistrationData>) => {

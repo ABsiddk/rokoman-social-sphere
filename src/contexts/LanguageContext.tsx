@@ -270,6 +270,11 @@ const translations = {
     // ---- NEW for job location ----
     'register.step4.job_location': 'Job Location',
     'register.step4.job_location.placeholder': 'Select your work district',
+    // --- Added for Student grade/session ---
+    'register.step4.grade_level': 'Grade Level',
+    'register.step4.grade_level.placeholder': 'Select your education level',
+    'register.step4.session_year': 'Session Year',
+    'register.step4.session_year.placeholder': 'Select your academic session',
   },
   bn: {
     // Brand  
@@ -532,6 +537,11 @@ const translations = {
     // ---- NEW for job location ----
     'register.step4.job_location': 'কর্মস্থল',
     'register.step4.job_location.placeholder': 'আপনার কর্মস্থলের জেলা নির্বাচন করুন',
+    // --- Added for Student grade/session ---
+    'register.step4.grade_level': 'শিক্ষার স্তর',
+    'register.step4.grade_level.placeholder': 'আপনার শিক্ষার স্তর নির্বাচন করুন',
+    'register.step4.session_year': 'সেশন বছর',
+    'register.step4.session_year.placeholder': 'আপনার একাডেমিক সেশন নির্বাচন করুন',
   }
 };
 

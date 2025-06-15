@@ -172,6 +172,41 @@ export const bangladeshDistricts = [
   { en: "Thakurgaon", bn: "ঠাকুরগাঁও" }
 ];
 
+// -------- Student Grade Levels -------
+export const studentGradeLevels = [
+  { en: "Primary (Class 1-5)", bn: "প্রাথমিক (১-৫ শ্রেণি)" },
+  { en: "Secondary (Class 6-10)", bn: "মাধ্যমিক (৬-১০ শ্রেণি)" },
+  { en: "Higher Secondary (Class 11-12)", bn: "উচ্চ মাধ্যমিক (১১-১২ শ্রেণি)" },
+  { en: "Diploma", bn: "ডিপ্লোমা" },
+  { en: "Bachelor's", bn: "স্নাতক" },
+  { en: "Master's", bn: "স্নাতকোত্তর" },
+  { en: "PhD", bn: "পিএইচডি" },
+  { en: "Certificate", bn: "সার্টিফিকেট" },
+];
+
+// -------- Student Session Years -------
+export const sessionYears = [
+  { en: "2020-21", bn: "২০২০-২১" },
+  { en: "2021-22", bn: "২০২১-২২" },
+  { en: "2022-23", bn: "২০২২-২৩" },
+  { en: "2023-24", bn: "২০২৩-২৪" },
+  { en: "2024-25", bn: "২০২৪-২৫" },
+  { en: "2025-26", bn: "২০২৫-২৬" },
+  { en: "2026-27", bn: "২০২৬-২৭" },
+];
+
+// Utility function to get grade level suggestions for students
+export function getGradeLevelSuggestions(professionType: string) {
+  if (professionType === "student") return studentGradeLevels;
+  return [];
+}
+
+// Utility function to get session year suggestions for students
+export function getSessionYearSuggestions(professionType: string) {
+  if (professionType === "student") return sessionYears;
+  return [];
+}
+
 // ---------- Universal fallback if needed ----------
 export const fallbackInstitutions = [
   ...governmentInstitutions,
