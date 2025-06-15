@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
@@ -71,12 +72,45 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </h1>
       </div>
 
+      {/* Profession type selector */}
       <ProfessionTypeSelector
         value={data.professionType}
         onChange={handleProfessionTypeChange}
       />
 
-      {/* NEW: Searchable professional info inputs */}
+      {/* Move the BCS options directly below profession type, for all profession types */}
+      <div className="w-full flex flex-col items-start animate-fade-in mb-1">
+        <div className="flex items-center space-x-2 py-1">
+          <Checkbox
+            id="isBCS"
+            checked={!!data.isBCS}
+            onCheckedChange={checked => handleBCSCheckboxChange(!!checked)}
+          />
+          <Label htmlFor="isBCS" className={`${labelColor} text-base font-semibold`}>
+            {t('register.step4.is_bcs')}
+          </Label>
+        </div>
+        {data.isBCS && (
+          <div className="pl-6 py-0 animate-fade-in flex-1 min-w-0">
+            <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
+              {t('register.step4.bcs_session')}
+            </Label>
+            <LiquidGlassInput
+              id="bcsSession"
+              value={data.bcsSession || ''}
+              onChange={handleBCSSessionChange}
+              error={errors.bcsSession}
+              placeholder={t('register.step4.bcs_session.placeholder')}
+              autoComplete="off"
+              maxLength={32}
+              className="mt-0.5"
+              style={{ minWidth: 0, maxWidth: "none" }}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Professional info inputs */}
       <div
         className="w-full flex flex-col gap-2 md:flex-row md:gap-4"
         style={{ marginBottom: "0.3rem" }}
@@ -119,41 +153,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
       </div>
 
-      {data.professionType === 'government' && (
-        <div className="w-full flex flex-col items-start animate-fade-in mb-1">
-          <div className="flex items-center space-x-2 py-1">
-            <Checkbox
-              id="isBCS"
-              checked={!!data.isBCS}
-              onCheckedChange={checked => handleBCSCheckboxChange(!!checked)}
-            />
-            <Label htmlFor="isBCS" className={`${labelColor} text-base font-semibold`}>
-              {t('register.step4.is_bcs')}
-            </Label>
-          </div>
-          {data.isBCS && (
-            <div className="pl-6 py-0 animate-fade-in flex-1 min-w-0">
-              <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
-                {t('register.step4.bcs_session')}
-              </Label>
-              {/* Remove all width/maxWidth, true dynamic sizing */}
-              <LiquidGlassInput
-                id="bcsSession"
-                value={data.bcsSession || ''}
-                onChange={handleBCSSessionChange}
-                error={errors.bcsSession}
-                placeholder={t('register.step4.bcs_session.placeholder')}
-                autoComplete="off"
-                maxLength={32}
-                className="mt-0.5"
-                style={{ minWidth: 0, maxWidth: "none" }}
-              />
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* On all screens: make date boxes side by side, no unnecessary gap, truly fit text */}
+      {/* Date fields and currently working */}
       <div className="grid grid-cols-2 gap-2 md:gap-5 justify-between">
         <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.start_date')}</Label>
@@ -210,3 +210,4 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 };
 
 export default ProfessionalStep;
+
