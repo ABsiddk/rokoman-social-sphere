@@ -6,6 +6,11 @@ interface LiquidGlassInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   error?: string;
 }
 
+const isMobile = () =>
+  typeof window !== "undefined" &&
+  (window.innerWidth <= 600 ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+
 const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProps>(
   ({ className = "", style, error, ...props }, ref) => {
     const [inputWidth, setInputWidth] = useState<number | undefined>(undefined);
@@ -17,25 +22,36 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
 
     useLayoutEffect(() => {
       if (autoSize && relevantType && spanRef.current) {
-        // Set width to length of the greater of: current value or placeholder, plus minimal caret space
+        const isMobileNow = isMobile();
+
         let valueForWidth =
           typeof props.value === "string" && props.value.length > 0
             ? props.value
             : props.placeholder || "";
-        // Single space at the end for caret
+        // Add one space at the end for caret
         spanRef.current.textContent = valueForWidth + " ";
-        // Copy font styles from input for more accurate measurement
-        const computed = window.getComputedStyle(spanRef.current);
-        spanRef.current.style.fontFamily = computed.fontFamily || "inherit";
-        spanRef.current.style.fontWeight = computed.fontWeight || "500";
-        spanRef.current.style.fontSize = computed.fontSize || "1rem";
-        spanRef.current.style.letterSpacing = computed.letterSpacing || "inherit";
 
-        const measured = spanRef.current.offsetWidth;
-        // Remove all max-width constraints, clamp only minimally (min 54px, max ~98vw for safety)
-        const min = 54;
-        const max = Math.min(window.innerWidth * 0.98, 600);
-        setInputWidth(Math.max(min, Math.min(measured + 2, max))); // +2 for focus visual fudge
+        // Font sizing and padding: match mobile/desktop
+        spanRef.current.style.fontFamily = "inherit";
+        spanRef.current.style.letterSpacing = "inherit";
+        spanRef.current.style.fontWeight = "500";
+        spanRef.current.style.fontSize = isMobileNow ? "0.95rem" : "1rem";
+        // Padding must match input padding in px (1rem=16px, 0.95rem~15.2px)
+        const pxPad = isMobileNow ? 9.6 : 16;
+        // Add both left+right padding (x2)
+        const min = isMobileNow ? 48 : 54;
+        // For side-by-side grid, subtract grid gap (gap-2 = 8px)
+        const formOuterPad = isMobileNow ? 20 : 0; // container px-4 => 16px, let's use 20px for safety
+
+        let measured = spanRef.current.offsetWidth + pxPad * 2;
+        // On mobile, cap so two fit side-by-side
+        let max = isMobileNow
+          ? Math.max(
+              Math.floor((window.innerWidth - formOuterPad * 2 - 8) / 2), // 8px grid gap for gap-2
+              70 // never get smaller than this, but allow long Bangla placeholder!
+            )
+          : 600;
+        setInputWidth(Math.max(min, Math.min(measured, max)));
       }
     }, [props.placeholder, props.value, autoSize, relevantType]);
 
@@ -44,7 +60,7 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
         className={styles.liquidGlassInputContainer}
         style={{
           width: autoSize && relevantType && inputWidth ? inputWidth : undefined,
-          minWidth: autoSize && relevantType ? 54 : undefined,
+          minWidth: autoSize && relevantType ? (isMobile() ? 48 : 54) : undefined,
           ...style,
         }}
       >
@@ -53,8 +69,10 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
           className={`${styles.liquidGlassInput} ${className} ${error ? "border-red-500" : ""}`}
           style={{
             width: autoSize && relevantType && inputWidth ? inputWidth : style?.width,
-            minWidth: autoSize && relevantType ? 54 : undefined,
+            minWidth: autoSize && relevantType ? (isMobile() ? 48 : 54) : undefined,
             transition: "width 0.27s cubic-bezier(.61,.14,.55,.5)",
+            fontSize: isMobile() ? "0.95rem" : "1rem",
+            padding: isMobile() ? "0 0.6rem" : "0 1rem",
             ...style,
           }}
           {...props}
@@ -68,12 +86,12 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
             top: "-200%",
             left: 0,
             fontWeight: 500,
-            fontSize: "1rem",
+            fontSize: isMobile() ? "0.95rem" : "1rem",
             letterSpacing: "inherit",
             whiteSpace: "pre",
             visibility: "hidden",
             pointerEvents: "none",
-            padding: "0 0.18rem",
+            padding: isMobile() ? "0 0.6rem" : "0 1rem",
             fontFamily: "inherit",
           }}
           aria-hidden

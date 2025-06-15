@@ -30,7 +30,7 @@
   position: relative;
   z-index: 1;
   backdrop-filter: blur(9px) saturate(150%);
-  max-width: unset;
+  max-width: unset; /* Remove old max-width, handled inline now */
 }
 .liquidGlassInput:focus {
   border-color: #19eecd;
@@ -84,9 +84,9 @@
 }
 @media (max-width: 600px) {
   .liquidGlassInputContainer, .liquidGlassInput {
-    font-size: 0.95rem;
+    font-size: 0.95rem !important;
     height: 36px;
-    padding: 0 0.6rem;
+    padding: 0 0.6rem !important;
     transition: width 0.22s cubic-bezier(.61,.14,.55,.5);
     min-width: 48px;
     width: auto;
