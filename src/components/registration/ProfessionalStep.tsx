@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -123,7 +122,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
       </div>
 
       <div className="flex justify-end">
-        <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
+        <Button onClick={handleSubmit}>
           {t('register.step4.complete')}
         </Button>
       </div>
