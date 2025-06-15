@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
@@ -58,8 +59,9 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`space-y-6 ${sectionBg}`}>
-      <div className="w-full flex justify-center mb-5">
+    // Removed space-y-6 to tighten form vertical spacing
+    <form onSubmit={handleSubmit} className={`gap-y-3 flex flex-col ${sectionBg}`}>
+      <div className="w-full flex justify-center mb-3">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-cyan-200 drop-shadow-md tracking-tight">
           {t('register.step4.title')}
         </h1>
@@ -71,8 +73,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
       />
 
       {data.professionType === 'government' && (
-        <div className="w-full flex flex-col items-start animate-fade-in mb-4">
-          <div className="flex items-center space-x-2 py-2">
+        <div className="w-full flex flex-col items-start animate-fade-in mb-1">
+          <div className="flex items-center space-x-2 py-1">
             <Checkbox
               id="isBCS"
               checked={!!data.isBCS}
@@ -83,10 +85,11 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             </Label>
           </div>
           {data.isBCS && (
-            <div className="pl-6 py-1 animate-fade-in flex-1 min-w-0">
+            <div className="pl-6 py-0 animate-fade-in flex-1 min-w-0">
               <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
                 {t('register.step4.bcs_session')}
               </Label>
+              {/* Remove all width/maxWidth, true dynamic sizing */}
               <LiquidGlassInput
                 id="bcsSession"
                 value={data.bcsSession || ''}
@@ -95,17 +98,16 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
                 placeholder={t('register.step4.bcs_session.placeholder')}
                 autoComplete="off"
                 maxLength={32}
-                // Removed width/max-width so input width matches placeholder dynamically
                 className="mt-0.5"
-                style={{ minWidth: 0 }}
+                style={{ minWidth: 0, maxWidth: "none" }}
               />
             </div>
           )}
         </div>
       )}
 
-      {/* On all screen sizes, make date boxes side by side and lengths fit placeholders */}
-      <div className="grid grid-cols-2 gap-4 md:gap-7 justify-between">
+      {/* On all screens: make date boxes side by side, no unnecessary gap, truly fit text */}
+      <div className="grid grid-cols-2 gap-2 md:gap-5 justify-between">
         <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.start_date')}</Label>
           <LiquidGlassInput
@@ -115,7 +117,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             placeholder={t('register.step4.start_date.placeholder')}
             className="mt-0.5"
             maxLength={24}
-            style={{ minWidth: 0 }}
+            style={{ minWidth: 0, maxWidth: "none" }}
           />
         </div>
         <div className="flex flex-col">
@@ -128,7 +130,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             className="mt-0.5"
             disabled={data.currentlyWorking}
             maxLength={24}
-            style={{ minWidth: 0 }}
+            style={{ minWidth: 0, maxWidth: "none" }}
           />
         </div>
         <div className="col-span-2">
@@ -145,11 +147,11 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         </div>
       </div>
 
-      <div className="w-full flex justify-center mt-6">
+      <div className="w-full flex justify-center mt-4">
         <LiquidGlassSiennaButton
           type="submit"
           disabled={submitting}
-          className="w-full md:w-auto !bg-[linear-gradient(96deg,rgba(5,117,170,0.88)14%,rgba(42,210,172,0.93)71%)] text-white shadow-lg py-3 px-12 font-bold"
+          className="w-full md:w-auto !bg-[linear-gradient(96deg,rgba(5,117,170,0.88)14%,rgba(42,210,172,0.93)71%)] text-white shadow-lg py-2 px-6 font-bold"
         >
           {submitting
             ? t('register.step4.completing') || 'Submitting...'
@@ -161,3 +163,4 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 };
 
 export default ProfessionalStep;
+

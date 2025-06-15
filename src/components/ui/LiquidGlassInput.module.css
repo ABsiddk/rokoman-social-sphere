@@ -4,8 +4,7 @@
   flex-direction: column;
   align-items: start;
   width: auto;
-  min-width: 74px;
-  max-width: 330px;
+  min-width: 54px;
   transition: width 0.27s cubic-bezier(.61,.14,.55,.5);
   position: relative;
 }
@@ -13,7 +12,6 @@
 .liquidGlassInput {
   width: 100%;
   min-width: 0;
-  max-width: 330px;
   height: 44px;
   border-radius: 15px;
   padding: 0 1rem;
@@ -32,13 +30,13 @@
   position: relative;
   z-index: 1;
   backdrop-filter: blur(9px) saturate(150%);
+  max-width: unset;
 }
 .liquidGlassInput:focus {
   border-color: #19eecd;
   box-shadow: 0 0 14px 0 #21ffe9, 0 1.8px 6.5px 0 #51fde2aa;
   background: linear-gradient(96deg, rgba(19,215,249,0.73) 10%, rgba(54,254,206,.59) 92%);
 }
-
 .liquidGlassInput::placeholder {
   color: #232323;
   opacity: 1;
@@ -49,7 +47,6 @@
     opacity: 0.95;
   }
 }
-
 .liquidGlassInput[disabled] {
   opacity: 0.67;
   cursor: not-allowed;
@@ -85,14 +82,14 @@
   animation: glassShine 2.7s infinite linear;
   border-radius: 15px;
 }
-
 @media (max-width: 600px) {
   .liquidGlassInputContainer, .liquidGlassInput {
-    max-width: 98vw;
     font-size: 0.95rem;
     height: 36px;
     padding: 0 0.6rem;
     transition: width 0.22s cubic-bezier(.61,.14,.55,.5);
+    min-width: 48px;
+    width: auto;
+    max-width: unset;
   }
 }
-

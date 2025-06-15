@@ -11,24 +11,31 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
     const [inputWidth, setInputWidth] = useState<number | undefined>(undefined);
     const spanRef = useRef<HTMLSpanElement | null>(null);
 
-    // Only auto-size for type text or date and when no explicit width style or class
+    // Auto-size only for text/date input and if user hasn’t set width already.
     const autoSize = !style?.width && !className?.includes("w-");
     const relevantType = !props.type || props.type === "text" || props.type === "date";
 
     useLayoutEffect(() => {
-      if (autoSize && relevantType && props.placeholder && spanRef.current) {
-        // Add an extra character for caret space
-        const valueForWidth =
-          (props.value && typeof props.value === "string"
+      if (autoSize && relevantType && spanRef.current) {
+        // Set width to length of the greater of: current value or placeholder, plus minimal caret space
+        let valueForWidth =
+          typeof props.value === "string" && props.value.length > 0
             ? props.value
-            : props.placeholder) + " ";
-        spanRef.current.textContent = valueForWidth;
-        const measured = spanRef.current.offsetWidth;
+            : props.placeholder || "";
+        // Single space at the end for caret
+        spanRef.current.textContent = valueForWidth + " ";
+        // Copy font styles from input for more accurate measurement
+        const computed = window.getComputedStyle(spanRef.current);
+        spanRef.current.style.fontFamily = computed.fontFamily || "inherit";
+        spanRef.current.style.fontWeight = computed.fontWeight || "500";
+        spanRef.current.style.fontSize = computed.fontSize || "1rem";
+        spanRef.current.style.letterSpacing = computed.letterSpacing || "inherit";
 
-        // Set clamp between 74px and 98vw/330px
-        const min = 74;
-        const max = Math.min(window.innerWidth * 0.98, 330);
-        setInputWidth(Math.max(min, Math.min(measured + 12, max))); // +12 for icon/padding fudge
+        const measured = spanRef.current.offsetWidth;
+        // Remove all max-width constraints, clamp only minimally (min 54px, max ~98vw for safety)
+        const min = 54;
+        const max = Math.min(window.innerWidth * 0.98, 600);
+        setInputWidth(Math.max(min, Math.min(measured + 2, max))); // +2 for focus visual fudge
       }
     }, [props.placeholder, props.value, autoSize, relevantType]);
 
@@ -36,9 +43,8 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
       <div
         className={styles.liquidGlassInputContainer}
         style={{
-          position: "relative",
           width: autoSize && relevantType && inputWidth ? inputWidth : undefined,
-          minWidth: autoSize && relevantType ? 74 : undefined,
+          minWidth: autoSize && relevantType ? 54 : undefined,
           ...style,
         }}
       >
@@ -46,19 +52,15 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
           ref={ref}
           className={`${styles.liquidGlassInput} ${className} ${error ? "border-red-500" : ""}`}
           style={{
-            width:
-              autoSize && relevantType && inputWidth
-                ? inputWidth
-                : style?.width,
-            minWidth: autoSize && relevantType ? 74 : undefined,
-            maxWidth: 330,
+            width: autoSize && relevantType && inputWidth ? inputWidth : style?.width,
+            minWidth: autoSize && relevantType ? 54 : undefined,
             transition: "width 0.27s cubic-bezier(.61,.14,.55,.5)",
             ...style,
           }}
           {...props}
         />
         <span className={styles.liquidGlassShine} />
-        {/* Hidden span used for measuring width, not visible to users */}
+        {/* Hidden span for measuring width */}
         <span
           ref={spanRef}
           style={{
@@ -71,7 +73,7 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
             whiteSpace: "pre",
             visibility: "hidden",
             pointerEvents: "none",
-            padding: "0 1rem",
+            padding: "0 0.18rem",
             fontFamily: "inherit",
           }}
           aria-hidden
