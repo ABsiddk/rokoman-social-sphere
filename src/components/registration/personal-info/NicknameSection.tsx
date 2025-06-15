@@ -25,9 +25,9 @@ const NicknameSection = ({
   };
 
   return (
-    <div className="animate-fade-in">
-      <div className="mb-2">
-        <Label htmlFor="nickname1" className={labelColor}>
+    <div className="animate-fade-in rounded-2xl shadow-md p-[1.5px] bg-gradient-to-br from-white/60 via-teal-100/60 to-blue-200/60 dark:from-[rgb(55,65,81)] dark:to-[#29383A] dark:via-[#18303c]/50 mb-2">
+      <div className="w-full h-full rounded-[19px] p-4 bg-white/85 dark:bg-[rgb(34,43,60)] transition-colors duration-300 backdrop-blur-xl">
+        <Label htmlFor="nickname1" className={`font-medium ${labelColor} dark:text-cyan-100`}>
           {t('register.step2.nickname')}
         </Label>
         <LiquidGlassInput
