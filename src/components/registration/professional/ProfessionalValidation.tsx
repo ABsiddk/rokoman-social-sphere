@@ -7,7 +7,7 @@ export const useProfessionalValidation = () => {
 
   const validateForm = (data: RegistrationData) => {
     const newErrors: Record<string, string> = {};
-    // All business/designation validation removed
+    // All business/designation/specialNote/jobDescription validation removed
     return newErrors;
   };
 

@@ -89,28 +89,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             </Label>
           </div>
         </div>
-
-        <div className="md:col-span-2">
-          <Label className={labelColor}>{t('register.step4.special.note')}</Label>
-          <Textarea
-            className={inputBgColor}
-            value={data.specialNote}
-            onChange={(e) => updateData({ specialNote: e.target.value })}
-            placeholder={t('register.step4.special.note.placeholder')}
-            rows={3}
-          />
-        </div>
-
-        <div className="md:col-span-2">
-          <Label className={labelColor}>{t('register.step4.job.description')}</Label>
-          <Textarea
-            className={inputBgColor}
-            value={data.jobDescription}
-            onChange={(e) => updateData({ jobDescription: e.target.value })}
-            placeholder={t('register.step4.job.description.placeholder')}
-            rows={4}
-          />
-        </div>
       </div>
 
       {/* Confirmation Button: synchronized name and styling */}

@@ -58,11 +58,9 @@ const Registerelement3 = () => {
         villageHouseRoad: '',
         zipCode: ''
       },
-      specialNote: '',
       startDate: '',
       endDate: '',
-      currentlyWorking: false,
-      jobDescription: ''
+      currentlyWorking: false
     };
   };
 

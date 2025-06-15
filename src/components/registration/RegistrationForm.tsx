@@ -48,11 +48,9 @@ export interface RegistrationData {
     villageHouseRoad: string;
     zipCode: string;
   };
-  specialNote: string;
   startDate: string;
   endDate: string;
   currentlyWorking: boolean;
-  jobDescription: string;
 }
 
 const RegistrationForm = () => {
@@ -97,11 +95,9 @@ const RegistrationForm = () => {
       villageHouseRoad: '',
       zipCode: ''
     },
-    specialNote: '',
     startDate: '',
     endDate: '',
-    currentlyWorking: false,
-    jobDescription: ''
+    currentlyWorking: false
   });
 
   const updateRegistrationData = (data: Partial<RegistrationData>) => {

@@ -49,11 +49,9 @@ const Registerelement2 = () => {
       villageHouseRoad: '',
       zipCode: ''
     },
-    specialNote: '',
     startDate: '',
     endDate: '',
-    currentlyWorking: false,
-    jobDescription: ''
+    currentlyWorking: false
   });
 
   const updateRegistrationData = (data: Partial<RegistrationData>) => {
