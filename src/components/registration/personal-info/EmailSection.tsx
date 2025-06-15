@@ -35,7 +35,7 @@ const EmailSection: React.FC<EmailSectionProps> = ({
         value={personalEmail}
         onChange={(e) => onPersonalEmailChange(e.target.value)}
         placeholder={t('register.step2.personal_email_placeholder')}
-        className={`${inputBgColor} ${personalEmailError ? 'border-red-500' : ''}`}
+        className={`${inputBgColor} placeholder-white dark:placeholder-white ${personalEmailError ? 'border-red-500' : ''}`}
         autoComplete="off"
       />
       {personalEmailError && <p className="text-red-500 text-sm mt-1">{personalEmailError}</p>}
@@ -48,7 +48,7 @@ const EmailSection: React.FC<EmailSectionProps> = ({
         value={officialEmail}
         onChange={(e) => onOfficialEmailChange(e.target.value)}
         placeholder={t('register.step2.official_email_placeholder')}
-        className={`${inputBgColor} ${officialEmailError ? 'border-red-500' : ''}`}
+        className={`${inputBgColor} placeholder-white dark:placeholder-white ${officialEmailError ? 'border-red-500' : ''}`}
         autoComplete="off"
       />
       {officialEmailError && <p className="text-red-500 text-sm mt-1">{officialEmailError}</p>}

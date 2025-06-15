@@ -36,7 +36,7 @@ const NicknameSection = ({
           value={nickNames?.[0] || ''}
           onChange={e => handleChange(e.target.value)}
           placeholder={t('register.step2.nickname_placeholder')}
-          className={inputBgColor}
+          className={`${inputBgColor} placeholder-white dark:placeholder-white`}
           autoComplete="off"
         />
       </div>

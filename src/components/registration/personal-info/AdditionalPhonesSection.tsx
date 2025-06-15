@@ -36,7 +36,7 @@ const AdditionalPhonesSection = ({
             value={additionalPhones?.[i] || ''}
             onChange={(e) => updateAdditionalPhone(i, e.target.value)}
             placeholder={t('register.step2.additional_phone_placeholder')}
-            className={inputBgColor}
+            className={`${inputBgColor} placeholder-white dark:placeholder-white`}
           />
         </div>
       ))}
