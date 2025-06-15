@@ -58,6 +58,21 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     }
   };
 
+  // Dynamically calculate input width based on placeholder length for BCS and dates
+  // Use ch units to roughly fit the text
+  const bcsSessionPlaceholder = t('register.step4.bcs_session.placeholder');
+  const bcsInputWidth = bcsSessionPlaceholder
+    ? `calc(${bcsSessionPlaceholder.length + 2}ch)` // Add a little extra for padding and caret
+    : undefined;
+  const startDatePlaceholder = t('register.step4.start_date.placeholder');
+  const startDateWidth = startDatePlaceholder
+    ? `calc(${startDatePlaceholder.length + 2}ch)`
+    : undefined;
+  const endDatePlaceholder = t('register.step4.end_date.placeholder');
+  const endDateWidth = endDatePlaceholder
+    ? `calc(${endDatePlaceholder.length + 2}ch)`
+    : undefined;
+
   return (
     <form onSubmit={handleSubmit} className={`space-y-6 ${sectionBg}`}>
       <div className="w-full flex justify-center mb-5">
@@ -84,7 +99,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             </Label>
           </div>
           {data.isBCS && (
-            <div className="pl-6 py-1 animate-fade-in flex-1 min-w-0" /* ensures width inheritance */>
+            <div className="pl-6 py-1 animate-fade-in flex-1 min-w-0">
               <Label htmlFor="bcsSession" className={`${labelColor} text-sm mb-1`}>
                 {t('register.step4.bcs_session')}
               </Label>
@@ -93,19 +108,21 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
                 value={data.bcsSession || ''}
                 onChange={handleBCSSessionChange}
                 error={errors.bcsSession}
-                placeholder={t('register.step4.bcs_session.placeholder')}
+                placeholder={bcsSessionPlaceholder}
                 autoComplete="off"
                 maxLength={32}
-                // Standardize input and date box sizing, full width matching below date boxes
-                className="mt-0.5 w-full md:max-w-[330px]"
-                style={{ minWidth: 0 }}
+                className="mt-0.5"
+                style={{
+                  minWidth: '110px',
+                  width: bcsInputWidth,
+                  maxWidth: '330px'
+                }}
               />
             </div>
           )}
         </div>
       )}
 
-      {/* On all screen sizes, make date boxes side by side and equal widths */}
       <div className="grid grid-cols-2 gap-4 md:gap-7">
         <div className="flex flex-col">
           <Label className={labelColor}>{t('register.step4.start_date')}</Label>
@@ -113,10 +130,14 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             type="date"
             value={data.startDate}
             onChange={e => updateData({ startDate: e.target.value })}
-            placeholder={t('register.step4.start_date.placeholder')}
-            className="mt-0.5 w-full md:max-w-[330px]"
+            placeholder={startDatePlaceholder}
+            className="mt-0.5"
+            style={{
+              minWidth: '96px',
+              width: startDateWidth,
+              maxWidth: '330px'
+            }}
             maxLength={24}
-            style={{minWidth:0}}
           />
         </div>
         <div className="flex flex-col">
@@ -125,11 +146,15 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             type="date"
             value={data.endDate}
             onChange={e => updateData({ endDate: e.target.value })}
-            placeholder={t('register.step4.end_date.placeholder')}
-            className="mt-0.5 w-full md:max-w-[330px]"
+            placeholder={endDatePlaceholder}
+            className="mt-0.5"
+            style={{
+              minWidth: '96px',
+              width: endDateWidth,
+              maxWidth: '330px'
+            }}
             disabled={data.currentlyWorking}
             maxLength={24}
-            style={{minWidth:0}}
           />
         </div>
         <div className="col-span-2">
