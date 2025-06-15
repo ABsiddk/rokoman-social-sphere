@@ -3,6 +3,7 @@ import React from 'react';
 import { Users, Activity, TrendingUp, Shield, Calendar, CheckCircle } from 'lucide-react';
 import { useUser } from '../contexts/UserContext';
 import { useLanguage } from '../contexts/LanguageContext';
+import LiquidGlassButton from "./ui/LiquidGlassButton";
 
 const DashboardStats = () => {
   const { currentUser, users } = useUser();
@@ -119,24 +120,24 @@ const DashboardStats = () => {
             {t('dashboard.quick.actions')}
           </h3>
           <div className="space-y-3">
-            <button className="w-full text-left p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600">
+            <LiquidGlassButton className="w-full text-left py-3 px-5 rounded-lg font-medium dark:text-cyan-100 text-[rgb(39,113,150)] bg-transparent">
               <div className="flex items-center space-x-3">
                 <Users size={16} className="text-[rgb(39,113,150)]" />
-                <span className="text-gray-700 dark:text-gray-300">{t('dashboard.action.manage.users')}</span>
+                <span>{t('dashboard.action.manage.users')}</span>
               </div>
-            </button>
-            <button className="w-full text-left p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600">
+            </LiquidGlassButton>
+            <LiquidGlassButton className="w-full text-left py-3 px-5 rounded-lg font-medium dark:text-cyan-100 text-[rgb(39,113,150)] bg-transparent">
               <div className="flex items-center space-x-3">
                 <Activity size={16} className="text-[rgb(39,113,150)]" />
-                <span className="text-gray-700 dark:text-gray-300">{t('dashboard.action.view.activity')}</span>
+                <span>{t('dashboard.action.view.activity')}</span>
               </div>
-            </button>
-            <button className="w-full text-left p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600">
+            </LiquidGlassButton>
+            <LiquidGlassButton className="w-full text-left py-3 px-5 rounded-lg font-medium dark:text-cyan-100 text-[rgb(39,113,150)] bg-transparent">
               <div className="flex items-center space-x-3">
                 <Shield size={16} className="text-[rgb(39,113,150)]" />
-                <span className="text-gray-700 dark:text-gray-300">{t('dashboard.action.security.settings')}</span>
+                <span>{t('dashboard.action.security.settings')}</span>
               </div>
-            </button>
+            </LiquidGlassButton>
           </div>
         </div>
       </div>

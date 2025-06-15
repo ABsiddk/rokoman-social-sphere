@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
-import { Button } from '../ui/button';
+// import { Button } from '../ui/button';
+import LiquidGlassButton from '../ui/LiquidGlassButton';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
 import AddressFormSection from './address/AddressFormSection';
@@ -52,10 +54,14 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
 
       {/* Everything below Permanent Address is removed as requested */}
 
-      <div className="flex justify-end">
-        <Button /* rely on theme, no bg overrides */>
+      <div className="flex justify-end mt-8">
+        <LiquidGlassButton
+          onClick={handleSubmit}
+          className="bg-gradient-to-r from-blue-500/80 to-cyan-400/80 hover:from-blue-600/90 hover:to-cyan-600/90 text-white font-bold text-lg px-8 py-3 min-w-[160px] rounded-xl animate-fade-in transition-all duration-200"
+          type="button"
+        >
           {t('register.step3.continue')}
-        </Button>
+        </LiquidGlassButton>
       </div>
     </div>
   );

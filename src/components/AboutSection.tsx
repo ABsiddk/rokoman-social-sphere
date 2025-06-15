@@ -2,6 +2,7 @@
 import React from 'react';
 import { Target, Heart, Lightbulb, Rocket } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import LiquidGlassButton from "./ui/LiquidGlassButton";
 
 const AboutSection = () => {
   const { t } = useLanguage();
@@ -69,9 +70,11 @@ const AboutSection = () => {
               <p className="mb-6">
                 {t('about.journey.desc')}
               </p>
-              <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              <LiquidGlassButton
+                className="bg-white/90 text-blue-700 dark:text-cyan-100 font-semibold hover:bg-white/95 transition-colors px-6 py-2 rounded-lg"
+              >
                 {t('about.getstarted')}
-              </button>
+              </LiquidGlassButton>
             </div>
           </div>
         </div>

@@ -105,7 +105,7 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
       <div className="flex justify-end mt-8">
         <LiquidGlassSiennaButton
           type="submit"
-          className="bg-emerald-600/80 hover:bg-emerald-700/90 active:bg-emerald-900 text-white font-bold text-lg px-8 py-3 min-w-[160px] rounded-xl animate-fade-in"
+          className="bg-emerald-600/80 hover:bg-emerald-700/90 active:bg-emerald-900 text-white font-bold text-lg px-8 py-3 min-w-[160px] rounded-xl animate-fade-in transition-all duration-200"
           style={{ boxShadow: '0 6px 24px 0 rgba(40, 180, 99, 0.19), 0 1.5px 6px 0 rgba(52, 168, 83,0.23)' }}
         >
           {t('register.step2.save_continue')}

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Star, MapPin } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import LiquidGlassButton from "./ui/LiquidGlassButton";
 
 const MembersSection = () => {
   const { t } = useLanguage();
@@ -89,18 +90,18 @@ const MembersSection = () => {
                     {t('members.specialty')}: {member.specialty}
                   </p>
                 </div>
-                <button className="w-full mt-4 bg-gradient-to-r from-blue-500 to-orange-500 text-white py-2 rounded-lg hover:shadow-lg transition-all duration-200 hover:scale-105">
+                <LiquidGlassButton className="w-full mt-4 font-semibold py-2 rounded-lg text-white dark:text-cyan-100 bg-gradient-to-r from-blue-500/80 to-orange-500/80 hover:from-blue-600 hover:to-orange-600 transition-all duration-200">
                   {t('members.connect')}
-                </button>
+                </LiquidGlassButton>
               </div>
             </div>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <button className="bg-gray-800 dark:bg-white text-white dark:text-gray-800 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-200">
+          <LiquidGlassButton className="bg-gray-800 dark:bg-white text-white dark:text-gray-800 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-200">
             {t('members.viewall')}
-          </button>
+          </LiquidGlassButton>
         </div>
       </div>
     </section>

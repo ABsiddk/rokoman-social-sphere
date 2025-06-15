@@ -3,6 +3,7 @@ import React from 'react';
 import { Play, Users } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Link } from 'react-router-dom';
+import LiquidGlassButton from "./ui/LiquidGlassButton";
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -27,25 +28,16 @@ const HeroSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/register">
-                <button className="flex items-center justify-center space-x-3 bg-gradient-to-r from-[rgb(39,113,150)] via-[rgb(75,145,185)] to-[rgb(129,130,135)] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto hover:from-[rgb(45,125,165)] hover:via-[rgb(85,155,195)] hover:to-[rgb(139,140,145)]">
+                <LiquidGlassButton className="flex items-center justify-center space-x-3 px-8 py-4 rounded-xl font-semibold w-full sm:w-auto text-white dark:text-cyan-100 bg-gradient-to-r from-[rgb(39,113,150)] via-[rgb(75,145,185)] to-[rgb(129,130,135)] hover:from-[rgb(45,125,165)] hover:via-[rgb(85,155,195)] hover:to-[rgb(139,140,145)] transition-all duration-300">
                   <Users size={24} />
                   <span>{t('hero.join')}</span>
-                </button>
+                </LiquidGlassButton>
               </Link>
-              <button
-                className="
-                  flex items-center justify-center space-x-3 
-                  px-8 py-4 rounded-xl font-semibold w-full sm:w-auto 
-                  transition-all duration-300 
-                  border-2 border-transparent
-                  text-white bg-gray-800
-                  hover:bg-gray-900 hover:text-white 
-                  dark:bg-gray-900 dark:text-white dark:hover:bg-gray-950
-                  shadow-md
-                "
+              <LiquidGlassButton
+                className="flex items-center justify-center space-x-3 px-8 py-4 rounded-xl font-semibold w-full sm:w-auto transition-all duration-300 border-2 border-transparent text-white bg-gray-800 hover:bg-gray-900 hover:text-white dark:bg-gray-900 dark:text-white dark:hover:bg-gray-950 shadow-md"
               >
                 <span>{t('hero.learn')}</span>
-              </button>
+              </LiquidGlassButton>
             </div>
 
             <div className="flex items-center space-x-8 pt-4">
