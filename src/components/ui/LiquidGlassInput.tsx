@@ -11,6 +11,12 @@ const isMobile = () =>
   (window.innerWidth <= 600 ||
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 
+// --- Tablet detection added here (769px - 1024px) ---
+const isTablet = () =>
+  typeof window !== "undefined" &&
+  window.innerWidth >= 769 &&
+  window.innerWidth <= 1024;
+
 // Detect Bengali/Bangla or CJK scripts for width adjustment
 const isWideScript = (text: string = "") =>
   /[\u0980-\u09FF\u0900-\u097F\u3040-\u30FF\u4E00-\u9FFF]/.test(text);
@@ -37,6 +43,7 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
       if ((autoSize && relevantType) || autowidthForce) {
         if (!spanRef.current) return;
         const isMobileNow = isMobile();
+        const isTabletNow = isTablet();
 
         // Use value or placeholder for width measurement
         let valueForWidth: string =
@@ -72,8 +79,18 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
         }
 
         let measured = Math.ceil(spanRef.current.offsetWidth + pxPad * 2);
+
+        // --- Shrink by 60px for date inputs on TABLET screens only ---
+        if (
+          isTabletNow &&
+          (props.type === "date")
+        ) {
+          measured = measured - 60;
+        }
+
         setInputWidth(Math.max(min, Math.min(measured, max)));
       }
+    // Dependency array: add isTablet and isMobile checks as these may change on resize
     }, [props.placeholder, props.value, autoSize, relevantType, lang, autowidthForce]);
 
     return (
@@ -127,3 +144,4 @@ const LiquidGlassInput = React.forwardRef<HTMLInputElement, LiquidGlassInputProp
 
 LiquidGlassInput.displayName = "LiquidGlassInput";
 export default LiquidGlassInput;
+
