@@ -20,8 +20,6 @@ const StepIndicator = ({ currentStep, completedSteps, totalSteps }: StepIndicato
         return t('register.step2.title');
       case 3:
         return t('register.step3.title');
-      case 4:
-        return t('register.step4.title');
       default:
         return '';
     }
@@ -29,7 +27,7 @@ const StepIndicator = ({ currentStep, completedSteps, totalSteps }: StepIndicato
 
   return (
     <div className="flex justify-between items-start mb-8">
-      {Array.from({ length: totalSteps }, (_, index) => {
+      {Array.from({ length: 3 }, (_, index) => {
         const stepNumber = index + 1;
         const isCompleted = completedSteps.includes(stepNumber);
         const isCurrent = currentStep === stepNumber;
@@ -54,7 +52,7 @@ const StepIndicator = ({ currentStep, completedSteps, totalSteps }: StepIndicato
                   )}
                 </div>
               </div>
-              {stepNumber < totalSteps && (
+              {stepNumber < 3 && (
                 <div
                   className={`flex-1 h-0.5 ml-2 ${
                     completedSteps.includes(stepNumber) ? 'bg-green-500' : 'bg-gray-300'
@@ -73,3 +71,4 @@ const StepIndicator = ({ currentStep, completedSteps, totalSteps }: StepIndicato
 };
 
 export default StepIndicator;
+

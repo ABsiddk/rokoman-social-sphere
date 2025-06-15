@@ -1,8 +1,6 @@
 
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
-import { Label } from '../ui/label';
-import { Checkbox } from '../ui/checkbox';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { RegistrationData } from './RegistrationForm';
 import AddressFormSection from './address/AddressFormSection';
@@ -19,17 +17,10 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
   const { validateForm } = useAddressValidation();
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleSameAddressChange = (checked: boolean) => {
-    updateData({ sameAsPresentAddress: checked });
-    if (checked) {
-      updateData({ permanentAddress: { ...data.presentAddress } });
-    }
-  };
-
   const handleSubmit = () => {
     const validationErrors = validateForm(data);
     setErrors(validationErrors);
-    
+
     if (Object.keys(validationErrors).length === 0) {
       onComplete();
     }
@@ -60,32 +51,7 @@ const AddressStep = ({ data, updateData, onComplete }: AddressStepProps) => {
         />
       </div>
 
-      {/* Permanent Address */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-          {t('register.step3.permanent.title')}
-        </h3>
-
-        <div className="flex items-center space-x-2">
-          <Checkbox
-            id="sameAddress"
-            checked={data.sameAsPresentAddress}
-            onCheckedChange={handleSameAddressChange}
-          />
-          <Label htmlFor="sameAddress">
-            {t('register.step3.same.address')}
-          </Label>
-        </div>
-
-        {!data.sameAsPresentAddress && (
-          <AddressFormSection
-            address={data.permanentAddress}
-            onAddressChange={(address) => updateData({ permanentAddress: address })}
-            errors={errors}
-            fieldPrefix="permanent"
-          />
-        )}
-      </div>
+      {/* Everything below Permanent Address is removed as requested */}
 
       <div className="flex justify-end">
         <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">

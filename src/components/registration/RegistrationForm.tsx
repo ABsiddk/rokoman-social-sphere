@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import StepIndicator from './StepIndicator';
 import PhonePasswordStepContainer from './steps/PhonePasswordStepContainer';
 import PersonalInfoStepContainer from './steps/PersonalInfoStepContainer';
 import AddressStepContainer from './steps/AddressStepContainer';
-import ProfessionalStepContainer from './steps/ProfessionalStepContainer';
+// No longer import ProfessionalStepContainer
 
 export interface RegistrationData {
   // Step 1
@@ -33,6 +34,8 @@ export interface RegistrationData {
     villageHouseRoad: string;
     zipCode: string;
   };
+  // Note: permanentAddress, sameAsPresentAddress, occupation, professional fields are still present in data type for compatibility, but won’t be used in UI.
+
   permanentAddress: {
     nationality: string;
     division: string;
@@ -42,8 +45,6 @@ export interface RegistrationData {
     zipCode: string;
   };
   sameAsPresentAddress: boolean;
-  
-  // Step 4
   occupation: string;
   businessType?: string;
   businessSubCategory?: string;
@@ -123,7 +124,7 @@ const RegistrationForm = () => {
     if (!completedSteps.includes(step)) {
       setCompletedSteps(prev => [...prev, step]);
     }
-    if (step < 4) {
+    if (step < 3) {
       setCurrentStep(step + 1);
     }
   };
@@ -131,6 +132,7 @@ const RegistrationForm = () => {
   const renderCurrentStep = () => {
     switch (currentStep) {
       case 1:
+        // No StepIndicator on first step, only the form
         return (
           <PhonePasswordStepContainer
             data={registrationData}
@@ -140,27 +142,33 @@ const RegistrationForm = () => {
         );
       case 2:
         return (
-          <PersonalInfoStepContainer
-            data={registrationData}
-            updateData={updateRegistrationData}
-            onComplete={() => completeStep(2)}
-          />
+          <>
+            <StepIndicator
+              currentStep={currentStep}
+              completedSteps={completedSteps}
+              totalSteps={3}
+            />
+            <PersonalInfoStepContainer
+              data={registrationData}
+              updateData={updateRegistrationData}
+              onComplete={() => completeStep(2)}
+            />
+          </>
         );
       case 3:
         return (
-          <AddressStepContainer
-            data={registrationData}
-            updateData={updateRegistrationData}
-            onComplete={() => completeStep(3)}
-          />
-        );
-      case 4:
-        return (
-          <ProfessionalStepContainer
-            data={registrationData}
-            updateData={updateRegistrationData}
-            onComplete={() => completeStep(4)}
-          />
+          <>
+            <StepIndicator
+              currentStep={currentStep}
+              completedSteps={completedSteps}
+              totalSteps={3}
+            />
+            <AddressStepContainer
+              data={registrationData}
+              updateData={updateRegistrationData}
+              onComplete={() => completeStep(3)}
+            />
+          </>
         );
       default:
         return null;
@@ -179,12 +187,6 @@ const RegistrationForm = () => {
           </p>
         </div>
 
-        <StepIndicator
-          currentStep={currentStep}
-          completedSteps={completedSteps}
-          totalSteps={4}
-        />
-
         <div className="mt-8">
           {renderCurrentStep()}
         </div>
@@ -194,3 +196,4 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
+
