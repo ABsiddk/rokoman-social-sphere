@@ -7,10 +7,8 @@ import { RegistrationData } from './RegistrationForm';
 import OTPVerification from './OTPVerification';
 import CountryCodeSelect from './phone-password/CountryCodeSelect';
 import PhoneInput from './phone-password/PhoneInput';
-import PasswordFields from './phone-password/PasswordFields';
-import PhoneConfirmation from './phone-password/PhoneConfirmation';
 import { countryOptions } from './phone-password/countryOptions';
-import { validatePhone, validatePassword } from './phone-password/validationUtils';
+import { validatePhone } from './phone-password/validationUtils';
 
 interface PhonePasswordStepProps {
   data: RegistrationData;
@@ -21,12 +19,10 @@ interface PhonePasswordStepProps {
 const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepProps) => {
   const { t } = useLanguage();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
 
   const handlePhoneChange = (value: string) => {
     updateData({ phone: value });
-    
     if (errors.phone) {
       setErrors(prev => ({ ...prev, phone: '' }));
     }
@@ -34,23 +30,15 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
 
   const handleSendOTP = () => {
     const newErrors: Record<string, string> = {};
-    
     const phoneError = validatePhone(data.phone, data.countryCode, t);
     if (phoneError) newErrors.phone = phoneError;
-    
-    const passwordErrors = validatePassword(data.password, t);
-    if (passwordErrors.length > 0) newErrors.password = passwordErrors.join(', ');
-    
-    if (data.password !== data.confirmPassword) {
-      newErrors.confirmPassword = t('registration.password.error.match');
-    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    setShowConfirmation(true);
+    setShowOTP(true);
   };
 
   if (showOTP) {
@@ -59,16 +47,6 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
         phoneNumber={`${data.countryCode} ${data.phone}`}
         onVerified={onComplete}
         onBack={() => setShowOTP(false)}
-      />
-    );
-  }
-
-  if (showConfirmation) {
-    return (
-      <PhoneConfirmation
-        phoneNumber={`${data.countryCode} ${data.phone}`}
-        onEdit={() => setShowConfirmation(false)}
-        onConfirm={() => setShowOTP(true)}
       />
     );
   }
@@ -103,16 +81,6 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
           {errors.phone && <p className="text-red-500 text-sm font-medium mt-2">{errors.phone}</p>}
         </div>
 
-        {/* Password Fields */}
-        <PasswordFields
-          password={data.password}
-          confirmPassword={data.confirmPassword}
-          onPasswordChange={(password) => updateData({ password })}
-          onConfirmPasswordChange={(confirmPassword) => updateData({ confirmPassword })}
-          passwordError={errors.password}
-          confirmPasswordError={errors.confirmPassword}
-        />
-
         <Button
           onClick={handleSendOTP}
           className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 dark:from-green-600 dark:to-green-700 dark:hover:from-green-700 dark:hover:to-green-800 text-white font-semibold py-3 h-12 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
@@ -126,4 +94,3 @@ const PhonePasswordStep = ({ data, updateData, onComplete }: PhonePasswordStepPr
 };
 
 export default PhonePasswordStep;
-
