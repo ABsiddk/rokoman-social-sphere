@@ -47,7 +47,8 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
     <form onSubmit={handleSubmit} className={`space-y-6 ${sectionBg}`}>
       {/* Main title at top */}
       <div className="w-full flex justify-center mb-5">
-        <h1 className="text-3xl md:text-4xl font-bold text-primary dark:text-cyan-200 drop-shadow-md tracking-tight">
+        {/* Changed to a darker, more readable color in light mode */}
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-cyan-200 drop-shadow-md tracking-tight">
           {t('register.step4.title') || 'Professional Information'}
         </h1>
       </div>

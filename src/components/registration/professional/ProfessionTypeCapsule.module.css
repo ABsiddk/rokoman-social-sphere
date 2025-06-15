@@ -1,7 +1,7 @@
 
 .capsuleRow {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.1rem;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 0.5rem;
@@ -13,19 +13,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 130px;
-  height: 56px;
-  padding: 0 36px;
+  /* Responsive natural size by content */
+  flex: 0 0 auto;
+  min-width: 72px;
+  height: 42px;
+  padding: 0 1.25rem;
   border-radius: 999em;
-  font-size: 1.08rem;
+  font-size: 1.01rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: #222A32; /* improved for light background */
+  color: #222A32;
   background: linear-gradient(112deg, rgba(255,255,255,.53) 0%, rgba(5,117,170,0.97) 31%, rgba(26,236,200,0.96) 100%);
   box-shadow: 0 9px 44px 0 rgba(27,60,112,0.22), 0 2.5px 6.5px 0 rgba(39,113,150,0.14);
   backdrop-filter: blur(12px) saturate(165%);
   border: 3px solid rgba(5, 132, 196, .19);
-  margin: .35rem 0;
+  margin: .32rem 0;
   outline: none;
   transition: 
     box-shadow .29s cubic-bezier(.61, .14, .55, .5), 
@@ -37,6 +39,7 @@
   overflow: hidden;
   z-index: 1;
   will-change: background, border-color, box-shadow, filter;
+  white-space: nowrap;
 }
 
 .capsuleButton .shine {
@@ -84,9 +87,8 @@
 
 .capsuleButton.selected,
 .capsuleButton:active {
-  /* Super bright, glassy, saturated look */
   border-color: #27fcd0;
-  box-shadow: 0 24px 78px 14px rgba(32,250,189,0.53), 0 12px 44px 0 rgba(15,224,185,0.35); /* bigger, brighter */
+  box-shadow: 0 24px 78px 14px rgba(32,250,189,0.53), 0 12px 44px 0 rgba(15,224,185,0.35);
   background: linear-gradient(91deg, rgba(19,215,249,0.99) 10%, rgba(54,254,206,.99) 92%);
   color: #fff;
   filter: brightness(4.2) saturate(2.2) drop-shadow(0 0 12px #78ffe9);
@@ -131,10 +133,10 @@
 .capsuleButton:after {
   content: '';
   position: absolute;
-  right: 25px;
-  bottom: 13px;
-  width: 17px;
-  height: 17px;
+  right: 18px;
+  bottom: 11px;
+  width: 15px;
+  height: 15px;
   background: radial-gradient(ellipse at 60% 55%,rgba(255,255,255,.76) 69%,rgba(5,196,210,0.15) 100%);
   opacity: 0.18;
   border-radius: 50%;
@@ -143,52 +145,41 @@
   box-shadow: 0 4px 18px 2px rgba(27,60,112,0.15);
 }
 
-/* RESPONSIVENESS UPDATE */
-
-/* Tablet and below: fit multiple buttons per row (side by side) */
+/* RESPONSIVENESS */
 @media (max-width: 1024px) {
   .capsuleRow {
-    gap: 0.8rem;
-    justify-content: center;
+    gap: 0.7rem;
   }
   .capsuleButton {
-    min-width: 38vw;
-    max-width: 45vw;
-    flex: 1 1 38vw;
-    padding: 0 1vw;
-    font-size: 1rem;
-    height: 41px;
+    height: 40px;
+    font-size: 0.99rem;
+    min-width: 66px;
+    padding: 0 1.15rem;
   }
 }
 
-/* Small screens: also allow 2-per-row with better gap */
 @media (max-width: 768px) {
   .capsuleRow {
-    gap: 0.65rem;
-    justify-content: center;
+    gap: 0.55rem;
   }
   .capsuleButton {
-    min-width: 48vw;
-    max-width: 48vw;
-    flex: 1 1 48vw;
-    padding: 0 1.5vw;
-    font-size: 0.97rem;
-    height: 41px;
-    margin: 0.28rem 0;
+    height: 38px;
+    min-width: 58px;
+    font-size: 0.96rem;
+    padding: 0 0.95rem;
+    margin: 0.23rem 0;
   }
 }
 
-/* Tiny screens: make sure at least 2 fit, wrap if needed */
-@media (max-width: 440px) {
+/* tiny screens: keep natural width, stack if overflow */
+@media (max-width: 430px) {
   .capsuleRow {
-    gap: 0.45rem;
+    gap: 0.35rem;
   }
   .capsuleButton {
-    min-width: 94vw;
-    max-width: 99vw;
-    flex: 1 1 99vw;
-    padding: 0 2vw;
-    font-size: 0.96rem;
-    height: 38px;
+    height: 36px;
+    font-size: 0.94rem;
+    min-width: 48px;
+    padding: 0 0.8rem;
   }
 }
