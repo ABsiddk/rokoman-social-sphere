@@ -5,11 +5,13 @@
   align-items: start;
   width: 100%;
   max-width: 330px;
+  min-width: 330px;
+  position: relative;
 }
 
 .liquidGlassInput {
-  width: 100%;
-  min-width: 0;
+  width: 330px;
+  min-width: 330px;
   max-width: 330px;
   height: 44px;
   border-radius: 15px;
@@ -29,13 +31,14 @@
   z-index: 1;
   backdrop-filter: blur(9px) saturate(150%);
 }
+
 .liquidGlassInput:focus {
   border-color: #19eecd;
   box-shadow: 0 0 14px 0 #21ffe9, 0 1.8px 6.5px 0 #51fde2aa;
   background: linear-gradient(96deg, rgba(19,215,249,0.73) 10%, rgba(54,254,206,.59) 92%);
 }
 
-/* White placeholder in dark, dark placeholder in light */
+/* Placeholder color: black in light, white in dark mode */
 .liquidGlassInput::placeholder {
   color: #232323;
   opacity: 1;
@@ -43,18 +46,16 @@
 @media (prefers-color-scheme: dark) {
   .liquidGlassInput::placeholder {
     color: #fff;
-    opacity: 0.95;
+    opacity: 0.96;
   }
 }
-
-/* Also for non-webkit browsers */
 .liquidGlassInput::-webkit-input-placeholder {
   color: #232323;
 }
 @media (prefers-color-scheme: dark) {
   .liquidGlassInput::-webkit-input-placeholder {
     color: #fff;
-    opacity: 0.95;
+    opacity: 0.96;
   }
 }
 
@@ -68,10 +69,12 @@
   pointer-events: none;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 330px;
   height: 100%;
   border-radius: 15px;
   overflow: hidden;
+  z-index: 2;
+  will-change: transform, opacity;
 }
 @keyframes glassShine {
   0% { left: -80%; opacity: .7;}
@@ -91,13 +94,45 @@
   opacity: 0.22;
   animation: glassShine 2.7s infinite linear;
   border-radius: 15px;
+  will-change: opacity, transform;
 }
 
 @media (max-width: 600px) {
-  .liquidGlassInputContainer, .liquidGlassInput {
-    max-width: 98vw;
-    font-size: 0.95rem;
+  .liquidGlassInputContainer, .liquidGlassInput, .liquidGlassShine {
+    max-width: 330px;
+    min-width: 330px;
+    width: 330px;
+  }
+  .liquidGlassInput {
     height: 36px;
     padding: 0 0.6rem;
+    font-size: 0.95rem;
+  }
+
+  .liquidGlassShine, .liquidGlassShine::after {
+    border-radius: 15px;
+    height: 36px;
+  }
+}
+
+/* Even smaller screens: horizontal scroll */
+@media (max-width: 350px) {
+  .liquidGlassInputContainer,
+  .liquidGlassInput,
+  .liquidGlassShine {
+    min-width: 290px;
+    max-width: 98vw;
+    width: 98vw;
+  }
+}
+
+/* Super liquid responsive: smooth blur, scaling, and animation for all sizes */
+.liquidGlassInput, .liquidGlassShine, .liquidGlassShine::after {
+  transition: box-shadow .21s, border-color .18s, background .18s, height .18s, width .18s, font-size .17s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquidGlassShine::after {
+    animation: none !important;
   }
 }
