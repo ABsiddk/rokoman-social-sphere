@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type UserRole = 'admin' | 'moderator' | 'user';
@@ -14,6 +13,27 @@ export interface User {
   joinDate: string;
   lastLogin: string;
   isActive: boolean;
+
+  // extended fields
+  nickNames?: string[];
+  personalEmail?: string;
+  additionalPhones?: string[];
+  dateOfBirth?: string;
+  gender?: string;
+  religion?: string;
+  maritalStatus?: string;
+  presentAddress?: Record<string, string>;
+  permanentAddress?: Record<string, string>;
+  professionType?: string;
+  institution?: string;
+  department?: string;
+  designation?: string;
+  jobLocation?: string;
+  startDate?: string;
+  endDate?: string;
+  bcsBatch?: string;
+  bcsCadre?: string;
+  currentlyWorking?: boolean;
 }
 
 interface UserContextType {
