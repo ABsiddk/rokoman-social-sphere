@@ -25,13 +25,13 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
 
   return (
     <div className="md:col-span-2 animate-fade-in">
-      {/* Changed label to "Full Name" and color to white */}
+      {/* Synchronized label with language change */}
       <Label
         htmlFor="fullName"
         className="font-semibold"
         style={{ color: "#fff" }}
       >
-        Full Name
+        {t('register.step2.full_name')}
       </Label>
       <Input
         id="fullName"
