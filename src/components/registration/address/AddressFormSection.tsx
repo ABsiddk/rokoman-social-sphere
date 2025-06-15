@@ -66,7 +66,7 @@ const AddressFormSection = ({ address, onAddressChange, errors, fieldPrefix }: A
           onValueChange={(value) => onAddressChange({ ...address, district: value })}
         >
           <SelectTrigger className={errors[`${fieldPrefix}District`] ? 'border-red-500' : ''}>
-            <SelectValue placeholder={t('register.step3.district.placeholder')} />
+            <SelectValue placeholder={t('register.step3.district.placeholder']} />
           </SelectTrigger>
           <SelectContent>
             {districts.map((district) => (
@@ -83,7 +83,7 @@ const AddressFormSection = ({ address, onAddressChange, errors, fieldPrefix }: A
           value={address.subDistrict}
           onChange={(e) => onAddressChange({ ...address, subDistrict: e.target.value })}
           placeholder={t('register.step3.subdistrict.placeholder')}
-          className={errors[`${fieldPrefix}SubDistrict`] ? 'border-red-500' : ''}
+          className={`placeholder-white dark:placeholder-white ${errors[`${fieldPrefix}SubDistrict`] ? 'border-red-500' : ''}`}
         />
         {errors[`${fieldPrefix}SubDistrict`] && <p className="text-red-500 text-sm mt-1">{errors[`${fieldPrefix}SubDistrict`]}</p>}
       </div>
@@ -94,6 +94,7 @@ const AddressFormSection = ({ address, onAddressChange, errors, fieldPrefix }: A
           value={address.villageHouseRoad}
           onChange={(e) => onAddressChange({ ...address, villageHouseRoad: e.target.value })}
           placeholder={t('register.step3.village.placeholder')}
+          className="placeholder-white dark:placeholder-white"
         />
       </div>
 
@@ -103,6 +104,7 @@ const AddressFormSection = ({ address, onAddressChange, errors, fieldPrefix }: A
           value={address.zipCode}
           onChange={(e) => onAddressChange({ ...address, zipCode: e.target.value })}
           placeholder={t('register.step3.zipcode.placeholder')}
+          className="placeholder-white dark:placeholder-white"
         />
       </div>
     </div>
@@ -110,3 +112,4 @@ const AddressFormSection = ({ address, onAddressChange, errors, fieldPrefix }: A
 };
 
 export default AddressFormSection;
+
