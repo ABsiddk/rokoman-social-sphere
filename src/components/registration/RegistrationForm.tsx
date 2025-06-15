@@ -54,6 +54,10 @@ export interface RegistrationData {
   professionType: string;
   isBCS?: boolean;
   bcsSession?: string;
+  // ---- NEW FIELDS ----
+  institutionName?: string;
+  department?: string;
+  designation?: string;
 }
 
 const RegistrationForm = () => {
@@ -103,7 +107,10 @@ const RegistrationForm = () => {
     currentlyWorking: false,
     professionType: '',
     isBCS: false,
-    bcsSession: ''
+    bcsSession: '',
+    institutionName: '',
+    department: '',
+    designation: ''
   });
 
   const updateRegistrationData = (data: Partial<RegistrationData>) => {

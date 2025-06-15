@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
@@ -8,6 +7,12 @@ import { useProfessionalValidation } from './professional/ProfessionalValidation
 import LiquidGlassSiennaButton from '../ui/LiquidGlassSiennaButton';
 import ProfessionTypeSelector from './professional/ProfessionTypeSelector';
 import LiquidGlassInput from '../ui/LiquidGlassInput';
+import SearchableInput from "../ui/SearchableInput";
+import {
+  institutionSuggestions,
+  departmentSuggestions,
+  designationSuggestions,
+} from "./professional/ProfessionalSuggestions";
 
 interface ProfessionalStepProps {
   data: RegistrationData;
@@ -16,7 +21,7 @@ interface ProfessionalStepProps {
 }
 
 const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { validateForm } = useProfessionalValidation();
   const [submitting, setSubmitting] = useState(false);
@@ -59,7 +64,6 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
   };
 
   return (
-    // Removed space-y-6 to tighten form vertical spacing
     <form onSubmit={handleSubmit} className={`gap-y-3 flex flex-col ${sectionBg}`}>
       <div className="w-full flex justify-center mb-3">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-cyan-200 drop-shadow-md tracking-tight">
@@ -71,6 +75,49 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         value={data.professionType}
         onChange={handleProfessionTypeChange}
       />
+
+      {/* NEW: Searchable professional info inputs */}
+      <div
+        className="w-full flex flex-col gap-2 md:flex-row md:gap-4"
+        style={{ marginBottom: "0.3rem" }}
+      >
+        <div className="flex-1 min-w-[120px]">
+          <SearchableInput
+            label={t('register.step4.institution_name') || "Institution Name"}
+            placeholder={t('register.step4.institution_name.placeholder') || "e.g. University of Dhaka"}
+            suggestions={institutionSuggestions}
+            value={data.institutionName || ""}
+            onChange={val => updateData({ institutionName: val })}
+            autoComplete="organization"
+            id="institutionName"
+            maxLength={48}
+          />
+        </div>
+        <div className="flex-1 min-w-[120px]">
+          <SearchableInput
+            label={t('register.step4.department') || "Department"}
+            placeholder={t('register.step4.department.placeholder') || "e.g. Computer Science"}
+            suggestions={departmentSuggestions}
+            value={data.department || ""}
+            onChange={val => updateData({ department: val })}
+            autoComplete="department"
+            id="department"
+            maxLength={48}
+          />
+        </div>
+        <div className="flex-1 min-w-[120px]">
+          <SearchableInput
+            label={t('register.step4.designation') || "Designation"}
+            placeholder={t('register.step4.designation.placeholder') || "e.g. Manager"}
+            suggestions={designationSuggestions}
+            value={data.designation || ""}
+            onChange={val => updateData({ designation: val })}
+            autoComplete="title"
+            id="designation"
+            maxLength={48}
+          />
+        </div>
+      </div>
 
       {data.professionType === 'government' && (
         <div className="w-full flex flex-col items-start animate-fade-in mb-1">
@@ -163,4 +210,3 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
 };
 
 export default ProfessionalStep;
-
