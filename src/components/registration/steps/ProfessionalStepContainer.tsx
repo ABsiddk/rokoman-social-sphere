@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ProfessionalStep from '../ProfessionalStep';
 import { RegistrationData } from '../RegistrationForm';
@@ -11,10 +10,9 @@ interface StepProps {
 const ProfessionalStepContainer = ({ data, updateData }: StepProps) => {
   const navigate = useNavigate();
 
-  // Mimic onComplete like other steps: save and navigate
   const handleComplete = () => {
     localStorage.setItem('registrationData', JSON.stringify(data));
-    navigate('/register-success'); // Optionally you would need to create this route
+    navigate('/profile'); // Go to profile page on complete
   };
 
   return (

@@ -63,6 +63,10 @@ export interface RegistrationData {
   // Step 4 additions for Student
   gradeLevel?: string;
   sessionYear?: string;
+  
+  // New fields for enhanced professional step
+  professionDescription?: string;
+  workAddress?: string;
 }
 
 const RegistrationForm = () => {
@@ -118,7 +122,9 @@ const RegistrationForm = () => {
     designation: '',
     jobLocation: '',
     gradeLevel: '',
-    sessionYear: ''
+    sessionYear: '',
+    professionDescription: '',
+    workAddress: ''
   });
 
   const updateRegistrationData = (data: Partial<RegistrationData>) => {

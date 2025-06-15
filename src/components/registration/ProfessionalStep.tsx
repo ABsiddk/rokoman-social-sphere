@@ -8,6 +8,7 @@ import LiquidGlassSiennaButton from '../ui/LiquidGlassSiennaButton';
 import ProfessionTypeSelector from './professional/ProfessionTypeSelector';
 import LiquidGlassInput from '../ui/LiquidGlassInput';
 import SearchableInput from "../ui/SearchableInput";
+import LiquidGlassTextarea from "../ui/LiquidGlassTextarea";
 import {
   getInstitutionSuggestions,
   getDepartmentSuggestions,
@@ -165,6 +166,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         {!isStudent && (
           <>
             <div className="flex-1 min-w-[120px]">
+              {/* Department */}
               <SearchableInput
                 label={t('register.step4.department') || "Department"}
                 placeholder={t('register.step4.department.placeholder') || "e.g. Computer Science"}
@@ -177,6 +179,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
               />
             </div>
             <div className="flex-1 min-w-[120px]">
+              {/* Designation */}
               <SearchableInput
                 label={t('register.step4.designation') || "Designation"}
                 placeholder={t('register.step4.designation.placeholder') || "e.g. Manager"}
@@ -194,6 +197,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
         {isStudent && (
           <>
             <div className="flex-1 min-w-[120px]">
+              {/* Grade Level */}
               <SearchableInput
                 label={t('register.step4.grade_level')}
                 placeholder={t('register.step4.grade_level.placeholder')}
@@ -206,6 +210,7 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
               />
             </div>
             <div className="flex-1 min-w-[120px]">
+              {/* Session Year */}
               <SearchableInput
                 label={t('register.step4.session_year')}
                 placeholder={t('register.step4.session_year.placeholder')}
@@ -266,9 +271,9 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
             </div>
           </div>
 
-          {/* Job Location field before the submit button */}
-          <div className="w-full flex flex-col items-start mb-2 animate-fade-in">
-            <div className="w-full md:w-2/3 sm:w-full">
+          {/* Job Location + Profession Description row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5 w-full mb-2 animate-fade-in">
+            <div className="flex flex-col">
               <SearchableInput
                 label={t('register.step4.job_location') || "Job Location"}
                 placeholder={t('register.step4.job_location.placeholder') || "Select your work district"}
@@ -282,12 +287,36 @@ const ProfessionalStep = ({ data, updateData, onComplete }: ProfessionalStepProp
                 style={{ minWidth: 0, maxWidth: "none" }}
               />
             </div>
+            <div className="flex flex-col">
+              <LiquidGlassTextarea
+                label={t('register.step4.profession_description')}
+                placeholder={t('register.step4.profession_description.placeholder')}
+                value={data.professionDescription || ""}
+                onChange={e => updateData({ professionDescription: e.target.value })}
+                maxLength={500}
+                className="mt-1"
+              />
+            </div>
+          </div>
+          {/* Work Address */}
+          <div className="w-full flex flex-col mb-2 animate-fade-in">
+            <LiquidGlassInput
+              label={t('register.step4.work_address')}
+              placeholder={t('register.step4.work_address.placeholder')}
+              value={data.workAddress || ""}
+              onChange={e => updateData({ workAddress: e.target.value })}
+              maxLength={200}
+              id="workAddress"
+              autoComplete="address-line1"
+              className="mt-1"
+              style={{ minWidth: 0, maxWidth: "none" }}
+            />
           </div>
         </>
       )}
 
-      {/* Submit Button: always shown */}
-      <div className="w-full mt-4 flex md:justify-start sm:justify-start justify-start">
+      {/* Submit Button: always shown and centered */}
+      <div className="w-full mt-4 flex justify-center">
         <LiquidGlassSiennaButton
           type="submit"
           disabled={submitting}

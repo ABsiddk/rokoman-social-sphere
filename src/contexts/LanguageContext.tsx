@@ -211,6 +211,10 @@ const translations = {
     'register.step4.currently_working': 'Currently Working',
     'register.step4.job_description': 'Job Description',
     'register.step4.complete_registration': 'Complete Registration',
+    'register.step4.profession_description': 'Give a brief description of your profession',
+    'register.step4.profession_description.placeholder': 'Describe your role and responsibilities...',
+    'register.step4.work_address': 'Enter your address',
+    'register.step4.work_address.placeholder': 'Enter your work/home address',
     // REMOVE: All keys beginning with register.step4.business, and register.step4.designation
     
     // Step 4 Errors
@@ -478,6 +482,10 @@ const translations = {
     'register.step4.currently_working': 'বর্তমানে কাজ করছেন',
     'register.step4.job_description': 'কাজের বিবরণ',
     'register.step4.complete_registration': 'নিবন্ধন সম্পূর্ণ করুন',
+    'register.step4.profession_description': 'আপনার পেশার একটি সংক্ষিপ্ত বিবরণ দিন',
+    'register.step4.profession_description.placeholder': 'আপনার ভূমিকা এবং দায়িত্ব বর্ণনা করুন...',
+    'register.step4.work_address': 'আপনার ঠিকানা লিখুন',
+    'register.step4.work_address.placeholder': 'আপনার কর্মস্থল/বাসার ঠিকানা লিখুন',
     // REMOVE: All keys beginning with register.step4.business, and register.step4.designation
     
     // Step 4 Errors
