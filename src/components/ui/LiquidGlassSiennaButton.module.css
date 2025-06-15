@@ -1,0 +1,70 @@
+
+.liquidGlassSiennaButton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: rgba(160,82,45,0.07);
+  backdrop-filter: blur(8px) saturate(180%);
+  box-shadow: 0 6px 24px 0 rgba(95, 36, 8, 0.19), 0 1.5px 6px 0 rgba(160,82,45,0.23);
+  border: 2.5px solid rgba(160,82,45,0.35);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.3s;
+  min-height: 48px;
+  min-width: 120px;
+}
+
+.liquidGlassSiennaButton:before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  width: 160%;
+  height: 180%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.08) 13%,
+    rgba(160,82,45, 0.18) 35%,
+    rgba(255,255,255,0.36) 48%,
+    rgba(160,82,45, 0.19) 66%,
+    rgba(255,255,255,0.09) 83%
+  );
+  filter: blur(7px);
+  mix-blend-mode: lighten;
+  opacity: 0.74;
+  animation: siennaGlassShine 3s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes siennaGlassShine {
+  0% {
+    transform: translateX(-30%) scaleX(1.0) skewX(-8deg);
+    opacity: 0.47;
+  }
+  50% {
+    transform: translateX(30%) scaleX(1.09) skewX(-8deg);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translateX(100%) scaleX(1.17) skewX(-8deg);
+    opacity: 0.47;
+  }
+}
+
+.liquidGlassSiennaButton:active {
+  border-color: rgba(160,82,45,0.48);
+  background: rgba(160,82,45,0.10);
+  box-shadow: 0 8px 32px 0 rgba(95,36,8,0.19);
+}
+
+.liquidGlassSiennaButtonContent {
+  position: relative;
+  z-index: 1;
+}
+
+.liquidGlassSiennaButton:disabled {
+  filter: grayscale(0.42);
+  opacity: 0.60;
+  box-shadow: none;
+  background: rgba(160,82,45,0.14);
+}
+
