@@ -2,6 +2,7 @@
 import React from 'react';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
+import styles from '../../registration/phone-password/LiquidGlassButton.module.css';
 
 interface BasicInfoSectionProps {
   fullName: string;
@@ -22,10 +23,8 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   inputBgColor = 'bg-[rgb(55,65,81)] text-white border-none focus:ring-2 focus:ring-primary',
   t,
 }) => {
-
   return (
     <div className="md:col-span-2 animate-fade-in">
-      {/* Changed label as requested */}
       <Label
         htmlFor="fullName"
         className="font-semibold"
@@ -38,7 +37,20 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
         value={fullName}
         onChange={(e) => onFullNameChange(e.target.value)}
         placeholder={t('register.step2.full_name_placeholder')}
-        className={`${inputBgColor} ${fullNameError ? 'border-red-500' : ''}`}
+        // Add both the glass-effect class and entry animation
+        className={`
+          ${styles.liquidGlassButton}
+          text-white
+          px-5 py-3 rounded-xl font-semibold text-base
+          shadow-md
+          focus:outline-none
+          transition-all duration-200
+          animate-fade-in
+          hover:scale-105 
+          active:scale-100
+          backdrop-blur-sm
+          ${fullNameError ? 'border-red-500' : ''}
+        `}
         autoComplete="off"
       />
       {fullNameError && (
@@ -51,3 +63,4 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
 };
 
 export default BasicInfoSection;
+
