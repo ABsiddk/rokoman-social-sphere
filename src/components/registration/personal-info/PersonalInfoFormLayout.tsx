@@ -1,10 +1,11 @@
+
 import React from 'react';
 import BasicInfoSection from './BasicInfoSection';
 import NicknameSection from './NicknameSection';
 import PersonalDetailsSection from './PersonalDetailsSection';
 import EmailSection from './EmailSection';
 import AdditionalPhonesSection from './AdditionalPhonesSection';
-import { Button } from '../../ui/button';
+import LiquidGlassButton from '../../ui/LiquidGlassButton';
 import { useLanguage } from '../../../contexts/LanguageContext';
 
 interface PersonalInfoFormLayoutProps {
@@ -40,9 +41,9 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
   const handleAdditionalPhones = (additionalPhones: string[]) => updateData({ additionalPhones });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative z-10 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 drop-shadow-lg animate-fade-in">
           {t('register.step2.title')}
         </h2>
       </div>
@@ -107,9 +108,9 @@ const PersonalInfoFormLayout: React.FC<PersonalInfoFormLayoutProps> = ({
         />
       </div>
       <div className="flex justify-end">
-        <Button onClick={onSubmit} className="bg-green-600 hover:bg-green-700">
+        <LiquidGlassButton onClick={onSubmit} className="animate-fade-in">
           {t('register.step2.save_continue')}
-        </Button>
+        </LiquidGlassButton>
       </div>
     </div>
   );

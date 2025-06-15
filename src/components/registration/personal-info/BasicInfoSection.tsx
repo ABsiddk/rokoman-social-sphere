@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
-import { Button } from '../../ui/button';
+import LiquidGlassButton from '../../ui/LiquidGlassButton';
 
 interface BasicInfoSectionProps {
   fullName: string;
@@ -39,7 +40,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
 
   return (
     <>
-      <div className="md:col-span-2">
+      <div className="md:col-span-2 animate-fade-in">
         {/* Force label text and color for full name */}
         <Label
           htmlFor="fullName"
@@ -63,7 +64,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
         )}
       </div>
 
-      <div>
+      <div className="animate-fade-in">
         <Label htmlFor="nickname1" className={labelColor}>
           {t('register.step2.nickname')} 1
         </Label>
@@ -80,25 +81,24 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
         </div>
       </div>
 
-      <div>
+      <div className="animate-fade-in">
         {!showNickname2 ? (
           <div className="flex items-center gap-2 mt-2">
-            <Button
+            <LiquidGlassButton
               type="button"
-              variant="outline"
               disabled
-              className="border-[#ffe6b2] text-[#ffe6b2] cursor-default"
+              className="cursor-default !bg-transparent !shadow-none"
+              style={{ opacity: 0.54, pointerEvents: 'none' }}
             >
               {t('register.step2.nickname')} 2
-            </Button>
-            <Button
+            </LiquidGlassButton>
+            <LiquidGlassButton
               type="button"
-              variant="outline"
-              className="border-[#ffe6b2] text-[#ffe6b2]"
+              className=""
               onClick={handleAddNickname2}
             >
               + {t('register.step2.add_nickname') ?? 'Add Nickname'}
-            </Button>
+            </LiquidGlassButton>
           </div>
         ) : (
           <div className="mt-2">

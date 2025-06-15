@@ -2,7 +2,7 @@
 import React from 'react';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
-import { Button } from '../../ui/button';
+import LiquidGlassButton from '../../ui/LiquidGlassButton';
 
 interface NicknameSectionProps {
   nickNames: string[];
@@ -46,7 +46,7 @@ const NicknameSection = ({
   const numFields = Math.max(1, visibleNicknames.filter((n, i) => n || i < nextToShow + 1).length);
 
   return (
-    <div>
+    <div className="animate-fade-in">
       {[...Array(TOTAL_NICKNAMES - 1)].map((_, i) =>
         (i < numFields) ? (
           <div key={i + 2} className="mb-2">
@@ -65,18 +65,16 @@ const NicknameSection = ({
         ) : null
       )}
       {numFields < (TOTAL_NICKNAMES - 1) && (
-        <Button
+        <LiquidGlassButton
           type="button"
-          variant="outline"
+          className="mt-2 text-[rgb(145,153,165)]"
           onClick={handleAdd}
-          className="mt-2 text-[rgb(145,153,165)] border-[rgb(145,153,165)]"
         >
           {t('register.step2.add_nickname')}
-        </Button>
+        </LiquidGlassButton>
       )}
     </div>
   );
 };
 
 export default NicknameSection;
-
