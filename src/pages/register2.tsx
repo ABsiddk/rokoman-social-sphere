@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -42,7 +41,6 @@ const Registerelement2 = () => {
       zipCode: ''
     },
     sameAsPresentAddress: false,
-    occupation: '',
     workplaceAddress: {
       nationality: 'Bangladesh',
       division: '',
@@ -97,4 +95,3 @@ const Registerelement2 = () => {
 };
 
 export default Registerelement2;
-
