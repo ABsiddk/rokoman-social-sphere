@@ -22,6 +22,7 @@ interface LiquidGlassSelectProps {
   id?: string;
   className?: string;
   error?: string;
+  disabled?: boolean;
 }
 
 const gradient =
@@ -30,6 +31,8 @@ const hoverGradient =
   "hover:from-blue-100 hover:to-sky-200 dark:hover:from-[#47506E] dark:hover:via-[#29598E] dark:hover:to-[#29383A]";
 const optionHover =
   "data-[state=checked]:bg-emerald-600/70 data-[state=checked]:text-white hover:bg-emerald-500/10 hover:text-emerald-900 dark:hover:text-emerald-300";
+const disabledStyle =
+  "disabled:opacity-67 disabled:cursor-not-allowed";
 
 const LiquidGlassSelect: React.FC<LiquidGlassSelectProps> = ({
   value,
@@ -39,8 +42,9 @@ const LiquidGlassSelect: React.FC<LiquidGlassSelectProps> = ({
   id,
   className,
   error,
+  disabled = false,
 }) => (
-  <Select value={value} onValueChange={onValueChange}>
+  <Select value={value} onValueChange={onValueChange} disabled={disabled}>
     <SelectTrigger
       id={id}
       className={cn(
@@ -48,6 +52,7 @@ const LiquidGlassSelect: React.FC<LiquidGlassSelectProps> = ({
         "backdrop-blur-xl",
         gradient,
         hoverGradient,
+        disabledStyle,
         className,
         error ? "border-red-500" : "",
         "animate-fade-in"
@@ -55,20 +60,22 @@ const LiquidGlassSelect: React.FC<LiquidGlassSelectProps> = ({
     >
       <SelectValue placeholder={placeholder} />
     </SelectTrigger>
-    <SelectContent className={cn("rounded-xl shadow-2xl mt-2 p-1 border-none !bg-white/90 dark:!bg-[rgb(55,65,81)] dark:text-white z-[1000]")}>
-      {options.map(opt => (
-        <SelectItem
-          key={opt.value}
-          value={opt.value}
-          className={cn(
-            "rounded-md px-3 py-2 m-1 transition duration-200",
-            optionHover
-          )}
-        >
-          {opt.label}
-        </SelectItem>
-      ))}
-    </SelectContent>
+    {!disabled && (
+      <SelectContent className={cn("rounded-xl shadow-2xl mt-2 p-1 border-none !bg-white/90 dark:!bg-[rgb(55,65,81)] dark:text-white z-[1000]")}>
+        {options.map(opt => (
+          <SelectItem
+            key={opt.value}
+            value={opt.value}
+            className={cn(
+              "rounded-md px-3 py-2 m-1 transition duration-200",
+              optionHover
+            )}
+          >
+            {opt.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    )}
     {error && <p className="text-red-500 text-xs mt-1 ml-1">{error}</p>}
   </Select>
 );

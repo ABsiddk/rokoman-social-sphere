@@ -33,120 +33,89 @@ const PersonalInfoSection: React.FC<Props> = ({ isEditing }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <Label htmlFor="profile-fullname">{t("profile.name")}</Label>
-          {isEditing ? (
-            <LiquidGlassInput
-              id="profile-fullname"
-              value={fullName}
-              onChange={e => setFullName(e.target.value)}
-              className="w-full"
-              placeholder={t("register.step2.full_name_placeholder")}
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">{currentUser?.name}</span>
-          )}
+          <LiquidGlassInput
+            id="profile-fullname"
+            value={isEditing ? fullName : (currentUser?.name || "")}
+            onChange={e => setFullName(e.target.value)}
+            className="w-full"
+            placeholder={currentUser?.name || t("register.step2.full_name_placeholder")}
+            disabled={!isEditing}
+          />
         </div>
         <div>
           <Label htmlFor="profile-nick">{t("register.step2.nickname")}</Label>
-          {isEditing ? (
-            <LiquidGlassInput
-              id="profile-nick"
-              value={nickNames[0] || ""}
-              onChange={e => setNickNames([e.target.value])}
-              className="w-full"
-              placeholder={t("register.step2.nickname_placeholder")}
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">{currentUser?.nickNames?.[0]}</span>
-          )}
+          <LiquidGlassInput
+            id="profile-nick"
+            value={isEditing ? (nickNames[0] || "") : (currentUser?.nickNames?.[0] || "")}
+            onChange={e => setNickNames([e.target.value])}
+            className="w-full"
+            placeholder={currentUser?.nickNames?.[0] || t("register.step2.nickname_placeholder")}
+            disabled={!isEditing}
+          />
         </div>
         <div>
           <Label htmlFor="profile-dob">{t("register.step2.date_of_birth")}</Label>
-          {isEditing ? (
-            <LiquidGlassInput
-              id="profile-dob"
-              type="date"
-              value={dateOfBirth}
-              onChange={e => setDateOfBirth(e.target.value)}
-              className="w-full"
-              placeholder={t("register.step2.date_of_birth")}
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">
-              {currentUser?.dateOfBirth
-                ? format(new Date(currentUser.dateOfBirth), "yyyy-MM-dd")
-                : t("profile.not.provided")}
-            </span>
-          )}
+          <LiquidGlassInput
+            id="profile-dob"
+            type="date"
+            value={isEditing ? dateOfBirth : (currentUser?.dateOfBirth ? format(new Date(currentUser.dateOfBirth), "yyyy-MM-dd") : "")}
+            onChange={e => setDateOfBirth(e.target.value)}
+            className="w-full"
+            placeholder={t("register.step2.date_of_birth")}
+            disabled={!isEditing}
+          />
         </div>
         <div>
           <Label htmlFor="profile-gender">{t("register.step2.gender.label")}</Label>
-          {isEditing ? (
-            <LiquidGlassSelect
-              id="profile-gender"
-              value={gender}
-              onValueChange={setGender}
-              options={genderOptions}
-              placeholder={t("register.step2.gender.placeholder")}
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">{currentUser?.gender}</span>
-          )}
+          <LiquidGlassSelect
+            id="profile-gender"
+            value={isEditing ? gender : (currentUser?.gender || "")}
+            onValueChange={setGender}
+            options={genderOptions}
+            placeholder={currentUser?.gender || t("register.step2.gender.placeholder")}
+          />
         </div>
         <div>
           <Label htmlFor="profile-religion">{t("register.step2.religion.label")}</Label>
-          {isEditing ? (
-            <LiquidGlassSelect
-              id="profile-religion"
-              value={religion}
-              onValueChange={setReligion}
-              options={religionOptions}
-              placeholder={t("register.step2.religion.placeholder")}
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">{currentUser?.religion}</span>
-          )}
+          <LiquidGlassSelect
+            id="profile-religion"
+            value={isEditing ? religion : (currentUser?.religion || "")}
+            onValueChange={setReligion}
+            options={religionOptions}
+            placeholder={currentUser?.religion || t("register.step2.religion.placeholder")}
+          />
         </div>
         <div>
           <Label htmlFor="profile-marital">{t("register.step2.marital.label")}</Label>
-          {isEditing ? (
-            <LiquidGlassSelect
-              id="profile-marital"
-              value={maritalStatus}
-              onValueChange={setMaritalStatus}
-              options={maritalStatusOptions}
-              placeholder={t("register.step2.marital.placeholder")}
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">{currentUser?.maritalStatus}</span>
-          )}
+          <LiquidGlassSelect
+            id="profile-marital"
+            value={isEditing ? maritalStatus : (currentUser?.maritalStatus || "")}
+            onValueChange={setMaritalStatus}
+            options={maritalStatusOptions}
+            placeholder={currentUser?.maritalStatus || t("register.step2.marital.placeholder")}
+          />
         </div>
         <div>
           <Label htmlFor="profile-personal-email">{t("register.step2.personal_email")}</Label>
-          {isEditing ? (
-            <LiquidGlassInput
-              id="profile-personal-email"
-              value={personalEmail}
-              onChange={e => setPersonalEmail(e.target.value)}
-              className="w-full"
-              placeholder={t("register.step2.personal_email_placeholder")}
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">{currentUser?.personalEmail}</span>
-          )}
+          <LiquidGlassInput
+            id="profile-personal-email"
+            value={isEditing ? personalEmail : (currentUser?.personalEmail || "")}
+            onChange={e => setPersonalEmail(e.target.value)}
+            className="w-full"
+            placeholder={currentUser?.personalEmail || t("register.step2.personal_email_placeholder")}
+            disabled={!isEditing}
+          />
         </div>
         <div>
           <Label htmlFor="profile-additional-phone">{t("register.step2.additional_phone")}</Label>
-          {isEditing ? (
-            <LiquidGlassInput
-              id="profile-additional-phone"
-              value={additionalPhones[0] || ""}
-              onChange={e => setAdditionalPhones([e.target.value])}
-              className="w-full"
-              placeholder={t("register.step2.additional_phone_placeholder")}
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">{currentUser?.additionalPhones?.[0]}</span>
-          )}
+          <LiquidGlassInput
+            id="profile-additional-phone"
+            value={isEditing ? (additionalPhones[0] || "") : (currentUser?.additionalPhones?.[0] || "")}
+            onChange={e => setAdditionalPhones([e.target.value])}
+            className="w-full"
+            placeholder={currentUser?.additionalPhones?.[0] || t("register.step2.additional_phone_placeholder")}
+            disabled={!isEditing}
+          />
         </div>
       </div>
     </div>

@@ -20,18 +20,15 @@ const PhoneSecuritySection: React.FC<Props> = ({ isEditing }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="profile-phone">{t("profile.phone")}</Label>
-          {isEditing ? (
-            <LiquidGlassInput
-              id="profile-phone"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
-              className="w-full"
-              placeholder={t("profile.phone")}
-              autoComplete="off"
-            />
-          ) : (
-            <span className="block bg-gray-50 dark:bg-gray-700 rounded px-2 py-2 text-gray-800 dark:text-cyan-50">{currentUser?.phone || t("profile.not.provided")}</span>
-          )}
+          <LiquidGlassInput
+            id="profile-phone"
+            value={isEditing ? phone : (currentUser?.phone || "")}
+            onChange={e => setPhone(e.target.value)}
+            className="w-full"
+            placeholder={currentUser?.phone || t("profile.phone")}
+            autoComplete="off"
+            disabled={!isEditing}
+          />
         </div>
       </div>
       {/* Password editing/copy functionality can be added here if business logic permits */}
