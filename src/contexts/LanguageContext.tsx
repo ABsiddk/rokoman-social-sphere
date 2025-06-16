@@ -30,6 +30,17 @@ const translations = {
     'common.edit': 'Edit',
     'common.required': 'Required',
     'common.optional': 'Optional',
+
+    // Profile
+    'profile.phone.security': 'Phone & Security',
+    'profile.phone': 'Phone Number',
+    'profile.phone.placeholder': 'Enter your phone number',
+    'profile.phone.empty': 'No phone number provided',
+    'profile.personal.info': 'Personal Information',
+    'profile.address.info': 'Address Information',
+    'profile.professional.info': 'Professional Information',
+    'profile.login.required': 'Login Required',
+    'profile.login.message': 'Please log in to view your profile',
     
     // Hero Section
     'hero.welcome': 'Welcome to',
@@ -301,6 +312,17 @@ const translations = {
     'common.edit': 'সম্পাদনা',
     'common.required': 'আবশ্যক',
     'common.optional': 'ঐচ্ছিক',
+
+    // Profile
+    'profile.phone.security': 'ফোন এবং নিরাপত্তা',
+    'profile.phone': 'ফোন নম্বর',
+    'profile.phone.placeholder': 'আপনার ফোন নম্বর লিখুন',
+    'profile.phone.empty': 'কোন ফোন নম্বর প্রদান করা হয়নি',
+    'profile.personal.info': 'ব্যক্তিগত তথ্য',
+    'profile.address.info': 'ঠিকানা তথ্য',
+    'profile.professional.info': 'পেশাগত তথ্য',
+    'profile.login.required': 'লগইন প্রয়োজন',
+    'profile.login.message': 'আপনার প্রোফাইল দেখতে দয়া করে লগইন করুন',
     
     // Hero Section
     'hero.welcome': 'স্বাগতম',

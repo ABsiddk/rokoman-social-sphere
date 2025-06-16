@@ -25,7 +25,7 @@ const PhoneSecuritySection: React.FC<Props> = ({ isEditing }) => {
             value={isEditing ? phone : (currentUser?.phone || "")}
             onChange={e => setPhone(e.target.value)}
             className="w-full"
-            placeholder={currentUser?.phone || t("profile.phone")}
+            placeholder={isEditing ? t("profile.phone.placeholder") : (currentUser?.phone || t("profile.phone.empty"))}
             autoComplete="off"
             disabled={!isEditing}
           />
