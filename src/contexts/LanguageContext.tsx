@@ -1,4 +1,5 @@
-import React, { createContext, useContext } from 'react';
+
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useTranslation, initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -10,9 +11,11 @@ interface Translation {
 
 interface LanguageContextType {
   t: (key: string, options?: any) => string;
-  i18n: i18n.i18n;
+  i18n: typeof i18n;
   currentLanguage: string;
+  language: string;
   changeLanguage: (lng: string) => void;
+  toggleLanguage: () => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -91,7 +94,6 @@ const translations = {
       emailEmpty: "Email not set",
       phoneEmpty: "Phone not set",
       passwordEmpty: "Password not set",
-      phone: "Phone Number",
       phoneSecurity: "Phone Number and Security",
       passwordSecurity: "Password and Security",
       edit: "Edit",
@@ -177,6 +179,10 @@ const translations = {
     csvManagement: {
       title: "CSV File Management",
       subtitle: "Import and export user data via CSV files"
+    },
+    common: {
+      save: "Save",
+      cancel: "Cancel"
     }
   },
   bn: {
@@ -224,29 +230,28 @@ const translations = {
         message: "বার্তা",
         send: "বার্তা পাঠান",
       },
-       profile: {
-        title: "প্রোফাইল",
-        subtitle: "আপনার প্রোফাইলের তথ্য পরিচালনা করুন",
-        name: "নাম",
-        email: "ইমেইল",
-        phone: "ফোন",
-        password: "পাসওয়ার্ড",
-        namePlaceholder: "আপনার নাম প্রবেশ করুন",
-        emailPlaceholder: "আপনার ইমেইল প্রবেশ করুন",
-        phonePlaceholder: "আপনার ফোন নম্বর প্রবেশ করুন",
-        passwordPlaceholder: "আপনার পাসওয়ার্ড প্রবেশ করুন",
-        nameEmpty: "নাম সেট করা নেই",
-        emailEmpty: "ইমেইল সেট করা নেই",
-        phoneEmpty: "ফোন সেট করা নেই",
-        passwordEmpty: "পাসওয়ার্ড সেট করা নেই",
-         phone: "ফোন নম্বর",
-        phoneSecurity: "ফোন নম্বর এবং নিরাপত্তা",
-        passwordSecurity: "পাসওয়ার্ড এবং নিরাপত্তা",
-        edit: "সম্পাদনা করুন",
-        save: "সংরক্ষণ করুন",
-        cancel: "বাতিল করুন",
-      },
-      },
+    },
+    profile: {
+      title: "প্রোফাইল",
+      subtitle: "আপনার প্রোফাইলের তথ্য পরিচালনা করুন",
+      name: "নাম",
+      email: "ইমেইল",
+      phone: "ফোন",
+      password: "পাসওয়ার্ড",
+      namePlaceholder: "আপনার নাম প্রবেশ করুন",
+      emailPlaceholder: "আপনার ইমেইল প্রবেশ করুন",
+      phonePlaceholder: "আপনার ফোন নম্বর প্রবেশ করুন",
+      passwordPlaceholder: "আপনার পাসওয়ার্ড প্রবেশ করুন",
+      nameEmpty: "নাম সেট করা নেই",
+      emailEmpty: "ইমেইল সেট করা নেই",
+      phoneEmpty: "ফোন সেট করা নেই",
+      passwordEmpty: "পাসওয়ার্ড সেট করা নেই",
+      phoneSecurity: "ফোন নম্বর এবং নিরাপত্তা",
+      passwordSecurity: "পাসওয়ার্ড এবং নিরাপত্তা",
+      edit: "সম্পাদনা করুন",
+      save: "সংরক্ষণ করুন",
+      cancel: "বাতিল করুন",
+    },
     dashboard: {
       title: "ড্যাশবোর্ড",
       subtitle: "আপনার অ্যাকাউন্টের সংক্ষিপ্ত বিবরণ",
@@ -326,6 +331,10 @@ const translations = {
     csvManagement: {
       title: "CSV ফাইল ব্যবস্থাপনা", 
       subtitle: "CSV ফাইলের মাধ্যমে ব্যবহারকারীর তথ্য আমদানি ও রপ্তানি করুন"
+    },
+    common: {
+      save: "সংরক্ষণ করুন",
+      cancel: "বাতিল করুন"
     }
   }
 };
@@ -350,13 +359,19 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   const t = (key: string, options?: any) => i18n.t(key, options);
   const currentLanguage = i18n.language;
+  const language = i18n.language;
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
 
+  const toggleLanguage = () => {
+    const newLang = currentLanguage === 'en' ? 'bn' : 'en';
+    changeLanguage(newLang);
+  };
+
   return (
-    <LanguageContext.Provider value={{ t, i18n, currentLanguage, changeLanguage }}>
+    <LanguageContext.Provider value={{ t, i18n, currentLanguage, language, changeLanguage, toggleLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

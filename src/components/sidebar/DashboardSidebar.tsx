@@ -13,7 +13,7 @@ import {
 
 interface SidebarItem {
   id: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType<any>;
   label: string;
   route: string;
 }
@@ -70,22 +70,25 @@ const DashboardSidebar: React.FC = () => {
       onMouseLeave={() => setIsExpanded(false)}
     >
       <div className={styles.sidebarContent}>
-        {menuItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => handleItemClick(item.route)}
-            className={`${styles.sidebarButton} ${isActive(item.route) ? styles.active : ''}`}
-            title={!isExpanded ? item.label : ''}
-          >
-            <div className={styles.buttonContent}>
-              <item.icon size={20} className={styles.buttonIcon} />
-              {isExpanded && (
-                <span className={styles.buttonLabel}>{item.label}</span>
-              )}
-            </div>
-            <div className={styles.liquidEffect}></div>
-          </button>
-        ))}
+        {menuItems.map((item) => {
+          const IconComponent = item.icon;
+          return (
+            <button
+              key={item.id}
+              onClick={() => handleItemClick(item.route)}
+              className={`${styles.sidebarButton} ${isActive(item.route) ? styles.active : ''}`}
+              title={!isExpanded ? item.label : ''}
+            >
+              <div className={styles.buttonContent}>
+                <IconComponent size={20} className={styles.buttonIcon} />
+                {isExpanded && (
+                  <span className={styles.buttonLabel}>{item.label}</span>
+                )}
+              </div>
+              <div className={styles.liquidEffect}></div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
