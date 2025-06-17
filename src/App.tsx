@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +15,10 @@ import Login from "./pages/Login";
 import Registerelement1 from "./pages/register1";
 import Registerelement2 from "./pages/register2";
 import Register3 from "./pages/register3";
+import DeepSearch from "./pages/DeepSearch";
+import NewProfile from "./pages/NewProfile";
+import PropertiesSettings from "./pages/PropertiesSettings";
+import CSVManagement from "./pages/CSVManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +41,10 @@ const App = () => (
                 <Route path="/register" element={<Registerelement1 />} />
                 <Route path="/register2" element={<Registerelement2 />} />
                 <Route path="/register3" element={<Register3 />} />
+                <Route path="/deep-search" element={<DeepSearch />} />
+                <Route path="/new-profile" element={<NewProfile />} />
+                <Route path="/properties-settings" element={<PropertiesSettings />} />
+                <Route path="/csv-management" element={<CSVManagement />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

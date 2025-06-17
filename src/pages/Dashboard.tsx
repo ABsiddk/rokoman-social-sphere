@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import DashboardStats from '../components/DashboardStats';
+import DashboardSidebar from '../components/sidebar/DashboardSidebar';
 import { useUser } from '../contexts/UserContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Button } from '../components/ui/button';
@@ -42,9 +43,14 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
-      <main className="container mx-auto px-4 py-20">
-        <DashboardStats />
-      </main>
+      <div className="flex w-full">
+        <DashboardSidebar />
+        <main className="flex-1 ml-16 transition-all duration-300">
+          <div className="container mx-auto px-4 py-20">
+            <DashboardStats />
+          </div>
+        </main>
+      </div>
       <Footer />
     </div>
   );

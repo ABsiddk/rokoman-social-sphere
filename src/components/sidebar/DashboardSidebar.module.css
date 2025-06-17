@@ -1,0 +1,212 @@
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 64px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1000;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.sidebar.expanded {
+  width: 220px;
+}
+
+.sidebarContent {
+  padding: 80px 8px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.sidebarButton {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, 
+    rgba(39, 113, 150, 0.2) 0%, 
+    rgba(129, 130, 135, 0.15) 100%);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  outline: none;
+  box-shadow: 0 4px 16px rgba(39, 113, 150, 0.1);
+}
+
+.sidebar.expanded .sidebarButton {
+  width: calc(100% - 16px);
+  border-radius: 24px;
+  padding: 0 16px;
+  justify-content: flex-start;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  justify-content: center;
+}
+
+.sidebar.expanded .buttonContent {
+  justify-content: flex-start;
+}
+
+.buttonIcon {
+  color: rgba(39, 113, 150, 0.8);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.buttonLabel {
+  color: rgba(39, 113, 150, 0.9);
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: slideInLabel 0.3s ease forwards;
+}
+
+@keyframes slideInLabel {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.liquidEffect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(39, 113, 150, 0.3) 50%,
+    transparent 100%);
+  transition: all 0.6s ease;
+  border-radius: inherit;
+}
+
+.sidebarButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(39, 113, 150, 0.2);
+  background: linear-gradient(135deg, 
+    rgba(39, 113, 150, 0.3) 0%, 
+    rgba(129, 130, 135, 0.2) 100%);
+}
+
+.sidebarButton:hover .liquidEffect {
+  left: 100%;
+  animation: liquidWave 1.2s infinite ease-in-out;
+}
+
+.sidebarButton:hover .buttonIcon {
+  color: rgba(39, 113, 150, 1);
+  transform: scale(1.1);
+}
+
+.sidebarButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.sidebarButton.active {
+  background: linear-gradient(135deg, 
+    rgba(39, 113, 150, 0.4) 0%, 
+    rgba(129, 130, 135, 0.3) 100%);
+  box-shadow: 0 6px 20px rgba(39, 113, 150, 0.25);
+}
+
+.sidebarButton.active .buttonIcon {
+  color: rgb(39, 113, 150);
+}
+
+@keyframes liquidWave {
+  0%, 100% {
+    transform: translateX(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-20px) scaleY(1.1);
+  }
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    background: linear-gradient(135deg, 
+      rgba(39, 113, 150, 0.15) 0%, 
+      rgba(39, 113, 150, 0.08) 100%);
+    border-right: 1px solid rgba(39, 113, 150, 0.3);
+  }
+  
+  .sidebarButton {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      rgba(255, 255, 255, 0.05) 100%);
+  }
+  
+  .buttonIcon {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .buttonLabel {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .sidebarButton:hover {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.15) 0%, 
+      rgba(255, 255, 255, 0.1) 100%);
+  }
+  
+  .sidebarButton:hover .buttonIcon {
+    color: white;
+  }
+  
+  .liquidEffect {
+    background: linear-gradient(90deg, 
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 56px;
+  }
+  
+  .sidebar.expanded {
+    width: 200px;
+  }
+  
+  .sidebarButton {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sidebar.expanded .sidebarButton {
+    width: calc(100% - 12px);
+    padding: 0 12px;
+  }
+}
