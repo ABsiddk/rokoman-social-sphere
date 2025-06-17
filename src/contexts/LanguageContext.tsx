@@ -339,30 +339,44 @@ const translations = {
   }
 };
 
+// Initialize i18n outside of the component
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en: { translation: translations.en },
+      bn: { translation: translations.bn },
+    },
+    fallbackLng: 'en',
+    detection: {
+      order: ['localStorage', 'navigator'],
+      lookupLocalStorage: 'i18nextLng',
+      caches: ['localStorage'],
+    },
+    interpolation: {
+      escapeValue: false,
+    },
+  });
+
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n: i18nInstance } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(i18nInstance.language || 'en');
 
   useEffect(() => {
-    i18n.use(initReactI18next).use(LanguageDetector).init({
-      resources: {
-        en: { translation: translations.en },
-        bn: { translation: translations.bn },
-      },
-      fallbackLng: 'en',
-      detection: {
-        order: ['localStorage', 'navigator'],
-        lookupLocalStorage: 'i18nextLng',
-        caches: ['localStorage'],
-      },
-    });
-  }, [i18n]);
+    const handleLanguageChange = (lng: string) => {
+      setCurrentLanguage(lng);
+    };
 
-  const t = (key: string, options?: any) => i18n.t(key, options);
-  const currentLanguage = i18n.language;
-  const language = i18n.language;
+    i18nInstance.on('languageChanged', handleLanguageChange);
+    
+    return () => {
+      i18nInstance.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18nInstance]);
 
   const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+    i18nInstance.changeLanguage(lng);
   };
 
   const toggleLanguage = () => {
@@ -371,7 +385,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   return (
-    <LanguageContext.Provider value={{ t, i18n, currentLanguage, language, changeLanguage, toggleLanguage }}>
+    <LanguageContext.Provider value={{ 
+      t, 
+      i18n: i18nInstance, 
+      currentLanguage, 
+      language: currentLanguage, 
+      changeLanguage, 
+      toggleLanguage 
+    }}>
       {children}
     </LanguageContext.Provider>
   );
