@@ -21,7 +21,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
   const { t } = useLanguage();
 
   const updateFilter = (key: keyof SearchFiltersType, value: any) => {
-    onFiltersChange({ ...filters, [key]: value });
+    // Convert "all" back to undefined for filtering logic
+    const filterValue = value === "all" ? undefined : value;
+    onFiltersChange({ ...filters, [key]: filterValue });
   };
 
   const removeFilter = (key: keyof SearchFiltersType) => {
@@ -58,12 +60,12 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
           <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
             Role
           </label>
-          <Select value={filters.role || ''} onValueChange={(value) => updateFilter('role', value || undefined)}>
+          <Select value={filters.role || 'all'} onValueChange={(value) => updateFilter('role', value)}>
             <SelectTrigger>
               <SelectValue placeholder="All Roles" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Roles</SelectItem>
+              <SelectItem value="all">All Roles</SelectItem>
               <SelectItem value="admin">Admin</SelectItem>
               <SelectItem value="moderator">Moderator</SelectItem>
               <SelectItem value="user">User</SelectItem>
@@ -76,12 +78,12 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
           <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
             Gender
           </label>
-          <Select value={filters.gender || ''} onValueChange={(value) => updateFilter('gender', value || undefined)}>
+          <Select value={filters.gender || 'all'} onValueChange={(value) => updateFilter('gender', value)}>
             <SelectTrigger>
               <SelectValue placeholder="All Genders" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Genders</SelectItem>
+              <SelectItem value="all">All Genders</SelectItem>
               <SelectItem value="Male">Male</SelectItem>
               <SelectItem value="Female">Female</SelectItem>
             </SelectContent>
@@ -93,12 +95,12 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
           <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
             Religion
           </label>
-          <Select value={filters.religion || ''} onValueChange={(value) => updateFilter('religion', value || undefined)}>
+          <Select value={filters.religion || 'all'} onValueChange={(value) => updateFilter('religion', value)}>
             <SelectTrigger>
               <SelectValue placeholder="All Religions" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Religions</SelectItem>
+              <SelectItem value="all">All Religions</SelectItem>
               <SelectItem value="Islam">Islam</SelectItem>
               <SelectItem value="Christianity">Christianity</SelectItem>
               <SelectItem value="Hinduism">Hinduism</SelectItem>
@@ -111,12 +113,12 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
           <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
             Marital Status
           </label>
-          <Select value={filters.maritalStatus || ''} onValueChange={(value) => updateFilter('maritalStatus', value || undefined)}>
+          <Select value={filters.maritalStatus || 'all'} onValueChange={(value) => updateFilter('maritalStatus', value)}>
             <SelectTrigger>
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Status</SelectItem>
+              <SelectItem value="all">All Status</SelectItem>
               <SelectItem value="Single">Single</SelectItem>
               <SelectItem value="Married">Married</SelectItem>
             </SelectContent>
@@ -128,12 +130,12 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
           <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
             Profession
           </label>
-          <Select value={filters.professionType || ''} onValueChange={(value) => updateFilter('professionType', value || undefined)}>
+          <Select value={filters.professionType || 'all'} onValueChange={(value) => updateFilter('professionType', value)}>
             <SelectTrigger>
               <SelectValue placeholder="All Professions" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Professions</SelectItem>
+              <SelectItem value="all">All Professions</SelectItem>
               <SelectItem value="Government Officer">Government Officer</SelectItem>
               <SelectItem value="Software Engineer">Software Engineer</SelectItem>
               <SelectItem value="Doctor">Doctor</SelectItem>
@@ -151,12 +153,12 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
           <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
             Location
           </label>
-          <Select value={filters.location || ''} onValueChange={(value) => updateFilter('location', value || undefined)}>
+          <Select value={filters.location || 'all'} onValueChange={(value) => updateFilter('location', value)}>
             <SelectTrigger>
               <SelectValue placeholder="All Locations" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Locations</SelectItem>
+              <SelectItem value="all">All Locations</SelectItem>
               <SelectItem value="Dhaka">Dhaka</SelectItem>
               <SelectItem value="Chittagong">Chittagong</SelectItem>
               <SelectItem value="Sylhet">Sylhet</SelectItem>
