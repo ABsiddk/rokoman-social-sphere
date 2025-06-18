@@ -4,6 +4,7 @@ import { User } from '../../contexts/UserContext';
 import UserCard from './UserCard';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface SearchResultsProps {
   users: User[];
@@ -28,6 +29,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   onPageChange,
   onViewProfile
 }) => {
+  const { t } = useLanguage();
+
   const getGridClasses = () => {
     switch (viewMode) {
       case 'extra-large':
@@ -53,10 +56,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
         <div className="text-center py-12">
           <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-            No Results Found
+            {t('deepSearch.results.noResults')}
           </h3>
           <p className="text-gray-600 dark:text-gray-300">
-            Try adjusting your search query or filters to find more results.
+            {t('deepSearch.results.noResultsDescription')}
           </p>
         </div>
       </div>
@@ -68,10 +71,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({
       {/* Results Info */}
       <div className="flex justify-between items-center mb-6">
         <div className="text-sm text-gray-600 dark:text-gray-300">
-          Showing {users.length} of {total} results
+          {t('deepSearch.results.showing')} {users.length} {t('deepSearch.results.of')} {total} {t('deepSearch.results.results')}
         </div>
         <div className="text-sm text-gray-600 dark:text-gray-300">
-          Page {currentPage} of {totalPages}
+          {t('deepSearch.results.page')} {currentPage} {t('deepSearch.results.of')} {totalPages}
         </div>
       </div>
 
@@ -97,7 +100,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             disabled={!hasPrevPage}
           >
             <ChevronLeft size={16} />
-            Previous
+            {t('deepSearch.results.previous')}
           </Button>
           
           <div className="flex gap-1">
@@ -125,7 +128,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             onClick={() => onPageChange(currentPage + 1)}
             disabled={!hasNextPage}
           >
-            Next
+            {t('deepSearch.results.next')}
             <ChevronRight size={16} />
           </Button>
         </div>

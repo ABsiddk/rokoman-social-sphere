@@ -96,6 +96,15 @@ const translations = {
       passwordEmpty: "Password not set",
       phoneSecurity: "Phone Number and Security",
       passwordSecurity: "Password and Security",
+      personal: {
+        info: "Personal Information"
+      },
+      address: {
+        info: "Address Information"
+      },
+      professional: {
+        info: "Professional Information"
+      },
       edit: "Edit",
       save: "Save",
       cancel: "Cancel",
@@ -133,28 +142,101 @@ const translations = {
       passwordPlaceholder: "Enter your password",
       submit: "Register",
       loginLink: "Already have an account? Login here",
-    },
-    register1: {
-      title: "Register",
-      subtitle: "Create a new account",
-      next: "Next",
-    },
-    register2: {
-      title: "Register",
-      subtitle: "Create a new account",
-      previous: "Previous",
-      next: "Next",
-    },
-    register3: {
-      title: "Register",
-      subtitle: "Create a new account",
-      previous: "Previous",
-      submit: "Submit",
-    },
-    notFound: {
-      title: "404 Not Found",
-      subtitle: "The page you are looking for does not exist.",
-      backHome: "Back to Home",
+      step1: {
+        title: "Account Setup",
+        subtitle: "Enter your phone number and password",
+        phone: "Phone Number",
+        phonePlaceholder: "Enter your phone number",
+        password: "Password",
+        passwordPlaceholder: "Enter your password",
+        confirmPassword: "Confirm Password",
+        confirmPasswordPlaceholder: "Confirm your password",
+        countryCode: "Country Code",
+        next: "Next",
+        errors: {
+          phoneRequired: "Phone number is required",
+          phoneInvalid: "Please enter a valid phone number",
+          passwordRequired: "Password is required",
+          passwordTooShort: "Password must be at least 8 characters",
+          passwordMismatch: "Passwords do not match"
+        }
+      },
+      step2: {
+        title: "Personal Information",
+        subtitle: "Tell us about yourself",
+        full_name: "Full Name",
+        full_name_placeholder: "Enter your full name",
+        nickname: "Nickname",
+        nickname_placeholder: "Enter your nickname",
+        date_of_birth: "Date of Birth",
+        date_of_birth_placeholder: "Select your date of birth",
+        gender: "Gender",
+        gender_placeholder: "Select your gender",
+        religion: "Religion",
+        religion_placeholder: "Select your religion",
+        marital_status: "Marital Status",
+        marital_placeholder: "Select your marital status",
+        personal_email: "Personal Email",
+        personal_email_placeholder: "Enter your personal email",
+        additional_phone: "Additional Phone",
+        additional_phone_placeholder: "Enter additional phone number",
+        save_continue: "Save & Continue",
+        previous: "Previous",
+        errors: {
+          fullNameRequired: "Full name is required",
+          emailInvalid: "Please enter a valid email address"
+        }
+      },
+      step3: {
+        title: "Address Information",
+        subtitle: "Where do you live and work?",
+        present_address: "Present Address",
+        permanent_address: "Permanent Address",
+        workplace_address: "Workplace Address",
+        same_as_present: "Same as present address",
+        nationality: "Nationality",
+        division: "Division",
+        district: "District",
+        subdistrict: "Sub-district",
+        village: "Village/House/Road",
+        zipcode: "Zip/Postal Code",
+        start_date: "Start Date",
+        end_date: "End Date",
+        currently_working: "Currently Working Here",
+        previous: "Previous",
+        next: "Next",
+        placeholders: {
+          nationality: "Select nationality",
+          division: "Select division",
+          district: "Select district",
+          subdistrict: "Enter sub-district",
+          village: "Enter village/house/road",
+          zipcode: "Enter zip code"
+        },
+        errors: {
+          division: {
+            required: "Division is required"
+          },
+          district: {
+            required: "District is required"
+          },
+          subdistrict: {
+            required: "Sub-district is required"
+          }
+        }
+      },
+      step4: {
+        title: "Professional Information",
+        subtitle: "Tell us about your career",
+        profession_type: "Profession Type",
+        profession_placeholder: "Select your profession",
+        workplace_info: "Workplace Information",
+        previous: "Previous",
+        submit: "Complete Registration",
+        errors: {
+          professionRequired: "Profession type is required"
+        }
+      }
     },
     sidebar: {
       dashboard: "Dashboard",
@@ -166,14 +248,74 @@ const translations = {
     deepSearch: {
       title: "Deep Search",
       subtitle: "Advanced search with image, voice, and text capabilities",
-      searchPlaceholder: "Search users by name, email, profession, location..."
+      searchPlaceholder: "Search users by name, email, profession, location...",
+      filters: {
+        title: "Advanced Filters",
+        clearAll: "Clear All",
+        role: "Role",
+        gender: "Gender",
+        religion: "Religion",
+        maritalStatus: "Marital Status",
+        profession: "Profession",
+        location: "Location",
+        minAge: "Min Age",
+        maxAge: "Max Age",
+        placeholders: {
+          allRoles: "All Roles",
+          allGenders: "All Genders",
+          allReligions: "All Religions",
+          allStatus: "All Status",
+          allProfessions: "All Professions",
+          allLocations: "All Locations",
+          minAge: "Min Age",
+          maxAge: "Max Age"
+        },
+        values: {
+          admin: "Admin",
+          moderator: "Moderator",
+          user: "User",
+          male: "Male",
+          female: "Female",
+          islam: "Islam",
+          christianity: "Christianity",
+          hinduism: "Hinduism",
+          single: "Single",
+          married: "Married"
+        }
+      },
+      results: {
+        showing: "Showing",
+        of: "of",
+        results: "results",
+        page: "Page",
+        noResults: "No Results Found",
+        noResultsDescription: "Try adjusting your search query or filters to find more results.",
+        previous: "Previous",
+        next: "Next"
+      },
+      viewModes: {
+        extraLarge: "Extra Large Icons",
+        large: "Large Icons",
+        medium: "Medium Icons",
+        small: "Small Icons",
+        list: "List",
+        details: "Details",
+        tiles: "Tiles"
+      },
+      sort: {
+        name: "Name",
+        joinDate: "Join Date",
+        role: "Role",
+        lastLogin: "Last Login"
+      },
+      download: "Download Results"
     },
     newProfile: {
       title: "New Profile",
       subtitle: "Create new user profiles with enhanced features"
     },
     propertiesSettings: {
-      title: "Properties Settings", 
+      title: "Properties Settings",
       subtitle: "Configure application settings and preferences"
     },
     csvManagement: {
@@ -182,7 +324,15 @@ const translations = {
     },
     common: {
       save: "Save",
-      cancel: "Cancel"
+      cancel: "Cancel",
+      edit: "Edit",
+      delete: "Delete",
+      confirm: "Confirm",
+      loading: "Loading...",
+      error: "Error",
+      success: "Success",
+      warning: "Warning",
+      info: "Information"
     }
   },
   bn: {
@@ -248,6 +398,15 @@ const translations = {
       passwordEmpty: "পাসওয়ার্ড সেট করা নেই",
       phoneSecurity: "ফোন নম্বর এবং নিরাপত্তা",
       passwordSecurity: "পাসওয়ার্ড এবং নিরাপত্তা",
+      personal: {
+        info: "ব্যক্তিগত তথ্য"
+      },
+      address: {
+        info: "ঠিকানার তথ্য"
+      },
+      professional: {
+        info: "পেশাগত তথ্য"
+      },
       edit: "সম্পাদনা করুন",
       save: "সংরক্ষণ করুন",
       cancel: "বাতিল করুন",
@@ -285,28 +444,101 @@ const translations = {
       passwordPlaceholder: "আপনার পাসওয়ার্ড প্রবেশ করুন",
       submit: "রেজিস্টার",
       loginLink: "ইতিমধ্যে একটি অ্যাকাউন্ট আছে? লগইন করুন",
-    },
-    register1: {
-      title: "রেজিস্টার",
-      subtitle: "নতুন অ্যাকাউন্ট তৈরি করুন",
-      next: "পরবর্তী",
-    },
-    register2: {
-      title: "রেজিস্টার",
-      subtitle: "নতুন অ্যাকাউন্ট তৈরি করুন",
-      previous: "আগে",
-      next: "পরবর্তী",
-    },
-    register3: {
-      title: "রেজিস্টার",
-      subtitle: "নতুন অ্যাকাউন্ট তৈরি করুন",
-      previous: "আগে",
-      submit: "জমা দিন",
-    },
-    notFound: {
-      title: "404 খুঁজে পাওয়া যায়নি",
-      subtitle: "আপনি যে পৃষ্ঠাটি খুঁজছেন তা বিদ্যমান নেই।",
-      backHome: "হোমে ফিরে যান",
+      step1: {
+        title: "অ্যাকাউন্ট সেটআপ",
+        subtitle: "আপনার ফোন নম্বর এবং পাসওয়ার্ড লিখুন",
+        phone: "ফোন নম্বর",
+        phonePlaceholder: "আপনার ফোন নম্বর লিখুন",
+        password: "পাসওয়ার্ড",
+        passwordPlaceholder: "আপনার পাসওয়ার্ড লিখুন",
+        confirmPassword: "পাসওয়ার্ড নিশ্চিত করুন",
+        confirmPasswordPlaceholder: "আপনার পাসওয়ার্ড নিশ্চিত করুন",
+        countryCode: "দেশের কোড",
+        next: "পরবর্তী",
+        errors: {
+          phoneRequired: "ফোন নম্বর প্রয়োজন",
+          phoneInvalid: "অনুগ্রহ করে একটি বৈধ ফোন নম্বর লিখুন",
+          passwordRequired: "পাসওয়ার্ড প্রয়োজন",
+          passwordTooShort: "পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে",
+          passwordMismatch: "পাসওয়ার্ড মিলছে না"
+        }
+      },
+      step2: {
+        title: "ব্যক্তিগত তথ্য",
+        subtitle: "আপনার সম্পর্কে আমাদের বলুন",
+        full_name: "পূর্ণ নাম",
+        full_name_placeholder: "আপনার পূর্ণ নাম লিখুন",
+        nickname: "ডাকনাম",
+        nickname_placeholder: "আপনার ডাকনাম লিখুন",
+        date_of_birth: "জন্ম তারিখ",
+        date_of_birth_placeholder: "আপনার জন্ম তারিখ নির্বাচন করুন",
+        gender: "লিঙ্গ",
+        gender_placeholder: "আপনার লিঙ্গ নির্বাচন করুন",
+        religion: "ধর্ম",
+        religion_placeholder: "আপনার ধর্ম নির্বাচন করুন",
+        marital_status: "বৈবাহিক অবস্থা",
+        marital_placeholder: "আপনার বৈবাহিক অবস্থা নির্বাচন করুন",
+        personal_email: "ব্যক্তিগত ইমেইল",
+        personal_email_placeholder: "আপনার ব্যক্তিগত ইমেইল লিখুন",
+        additional_phone: "অতিরিক্ত ফোন",
+        additional_phone_placeholder: "অতিরিক্ত ফোন নম্বর লিখুন",
+        save_continue: "সংরক্ষণ করুন এবং এগিয়ে যান",
+        previous: "পূর্ববর্তী",
+        errors: {
+          fullNameRequired: "পূর্ণ নাম প্রয়োজন",
+          emailInvalid: "অনুগ্রহ করে একটি বৈধ ইমেইল ঠিকানা লিখুন"
+        }
+      },
+      step3: {
+        title: "ঠিকানার তথ্য",
+        subtitle: "আপনি কোথায় থাকেন এবং কাজ করেন?",
+        present_address: "বর্তমান ঠিকানা",
+        permanent_address: "স্থায়ী ঠিকানা",
+        workplace_address: "কর্মক্ষেত্রের ঠিকানা",
+        same_as_present: "বর্তমান ঠিকানার মতো",
+        nationality: "জাতীয়তা",
+        division: "বিভাগ",
+        district: "জেলা",
+        subdistrict: "উপজেলা",
+        village: "গ্রাম/বাড়ি/রাস্তা",
+        zipcode: "জিপ/পোস্টাল কোড",
+        start_date: "শুরুর তারিখ",
+        end_date: "শেষের তারিখ",
+        currently_working: "বর্তমানে এখানে কাজ করছি",
+        previous: "পূর্ববর্তী",
+        next: "পরবর্তী",
+        placeholders: {
+          nationality: "জাতীয়তা নির্বাচন করুন",
+          division: "বিভাগ নির্বাচন করুন",
+          district: "জেলা নির্বাচন করুন",
+          subdistrict: "উপজেলা লিখুন",
+          village: "গ্রাম/বাড়ি/রাস্তা লিখুন",
+          zipcode: "জিপ কোড লিখুন"
+        },
+        errors: {
+          division: {
+            required: "বিভাগ প্রয়োজন"
+          },
+          district: {
+            required: "জেলা প্রয়োজন"
+          },
+          subdistrict: {
+            required: "উপজেলা প্রয়োজন"
+          }
+        }
+      },
+      step4: {
+        title: "পেশাগত তথ্য",
+        subtitle: "আপনার ক্যারিয়ার সম্পর্কে আমাদের বলুন",
+        profession_type: "পেশার ধরন",
+        profession_placeholder: "আপনার পেশা নির্বাচন করুন",
+        workplace_info: "কর্মক্ষেত্রের তথ্য",
+        previous: "পূর্ববর্তী",
+        submit: "নিবন্ধন সম্পূর্ণ করুন",
+        errors: {
+          professionRequired: "পেশার ধরন প্রয়োজন"
+        }
+      }
     },
     sidebar: {
       dashboard: "ড্যাশবোর্ড",
@@ -318,7 +550,67 @@ const translations = {
     deepSearch: {
       title: "গভীর অনুসন্ধান",
       subtitle: "ছবি, ভয়েস এবং টেক্সট ক্ষমতা সহ উন্নত অনুসন্ধান",
-      searchPlaceholder: "নাম, ইমেইল, পেশা, অবস্থান দিয়ে ব্যবহারকারী খুঁজুন..."
+      searchPlaceholder: "নাম, ইমেইল, পেশা, অবস্থান দিয়ে ব্যবহারকারী খুঁজুন...",
+      filters: {
+        title: "উন্নত ফিল্টার",
+        clearAll: "সব মুছুন",
+        role: "ভূমিকা",
+        gender: "লিঙ্গ",
+        religion: "ধর্ম",
+        maritalStatus: "বৈবাহিক অবস্থা",
+        profession: "পেশা",
+        location: "অবস্থান",
+        minAge: "সর্বনিম্ন বয়স",
+        maxAge: "সর্বোচ্চ বয়স",
+        placeholders: {
+          allRoles: "সব ভূমিকা",
+          allGenders: "সব লিঙ্গ",
+          allReligions: "সব ধর্ম",
+          allStatus: "সব অবস্থা",
+          allProfessions: "সব পেশা",
+          allLocations: "সব অবস্থান",
+          minAge: "সর্বনিম্ন বয়স",
+          maxAge: "সর্বোচ্চ বয়স"
+        },
+        values: {
+          admin: "এডমিন",
+          moderator: "মডারেটর",
+          user: "ব্যবহারকারী",
+          male: "পুরুষ",
+          female: "মহিলা",
+          islam: "ইসলাম",
+          christianity: "খ্রিস্টধর্ম",
+          hinduism: "হিন্দুধর্ম",
+          single: "অবিবাহিত",
+          married: "বিবাহিত"
+        }
+      },
+      results: {
+        showing: "দেখানো হচ্ছে",
+        of: "এর মধ্যে",
+        results: "ফলাফল",
+        page: "পৃষ্ঠা",
+        noResults: "কোনো ফলাফল পাওয়া যায়নি",
+        noResultsDescription: "আরও ফলাফল খুঁজতে আপনার অনুসন্ধান বা ফিল্টার সমন্বয় করুন।",
+        previous: "পূর্ববর্তী",
+        next: "পরবর্তী"
+      },
+      viewModes: {
+        extraLarge: "অতিরিক্ত বড় আইকন",
+        large: "বড় আইকন",
+        medium: "মাঝারি আইকন",
+        small: "ছোট আইকন",
+        list: "তালিকা",
+        details: "বিস্তারিত",
+        tiles: "টাইল"
+      },
+      sort: {
+        name: "নাম",
+        joinDate: "যোগদানের তারিখ",
+        role: "ভূমিকা",
+        lastLogin: "শেষ লগইন"
+      },
+      download: "ফলাফল ডাউনলোড করুন"
     },
     newProfile: {
       title: "নতুন প্রোফাইল",
@@ -334,7 +626,15 @@ const translations = {
     },
     common: {
       save: "সংরক্ষণ করুন",
-      cancel: "বাতিল করুন"
+      cancel: "বাতিল করুন",
+      edit: "সম্পাদনা করুন",
+      delete: "মুছুন",
+      confirm: "নিশ্চিত করুন",
+      loading: "লোড হচ্ছে...",
+      error: "ত্রুটি",
+      success: "সফল",
+      warning: "সতর্কতা",
+      info: "তথ্য"
     }
   }
 };
