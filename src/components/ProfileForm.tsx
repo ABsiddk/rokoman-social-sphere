@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import ProfileHeader from "./profile/ProfileHeader";
 import EditableSection from "./profile/EditableSection";
@@ -56,7 +55,7 @@ const ProfileForm = () => {
 
       <div className="p-8 pt-4 space-y-9">
         <EditableSection
-          title={t("profile.phoneSecurity")}
+          title={t("profile.phone.security")}
           onSave={() => {/* integrate save logic per section here */}}
         >
           {(isEditing) => <PhoneSecuritySection isEditing={isEditing} />}

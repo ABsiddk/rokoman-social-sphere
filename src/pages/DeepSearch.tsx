@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -31,20 +32,20 @@ const DeepSearch = () => {
   const [isRecording, setIsRecording] = useState(false);
 
   const viewOptions = [
-    { value: 'extra-large', label: t('deepSearch.viewModes.extraLarge') },
-    { value: 'large', label: t('deepSearch.viewModes.large') },
-    { value: 'medium', label: t('deepSearch.viewModes.medium') },
-    { value: 'small', label: t('deepSearch.viewModes.small') },
-    { value: 'list', label: t('deepSearch.viewModes.list') },
-    { value: 'details', label: t('deepSearch.viewModes.details') },
-    { value: 'tiles', label: t('deepSearch.viewModes.tiles') },
+    { value: 'extra-large', label: 'Extra Large Icons' },
+    { value: 'large', label: 'Large Icons' },
+    { value: 'medium', label: 'Medium Icons' },
+    { value: 'small', label: 'Small Icons' },
+    { value: 'list', label: 'List' },
+    { value: 'details', label: 'Details' },
+    { value: 'tiles', label: 'Tiles' },
   ];
 
   const sortOptions = [
-    { value: 'name', label: t('deepSearch.sort.name') },
-    { value: 'joinDate', label: t('deepSearch.sort.joinDate') },
-    { value: 'role', label: t('deepSearch.sort.role') },
-    { value: 'lastLogin', label: t('deepSearch.sort.lastLogin') },
+    { value: 'name', label: 'Name' },
+    { value: 'joinDate', label: 'Join Date' },
+    { value: 'role', label: 'Role' },
+    { value: 'lastLogin', label: 'Last Login' },
   ];
 
   // Search results using the search logic
@@ -176,7 +177,7 @@ const DeepSearch = () => {
                 )}
                 {isRecording && (
                   <div className="flex items-center gap-2 bg-red-100 dark:bg-red-900 px-3 py-1 rounded-full">
-                    <span className="text-sm animate-pulse">{t('common.loading')}</span>
+                    <span className="text-sm animate-pulse">Recording...</span>
                   </div>
                 )}
               </div>
@@ -233,7 +234,7 @@ const DeepSearch = () => {
                 disabled={searchResults.users.length === 0}
               >
                 <Download size={16} className="mr-2" />
-                {t('deepSearch.download')} ({searchResults.total})
+                Download Results ({searchResults.total})
               </Button>
             </div>
 
